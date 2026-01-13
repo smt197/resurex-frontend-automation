@@ -1,0 +1,37 @@
+.bg-pattern {
+    background:
+        linear-gradient(135deg,
+            var(--vex-background-background) 22px,
+            rgba(0, 0, 0, 0.15) 22px,
+            /* Darker line for better visibility */
+            rgba(0, 0, 0, 0.15) 24px,
+            /* Darker line for better visibility */
+            transparent 24px,
+            transparent 67px,
+            rgba(0, 0, 0, 0.15) 67px,
+            /* Darker line for better visibility */
+            rgba(0, 0, 0, 0.15) 69px,
+            /* Darker line for better visibility */
+            transparent 69px),
+        linear-gradient(225deg,
+            var(--vex-background-background) 22px,
+            rgba(0, 0, 0, 0.15) 22px,
+            /* Darker line for better visibility */
+            rgba(0, 0, 0, 0.15) 24px,
+            /* Darker line for better visibility */
+            transparent 24px,
+            transparent 67px,
+            rgba(0, 0, 0, 0.15) 67px,
+            /* Darker line for better visibility */
+            rgba(0, 0, 0, 0.15) 69px,
+            /* Darker line for better visibility */
+            transparent 69px) 0 64px;
+    background-color: var(--vex-background-background);
+    background-size: 64px 128px;
+}
+
+:host {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}

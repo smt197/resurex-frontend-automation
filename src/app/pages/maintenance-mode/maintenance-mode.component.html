@@ -1,0 +1,38 @@
+<div class="min-h-screen flex items-center justify-center px-4 bg-cover bg-center bg-pattern">
+  <!-- Afficher le spinner pendant la vérification de l'authentification -->
+  <div *ngIf="isCheckingAuth" class="card shadow-xl text-center w-full max-w-md overflow-hidden p-8">
+    <vex-loading-spinner></vex-loading-spinner>
+  </div>
+
+  <!-- Afficher le message de maintenance une fois la vérification terminée -->
+  <div *ngIf="!isCheckingAuth" class="card shadow-xl text-center w-full max-w-md overflow-hidden">
+    <!-- Header avec icône -->
+    <div class="p-6 flex flex-col items-center">
+      <mat-icon class="text-8xl mb-4" svgIcon="mat:build"></mat-icon>
+    </div>
+
+    <!-- Titre principal -->
+    <h1 class="display-1 font-medium m-0 text-orange-600">
+      {{ 'admin_maintenance.en_cours' | translate }}
+    </h1>
+
+    <!-- Message personnalisé -->
+    <div class="px-6 py-4">
+      <div class="text-lg text-gray-700" [innerHTML]="maintenanceMessage"></div>
+    </div>
+
+    <!-- Footer avec boutons -->
+    <div class="bg-app-bar p-6 flex flex-col gap-3 mt-6">
+      <p class="mt-0 mb-2 text-sm text-gray-600">
+        {{"admin_maintenance.message_label" | translate}}
+      </p>
+      <!-- <button
+        mat-raised-button
+        color="primary"
+        (click)="goToAdminLogin()"
+        class="w-full">
+        Connexion Administrateur
+      </button> -->
+    </div>
+  </div>
+</div>

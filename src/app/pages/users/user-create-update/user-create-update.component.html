@@ -1,0 +1,46 @@
+<div class="flex flex-col h-full">
+  <!-- Header avec titre et boutons -->
+  <div class="flex items-center" mat-dialog-title>
+    <div *ngIf="imageUrl">
+      <img [src]="imageUrl" class="avatar mr-5" />
+    </div>
+
+    <h2
+      *ngIf="model.first_name || model.last_name"
+      class="headline m-0 flex-auto">
+      {{ model.first_name }} {{ model.last_name }}
+    </h2>
+
+    <h2 *ngIf="!model.first_name && !model.last_name" class="headline m-0 flex-auto" rxTranslate="user.user_create">
+
+      New User
+    </h2>
+    <button
+      class="text-secondary"
+      mat-dialog-close
+      mat-icon-button
+      type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="text-border"></mat-divider>
+
+  <!-- Formulaire -->
+  <mat-dialog-content class="w-full">
+    <formly-form [form]="form" [model]="model" [fields]="fields"></formly-form>
+  </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close type="button" rxTranslate="user.cancel">Cancel</button>
+      <button
+      [disabled]="form.invalid"
+        *ngIf="isCreateMode() || isUpdateMode()"
+        (click)="save()"
+        color="primary"
+        mat-flat-button>
+        <span class="capitalize">{{ mode }} <span rxTranslate="user.select"> user </span></span>
+      </button>
+    </mat-dialog-actions>
+
+</div>

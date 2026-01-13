@@ -1,0 +1,32 @@
+<div class="formly-field-array-container">
+  <!-- Bouton d'ajout placé à l'extérieur de la boucle -->
+  <div class="flex items-center justify-end gap-x-2 mt-4">
+<button mat-raised-button color="primary" type="button" (click)="props['send']()" [disabled]="form.invalid || field.fieldGroup?.length === 0">
+  <mat-icon>save</mat-icon>
+      <span>{{ 'document.create_update.submit_button' | translate }}</span>
+    </button>
+    <!-- <button type="button" mat-stroked-button color="primary" (click)="add()" [attr.data-cy]="'add-button'"
+      class="flex items-center gap-x-2 px-4 py-2">
+      <span>{{ 'global.addText' | translate}}</span>
+      <mat-icon>add</mat-icon>
+    </button> -->
+  </div>
+
+  <div *ngFor="let field of field.fieldGroup; let i = index;"
+    class="card flex w-full items-start gap-x-4 p-4 shadow-lg mb-4 border border-gray-200 rounded-lg bg-white hover:shadow-xl transition-shadow duration-200">
+    
+    <!-- Conteneur principal pour les champs du formulaire -->
+    <div class="flex-grow">
+      <formly-field [field]="field"></formly-field>
+    </div>
+    
+    <!-- Conteneur pour les boutons d'action -->
+    <div class="flex-none flex items-center gap-x-2" *ngIf="!props.disabled">
+      <!-- Bouton Supprimer -->
+      <button mat-icon-button type="button" matTooltip="Supprimer" (click)="remove(i)"
+        class="text-red-600 hover:bg-red-50" [attr.data-cy]="'remove-button-' + i">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

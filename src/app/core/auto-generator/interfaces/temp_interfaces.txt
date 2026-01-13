@@ -1,0 +1,28 @@
+
+/**
+ * Configuration des notifications
+ */
+export interface NotificationsConfig {
+  /** Durée d'affichage en ms */
+  duration: number;
+
+  /** Messages personnalisés */
+  messages: NotificationMessages;
+}
+
+/**
+ * Messages de notification
+ */
+export interface NotificationMessages {
+  createSuccess: string;
+  updateSuccess: string;
+  deleteSuccess: string;
+  deleteAllSuccess: string;
+  createError: string;
+  updateError: string;
+  deleteError: string;
+  deleteAllError?: string;
+
+  /** Messages custom pour actions custom */
+  custom?: { [actionName: string]: { success: string; error: string } };
+}

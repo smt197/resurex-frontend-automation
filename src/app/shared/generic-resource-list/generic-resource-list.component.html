@@ -1,0 +1,64 @@
+<ng-container *ngIf="type === 'menus' || type === 'categories'; else NoMenu">
+    <div class="p-4"></div>
+</ng-container>
+<ng-template #NoMenu>
+    <vex-page-header [title]="customTitle ? (customTitle | translate) : (('menu.' + type) | translate)"
+        [breadcrumbs]="getBreadcrumbs()" [layoutControl]="layoutCtrl">
+    </vex-page-header>
+</ng-template>
+
+
+<vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
+    [class.px-6]="layoutCtrl.value === 'fullwidth'" class="-mt-6">
+    <div class="card overflow-auto" [class.-mt-16]="activeJobsCount === 0">
+        <!-- <div *ngIf="activeJobsCount > 0" class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4 rounded-md -mt-16"
+            role="alert">
+            <div class="flex items-center">
+                <mat-icon class="mr-3" svgIcon="mat:hourglass_full"></mat-icon>
+                <div>
+                    <p class="font-bold">{{"document.status.name" | translate}}</p>
+                    <p>{{ activeJobsCount }} {{"document.status.tache" | translate}}<span *ngIf="activeJobsCount > 1">s</span>
+                        {{"document.status.en_cours" | translate}}</p>
+                </div>
+            </div>
+        </div> -->
+        <!-- Barre de recherche et header -->
+        <div class="bg-app-bar px-6 h-16 border-b sticky left-0 flex items-center">
+            <h2 *ngIf="data.length > 0"
+                class="title my-0 ltr:pr-4 rtl:pl-4 ltr:mr-4 rtl:ml-4 ltr:border-r rtl:border-l hidden sm:block flex-none">
+                <span *ngIf="selection.isEmpty()">{{ 'menu.' + type | translate }}</span>
+                <span *ngIf="selection.hasValue()">
+                    {{ selection.selected.length }} {{ type.slice(0,-1)+'.select'| translate }}<span
+                        *ngIf="selection.selected.length > 1">s</span>
+                </span>
+            </h2>
+            <div *ngIf="!(type === 'roles' || type === 'permissions')">
+                <div *ngIf="selection.hasValue() && !isLoading()" class="mr-4 pr-4 border-r flex-none">
+                    <button (click)="triggerDeletAction()" mat-icon-button
+                        [matTooltip]="'menu_action.delete' | translate" type="button">
+                        <mat-icon svgIcon="mat:delete"></mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="shouldShowSearchBar()" class="mt-5">
+                <vex-search-bar *ngIf="(data.length > 0 || searchCtrl) && !(isLoading() && !searchCtrl)"
+                    [placeholder]="'user.search' | translate" (searchChange)="onSearchChange($event)">
+                </vex-search-bar>
+            </div>
+            <span class="flex-1"></span>
+            <ng-content select="[app-bar-actions]"></ng-content>
+            <button *ngIf="!isLoading()" (click)="triggerCreateAction()"
+                class="ml-4 flex-none bg-blue-700 hover:bg-blue-800 w-8 h-8 text-white rounded-full" type="button"
+                [hidden]="disableCreateButton" mat-mini-fab [matTooltip]="createButtonTranslationKey | translate">
+                <mat-icon svgIcon="mat:add" class="text-white w-6 h-6"></mat-icon>
+            </button>
+        </div>
+
+        <!-- NOTRE COMPOSANT DE TABLE DYNAMIQUE -->
+        <vex-dynamic-data-table [type]="type" [data]="data" [columns]="columns || []"
+            [dynamicFormlyFields]="formlyFields" [pagination]="pagination" [isLoading]="isLoading()"
+            [selection]="selection" [noDataMessage]="noDataMessage" [externalFilters]="externalFilters"
+            (pageChange)="onPageChange($event)" (action)="handleAction($event)">
+        </vex-dynamic-data-table>
+    </div>
+</vex-page-layout-content>

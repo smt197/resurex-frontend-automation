@@ -1,0 +1,32 @@
+<div class="container p-6">
+    <!-- Header -->
+    <div class="flex items-start justify-between" mat-dialog-title>
+        <div class="flex items-start justify-start gap-2">
+            <mat-icon color="warn" svgIcon="mat:lock"></mat-icon>
+            <h2 class="headline m-0 flex-auto">
+                {{ data.isBlocked ? ('menu_action.unblock' | translate) : ('menu_action.block' | translate) }}
+            </h2>
+        </div>
+    </div>
+
+    <mat-divider class="text-border"></mat-divider>
+
+    <!-- Content -->
+    <mat-dialog-content class="flex flex-col items-start justify-start space-y-2">
+        <p class="text-lg text-red-500 font-medium">
+            {{ data.isBlocked
+            ? ('user.block_confirm' | translate)
+            : ('user.unblock_confirm' | translate) }}
+        </p>
+    </mat-dialog-content>
+
+    <!-- Actions -->
+    <mat-dialog-actions align="end" class="space-x-2">
+        <button mat-stroked-button mat-dialog-close="false" color="default" type="button">
+            {{ 'user.cancel' | translate }}
+        </button>
+        <button mat-flat-button color="primary" type="submit" [mat-dialog-close]="true">
+            {{ data.isBlocked ? ('user.unblock' | translate) : ('user.block' | translate) }}
+        </button>
+    </mat-dialog-actions>
+</div>

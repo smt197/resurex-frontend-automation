@@ -1,0 +1,35 @@
+<div class="container p-6">
+  <!-- Header -->
+  <div class="flex items-start justify-between" mat-dialog-title>
+    <div class="flex items-start justify-start gap-2">
+      <mat-icon color="warn" svgIcon="mat:build"></mat-icon>
+      <h2 class="headline m-0 flex-auto">
+        {{ data.isActive
+        ? ('maintenance_dialog.activate_title' | translate)
+        : ('maintenance_dialog.deactivate_title' | translate) }}
+      </h2>
+    </div>
+  </div>
+
+  <mat-divider class="text-border"></mat-divider>
+
+  <!-- Content -->
+  <mat-dialog-content class="flex flex-col items-start justify-start space-y-2">
+    <p class="text-lg text-red-500 font-medium">
+      {{ data.isActive
+      ? ('maintenance_dialog.activate_message' | translate)
+      : ('maintenance_dialog.deactivate_message' | translate) }}
+    </p>
+  </mat-dialog-content>
+
+  <!-- Actions -->
+  <mat-dialog-actions align="end" class="space-x-2">
+    <button mat-stroked-button mat-dialog-close="false" color="default" type="button">
+      {{ 'user.cancel' | translate }}
+    </button>
+    <button mat-flat-button color="primary" type="submit" [mat-dialog-close]="true">
+      {{ data.isActive ? ('maintenance_dialog.activate_button' | translate) : ('maintenance_dialog.deactivate_button' |
+      translate) }}
+    </button>
+  </mat-dialog-actions>
+</div>

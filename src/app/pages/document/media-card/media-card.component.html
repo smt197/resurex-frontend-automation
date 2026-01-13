@@ -1,0 +1,31 @@
+<!-- media-card.component.html -->
+<div class="card overflow-hidden relative">
+    <!-- Bouton Edit en haut à droite -->
+    <button (click)="openEditDialog()" class="absolute top-2 right-2 text-secondary z-10" mat-icon-button type="button"
+        [matTooltip]="'Modifier'">
+        <mat-icon svgIcon="mat:edit"></mat-icon>
+    </button>
+
+    <div class="p-4 text-center hover:bg-hover transition duration-400 ease-out-swift cursor-pointer relative">
+        <mat-icon [svgIcon]="getFileIcon(file.mime_type)" class="w-16 h-16 text-gray-400 mx-auto"></mat-icon>
+        <h2 class="title mb-1 mt-3 truncate w-full" [matTooltip]="file.name">{{ file.name }}</h2>
+        <div class="body-2 text-secondary flex items-center justify-center">
+            <mat-icon class="ltr:mr-1 rtl:ml-1 icon-xs" svgIcon="mat:storage"></mat-icon>
+            <span>{{ formatBytes(file.size) }}</span>
+        </div>
+        <div class="bg-app-bar p-2 flex items-center justify-around">
+            <button (click)="downloadFile()" class="text-secondary" mat-icon-button type="button"
+                [matTooltip]="'Télécharger'">
+                <mat-icon svgIcon="mat:download"></mat-icon>
+            </button>
+            <button *ngIf="!isWordDocument()" (click)="previewFile()" class="text-secondary" mat-icon-button
+                type="button" [matTooltip]="'Prévisualiser'">
+                <mat-icon svgIcon="mat:visibility"></mat-icon>
+            </button>
+            <button class="text-secondary" mat-icon-button type="button" [matTooltip]="'Supprimer'"
+                (click)="fileDeleted.emit(file.id)">
+                <mat-icon svgIcon="mat:delete"></mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

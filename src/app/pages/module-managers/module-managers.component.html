@@ -1,0 +1,130 @@
+<vex-page-header [title]="title" [breadcrumbs]="['Dashboard', 'Module Generator']" [layoutControl]="layoutCtrl">
+</vex-page-header>
+
+<div class="module-manager-container mb-8">
+  <!-- Barre de recherche + bouton Add -->
+  <div class="bg-app-bar px-6 h-16 border-b sticky left-0 flex items-center">
+    <!-- Champ de recherche -->
+    <div *ngIf="shouldShowSearchBar()" class="mt-5">
+      <vex-search-bar *ngIf="(modules.length > 0 || searchCtrl) && !(loading && !searchCtrl)"
+        [placeholder]="'user.search' | translate" (searchChange)="onSearchChange($event)">
+      </vex-search-bar>
+    </div>
+      <span class="flex-1"></span>
+    <!-- Bouton Add -->
+    <button *ngIf="!loading" (click)="createModule()" mat-mini-fab color="primary"
+      class="ml-4 shadow-md flex items-center justify-center">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+
+  <!-- État de chargement -->
+  <div *ngIf="loading" class="flex items-center justify-center p-10">
+    <vex-loading-spinner></vex-loading-spinner>
+  </div>
+
+  <!-- État sans données -->
+  <div *ngIf="!loading && modules.length === 0" class="flex flex-col items-center justify-center p-10">
+    <img class="m-12 h-64" src="assets/img/illustrations/idea.svg" />
+    <h2 class="headline m-0 text-center">{{ noDataMessage }}</h2>
+  </div>
+
+  <!-- Table et paginateur -->
+  <div *ngIf="!loading && modules.length > 0" class="overflow-auto">
+    <table @stagger mat-table [dataSource]="modules" class="w-full">
+      <!-- Module Name Column -->
+      <ng-container matColumnDef="moduleName">
+        <th mat-header-cell *matHeaderCellDef class="uppercase">Module Name</th>
+        <td mat-cell *matCellDef="let module">
+          <div class="flex items-center gap-2">
+            <mat-icon class="text-primary">folder</mat-icon>
+            <span class="font-medium">{{ module.moduleName }}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Display Name Column -->
+      <ng-container matColumnDef="displayName">
+        <th mat-header-cell *matHeaderCellDef class="uppercase">Display Name</th>
+        <td mat-cell *matCellDef="let module">{{ module.displayName }}</td>
+      </ng-container>
+
+      <!-- Fields Count Column -->
+      <ng-container matColumnDef="fieldsCount">
+        <th mat-header-cell *matHeaderCellDef class="uppercase">Fields</th>
+        <td mat-cell *matCellDef="let module">
+          <span
+            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            {{ module.fieldsCount || 0 }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Enabled Column -->
+      <ng-container matColumnDef="enabled">
+        <th mat-header-cell *matHeaderCellDef class="uppercase">Status</th>
+        <td mat-cell *matCellDef="let module">
+          <div class="flex items-center justify-center">
+            <mat-slide-toggle [checked]="module.enabled" (change)="toggleModule(module)"
+              [matTooltip]="module.enabled ? 'Disable module' : 'Enable module'"
+              [color]="module.enabled ? 'primary' : 'default'">
+            </mat-slide-toggle>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Dev Mode Column -->
+      <ng-container matColumnDef="devMode">
+        <th mat-header-cell *matHeaderCellDef class="uppercase">Mode</th>
+        <td mat-cell *matCellDef="let module">
+          <div class="flex items-center gap-2">
+            <ng-container *ngIf="module.devMode">
+              <mat-icon class="text-orange-600">code</mat-icon>
+              <span class="text-sm font-medium text-orange-600">Mock Data</span>
+            </ng-container>
+            <ng-container *ngIf="!module.devMode">
+              <mat-icon class="text-green-600">cloud</mat-icon>
+              <span class="text-sm font-medium text-green-600">API</span>
+            </ng-container>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="uppercase text-right">Actions</th>
+        <td mat-cell *matCellDef="let module" (click)="$event.stopPropagation()">
+          <div class="flex items-center justify-end space-x-2">
+            <!-- Bouton Hamburger -->
+            <button mat-icon-button [matMenuTriggerFor]="actionsMenu" matTooltip="Actions">
+              <mat-icon svgIcon="mat:more_vert"></mat-icon>
+            </button>
+
+            <!-- Menu déroulant -->
+            <mat-menu #actionsMenu="matMenu">
+              <button mat-menu-item (click)="editModule(module)" [disabled]="loading">
+                <mat-icon svgIcon="mat:edit" class="mr-2"></mat-icon>
+                <span>Edit</span>
+              </button>
+
+              <button mat-menu-item (click)="regenerateModule(module)" [disabled]="loading">
+                <mat-icon svgIcon="mat:refresh" class="mr-2"></mat-icon>
+                <span>Regenerate</span>
+              </button>
+
+              <button mat-menu-item (click)="deleteModule(module)" [disabled]="loading">
+                <mat-icon svgIcon="mat:delete" class="mr-2 text-red-600"></mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" @fadeInUp
+        class="hover:bg-hover transition duration-400 ease-out-swift cursor-pointer"></tr>
+    </table>
+  </div>
+</div>

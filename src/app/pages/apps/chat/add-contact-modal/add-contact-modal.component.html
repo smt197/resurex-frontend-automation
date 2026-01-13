@@ -1,0 +1,148 @@
+<div class="flex flex-col gap-4 px-6 py-3 border-b border-divider">
+   <div class="flex items-center gap-3 w-full">
+  <mat-icon 
+    svgIcon="mat:person_add" 
+    class="icon-2xl text-primary-600 flex-shrink-0">
+  </mat-icon>
+  <h2 class="text-lg sm:text-xl font-medium capitalize truncate" 
+      rxTranslate="global.chats.add_new_discussion">
+    Add New Contact
+  </h2>
+  <button 
+    mat-icon-button 
+    (click)="close()" 
+    class="ltr:right-12 rtl:left-12 top-2 absolute"
+    aria-label="Close dialog">
+    <mat-icon svgIcon="mat:close"></mat-icon>
+  </button>
+</div>
+  <mat-form-field class="w-full" subscriptSizing="dynamic">
+    <mat-icon matIconPrefix svgIcon="mat:search"></mat-icon>
+    <input
+      matInput
+      [formControl]="searchCtrl"
+      [placeholder]="'global.chats.search_user' | translate"
+      type="text" />
+    <button
+      *ngIf="searchCtrl.value"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="searchCtrl.setValue('')">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<div class="p-4">
+  <!-- Section pour les contacts récents -->
+  <div *ngIf="showRecentContacts()">
+    <div class="text-xs font-semibold text-secondary px-2 mb-2">
+      <span rxTranslate="global.chats.recently_list">Recently</span>
+    </div>
+
+    <div class="space-y-1">
+      <div *ngIf="isLoading()" class="flex justify-center items-center h-40">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+      <div *ngIf="!isLoading()">
+        <div *ngIf="displayedRecentContacts$ | async as displayedRecentContacts">
+          <ng-container *ngIf="displayedRecentContacts.length > 0; else noRecentContacts">
+            <!-- Container avec scroll pour les contacts récents -->
+            <div class="max-h-80 overflow-y-auto">
+              <div
+                *ngFor="let contact of displayedRecentContacts"
+                (click)="onContactSelect(contact)"
+                class="px-2 py-2 hover:bg-hover rounded transition duration-200 ease-out flex items-center gap-4 cursor-pointer select-none"
+                matRipple>
+                <img
+                  [src]="contact.photo || 'assets/img/avatars/noavatar.png'"
+                  alt="{{ contact.first_name }} avatar"
+                  class="w-8 h-8 rounded-full flex-none" />
+                <div class="flex-auto flex-col gap-2">
+                  <div class="flex-auto text-base font-medium">
+                    {{ contact.last_name }} {{ contact.first_name }} 
+                  </div>
+                  <div class="flex-auto text-xs text-gray-500">{{ contact.email || 'Recent contact' }}</div>
+                </div>
+                <mat-icon
+                  svgIcon="mat:chevron_right"
+                  class="icon-sm flex-none"></mat-icon>
+              </div>
+            </div>
+            
+            <!-- Bouton Load More -->
+              <a *ngIf="hasMoreRecentContacts" (click)="loadMoreRecentContacts()"
+                class="inline-block text-gray-600 dark:text-gray-300 font-medium text-xs mx-6 mt-3" href="javascript:void(0);">
+                <span>{{ 'global.expansion.Folded' | translate }}</span>
+                <mat-icon class="icon-xs align-middle select-none" svgIcon="mat:expand_more"></mat-icon>
+              </a>
+          </ng-container>
+          <ng-template #noRecentContacts>
+            <p class="p-6 text-center text-gray-500">
+              {{ "global.chats.no_recent_contacts" | translate }}
+            </p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section pour la recherche d'utilisateurs -->
+  <div *ngIf="!showRecentContacts()">
+    <div class="text-xs font-semibold text-secondary px-2 mb-2">
+      <span rxTranslate="home.title_bloc">Contacts</span>
+    </div>
+
+    <div class="space-y-1">
+      <div *ngIf="isLoading()" class="flex justify-center items-center h-40">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+      <div *ngIf="!isLoading()">
+        <div *ngIf="users$ | async as users">
+          <ng-container *ngIf="users.length > 0; else noUsersFound">
+            <div
+              *ngFor="let user of users"
+              (click)="onContactSelect(user)"
+              class="px-2 py-2 hover:bg-hover rounded transition duration-200 ease-out flex items-center gap-4 cursor-pointer select-none"
+              matRipple>
+              <img
+                [src]="user.photo || 'assets/img/avatars/noavatar.png'"
+                alt="{{ user.first_name }} avatar"
+                class="w-8 h-8 rounded-full flex-none" />
+              <div class="flex-auto flex-col gap-2">
+                <div class="flex-auto text-base font-medium">
+                  {{ user.last_name }} {{ user.first_name }} 
+                </div>
+                <div class="flex-auto text-xs text-gray-500">{{ user.email }}</div>
+              </div>
+              <mat-icon
+                svgIcon="mat:chevron_right"
+                class="icon-sm flex-none"></mat-icon>
+            </div>
+          </ng-container>
+          <ng-template #noUsersFound>
+            <p class="p-6 text-center text-gray-500">
+              {{
+                (searchCtrl.value
+                  ? "user.no_user_matching"
+                  : "user.no_user_matching"
+                ) | translate
+              }}
+            </p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- <mat-paginator *ngIf="!isLoading() && pagination.total > pagination.per_page"
+                 [length]="pagination.total"
+                 [pageSize]="pagination.per_page"
+                 [pageIndex]="pagination.current_page - 1"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 (page)="onPageChange($event)"
+                 showFirstLastButtons
+                 class="paginator-compact">
+  </mat-paginator> -->

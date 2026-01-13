@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.file-upload-container {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.file-upload-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+
+  .required-asterisk {
+    color: #f44336;
+    margin-left: 4px;
+  }
+}
+
+mat-error {
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}

@@ -1,0 +1,28 @@
+<div
+  class="min-h-screen flex items-center justify-center px-4 bg-cover bg-center bg-pattern"
+  style="background-image: url('assets/img/backgrounds/access-denied-bg.jpg');">
+  <div class="card shadow-xl text-center w-full max-w-sm overflow-hidden">
+    <!-- Header avec icône -->
+    <div class="p-6 flex flex-col items-center">
+      <mat-icon class="text-red-500 text-8xl mb-4" svgIcon="mat:block">
+      </mat-icon>
+    </div>
+
+    <!-- Titre principal -->
+    <h1 class="display-1 font-medium m-0 text-red-600">
+      {{ 'access_denied.title' | translate }}
+    </h1>
+
+    <!-- Message -->
+    <h3 class="title mt-3 mb-0">
+      {{ 'access_denied.message' | translate }}
+    </h3>
+
+    <div class="bg-app-bar p-6 flex flex-col mt-6">
+      <p class="mt-0 mb-4 font-medium">
+        {{ 'access_denied.contact_admin' | translate }}
+      </p>
+      <a mat-raised-button color="primary" [routerLink]="['/login']">Back to Login</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4">{{ 'menu.categories' | translate }}</h1>
+  <vex-generic-resource-list [type]="type" [formlyFields]="formlyFields" [dataService]="dataService"
+    (action)="handleAction($event)">
+  </vex-generic-resource-list>
+
+</div>

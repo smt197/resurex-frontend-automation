@@ -1,0 +1,22 @@
+<div class="dialog-container" @fadeInUp>
+  <!-- Header -->
+  <div class="dialog-header">
+    <mat-icon @scaleIn class="header-icon">delete_forever</mat-icon>
+    <h2 @fadeInRight mat-dialog-title>Supprimer le fichier</h2>
+  </div>
+
+  <!-- Content -->
+  <mat-dialog-content>
+    <p class="file-name">{{ data.fileName }}</p>
+    <p class="warning-text">Cette action est irréversible.</p>
+  </mat-dialog-content>
+
+  <!-- Actions -->
+  <mat-dialog-actions>
+    <button mat-button (click)="cancel()">Annuler</button>
+    <button mat-raised-button color="warn" (click)="confirm()">
+      <mat-icon>delete</mat-icon>
+      Supprimer
+    </button>
+  </mat-dialog-actions>
+</div>

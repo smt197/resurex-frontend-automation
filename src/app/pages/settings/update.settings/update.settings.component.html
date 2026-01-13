@@ -1,0 +1,38 @@
+
+<div class="flex flex-col h-full">
+  <!-- Header avec titre et boutons -->
+  <div class="flex items-start justify-between" mat-dialog-title>
+    <ng-container *ngIf="imageUrl; else noLogo">
+      <img [src]="imageUrl" class="avatar mr-5" />
+    </ng-container>
+   <ng-template #noLogo>
+    <div *ngIf="image$ | async  as logo">
+      <img [src]="logo" class="avatar mr-5" />
+    </div>
+   </ng-template>
+    <h2 *ngIf="!model.site_name" class="headline m-0 flex-auto">
+      New Parameter
+    </h2>
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="text-border"></mat-divider>
+
+  <!-- Formulaire -->
+    <mat-dialog-content class="w-full">
+      <formly-form [form]="form" [model]="model" [fields]="fields"></formly-form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close type="button">Cancel</button>
+      <button
+      [disabled]="form.invalid"
+        (click)="save()"
+        color="primary"
+        mat-flat-button>
+        <span class="capitalize"> update</span>
+      </button>
+    </mat-dialog-actions>
+</div>

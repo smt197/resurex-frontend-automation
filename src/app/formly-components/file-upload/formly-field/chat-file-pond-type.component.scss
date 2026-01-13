@@ -1,0 +1,177 @@
+/* Styles personnalisés pour FilePond */
+.filepond-custom {
+  --filepond-border-radius: 8px;
+  --filepond-border-color: #e5e7eb;
+  --filepond-drop-circle-color: #3b82f6;
+  --filepond-drop-circle-size: 24px;
+  --filepond-drop-label-color: #6b7280;
+  --filepond-item-panel-background-color: #f9fafb;
+  --filepond-item-panel-border-color: #e5e7eb;
+  --filepond-item-panel-border-radius: 6px;
+  --filepond-progress-indicator-color: #3b82f6;
+  --filepond-file-action-button-border-color: #e5e7eb;
+  --filepond-file-action-button-background-color: #ffffff;
+  --filepond-file-action-button-hover-background-color: #f3f4f6;
+}
+
+/* Amélioration de l'affichage des fichiers PDF */
+.filepond--item-panel-pdf {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border: 1px solid #fca5a5;
+}
+
+.filepond--item-panel-pdf .filepond--file-info-main {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+/* Amélioration pour les documents */
+.filepond--item-panel-doc {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border: 1px solid #93c5fd;
+}
+
+.filepond--item-panel-doc .filepond--file-info-main {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* Amélioration pour les fichiers génériques */
+.filepond--item-panel-generic {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border: 1px solid #d1d5db;
+}
+
+.filepond--item-panel-generic .filepond--file-info-main {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* Amélioration de la zone de drop */
+.filepond--drop-label {
+  transition: all 0.3s ease;
+}
+
+.filepond--drop-label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Amélioration des boutons d'action */
+.filepond--file-action-button {
+  transition: all 0.2s ease;
+}
+
+.filepond--file-action-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Amélioration de l'indicateur de progression */
+.filepond--progress-indicator {
+  background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Amélioration pour les prévisualisations PDF */
+.filepond--pdf-preview-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filepond--pdf-preview-overlay {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+}
+
+/* Amélioration des messages d'erreur */
+.filepond--file-status-main {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* Amélioration de la zone de prévisualisation personnalisée */
+.file-preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+}
+
+.filepond--item:hover .file-preview-overlay {
+  opacity: 1;
+}
+
+.file-preview-button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.file-preview-button:hover {
+  background: #1d4ed8;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .filepond--item-panel {
+    margin: 0.25rem;
+  }
+  
+  .filepond--drop-label {
+    font-size: 14px;
+    padding: 1rem;
+  }
+  
+  .filepond--image-preview {
+    height: 120px;
+  }
+}
+
+/* Animation pour le glisser-déposer */
+.filepond--drip {
+  background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+  opacity: 0.6;
+}
+
+/* Amélioration des tooltips */
+.filepond--file-action-button[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #374151;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+/* Amélioration de l'accessibilité */
+.filepond--file-action-button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.filepond--drop-label:focus-within {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}

@@ -1,0 +1,53 @@
+<vex-page-header
+  [title]="title"
+  [breadcrumbs]="['Dashboard', 'Activity-Logs']"
+  [layoutControl]="layoutCtrl">
+</vex-page-header>
+
+<div class="border-1 -mt-14 px-6 py-1 flex items-center">
+  <h2 class="m-0 title flex-auto">{{"log.description" | translate}}</h2>
+  <div class="mt-8 ml-2 flex justify-between items-center">
+    <mat-form-field appearance="outline" class="w-1/3 mr-2">
+      <mat-label>{{ "user.search" | translate }}</mat-label>
+      <input
+        matInput
+        [formControl]="searchCtrl"
+        [placeholder]="'user.mot_cle' | translate" />
+    </mat-form-field>
+
+    <mat-form-field class="mr-2">
+      <mat-label>{{ "user.filter_date" | translate }}</mat-label>
+      <mat-date-range-input [formGroup]="rangeGroup" [rangePicker]="picker">
+        <input
+          matStartDate
+          formControlName="start"
+          [placeholder]="'user.mot_cle_date_debut' | translate" />
+        <input
+          matEndDate
+          formControlName="end"
+          [placeholder]="'user.mot_cle_date_fin' | translate" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker>
+        <mat-date-range-picker-actions>
+          <button mat-button matDateRangePickerCancel class="flex mr-4">
+            Cancel
+          </button>
+          <button mat-raised-button matDateRangePickerApply>Apply</button>
+        </mat-date-range-picker-actions>
+      </mat-date-range-picker>
+      @if (rangeGroup.controls.start.hasError("matStartDateInvalid")) {
+        <mat-error>Invalid start date</mat-error>
+      }
+      @if (rangeGroup.controls.end.hasError("matEndDateInvalid")) {
+        <mat-error>Invalid end date</mat-error>
+      }
+    </mat-form-field>
+  </div>
+</div>
+
+<vex-widget-table
+  [columns]="columns"
+  [data]="tableData()"
+  class="sm:col-span-2">
+</vex-widget-table>

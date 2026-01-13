@@ -1,0 +1,58 @@
+<div class="h-full flex flex-col">
+    <div class="p-6 pb-0 bg-foreground shadow-b flex-none border-b">
+        <div class="container px-0 py-4 flex items-center justify-between">
+            <h1 class="display-1 font-bold flex items-center">
+                <span @scaleIn
+                    class="w-12 h-12 rounded-full text-primary-600 ltr:mr-4 rtl:ml-4 flex items-center justify-center bg-primary-600/10">
+                    <mat-icon [svgIcon]="mode === 'show' ? 'mat:attach_file' : 'mat:description'"></mat-icon>
+                </span>
+                <span @fadeInRight class="block">{{ mode }}</span>
+            </h1>
+
+            <div class="flex items-center">
+                <button [hidden]="mode === 'create'" class="flex-none hidden sm:inline-block" color="primary"
+                    mat-icon-button matTooltip="Search Contacts" type="button">
+                    <mat-icon svgIcon="mat:search"></mat-icon>
+                </button>
+
+                <button (click)="back()" class="ltr:ml-4 rtl:mr-4 flex-none hidden sm:inline-block" color="primary"
+                    mat-flat-button type="button">
+                    <mat-icon class="ltr:mr-2 rtl:ml-2 ltr:-ml-1 rtl:-mr-1 icon-sm" svgIcon="mat:arrow_back"></mat-icon>
+                    <span>Retour</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Files section -->
+    <div class="overflow-y-auto flex-auto">
+        <div class="p-6">
+            <div *ngIf="isLoading()" class="flex justify-center items-center h-64">
+                <vex-loading-spinner></vex-loading-spinner>
+            </div>
+
+            @if (mode === 'show') {
+            <div *ngIf="!isLoading() && document()?.files_info?.length" @stagger
+                class="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 container">
+                <vex-media-card *ngFor="let file of document()?.files_info" @fadeInUp [file]="file"
+                    (fileDeleted)="deleteFile($event)" [mode]="mode">
+                </vex-media-card>
+            </div>
+            <div *ngIf="!isLoading() && document() && (!document()?.files_info || document()?.files_info?.length === 0)"
+                @scaleFadeIn class="min-h-[400px] flex flex-col items-center justify-center">
+                <img class="m-12 h-64" src="assets/img/illustrations/idea.svg" />
+                <h2 class="headline m-0 text-center">Aucun fichier attaché</h2>
+            </div>
+            }
+            @if (mode === 'create') {
+            <div *ngIf="!isLoading()" @stagger class="p-6 grid grid-cols-1 gap-6 container">
+                <vex-media-card @fadeInUp #mediaCard [mode]="mode">
+                </vex-media-card>
+            </div>
+            }
+
+        </div>
+    </div>
+
+
+</div>

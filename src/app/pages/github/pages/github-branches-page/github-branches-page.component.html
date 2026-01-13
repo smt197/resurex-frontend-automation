@@ -1,0 +1,123 @@
+<div class="page-container">
+  <div *ngIf="!isLoading" class="page-header">
+    <h1 class="page-title">
+      {{ 'GITHUB.BRANCH.TITLE' | translate }}
+    </h1>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'global.retour' | translate }}
+      </button>
+      <button mat-raised-button color="primary" (click)="toggleCreateForm()">
+        <mat-icon>add</mat-icon>
+        {{ 'GITHUB.BRANCH.CREATE_BRANCH' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <!-- Create Branch Form -->
+    <div *ngIf="showCreateForm" class="create-branch-section">
+      <h3>{{ 'GITHUB.BRANCH.CREATE_BRANCH' | translate }}</h3>
+      <form [formGroup]="branchForm">
+        <formly-form [form]="branchForm" [fields]="branchFields" [model]="branchModel"></formly-form>
+      </form>
+      <div class="form-actions">
+        <button mat-button type="button" (click)="toggleCreateForm()">
+          {{ 'global.cancel' | translate }}
+        </button>
+        <button mat-raised-button color="primary" type="button" (click)="createBranch()" [disabled]="!branchForm.valid">
+          <mat-icon>add</mat-icon>
+          {{ 'global.create' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading && !showCreateForm" class="spinner-container">
+      <vex-loading-spinner></vex-loading-spinner>
+    </div>
+
+    <!-- No Data State -->
+    <div *ngIf="!isLoading && branches.data.length === 0 && !showCreateForm" class="no-data">
+      <mat-icon class="no-data-icon">info</mat-icon>
+      <p>{{ 'GITHUB.BRANCH.NO_BRANCHES' | translate }}</p>
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="!isLoading && !showCreateForm && branches.data.length > 0" class="table-container">
+      <table mat-table [dataSource]="branches" class="branches-table">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>{{ 'GITHUB.BRANCH.COLUMNS.NAME' | translate }}</th>
+          <td mat-cell *matCellDef="let branch">
+            <div class="branch-name">
+              <span>{{ branch.name }}</span>
+              <mat-chip *ngIf="branch.name === repository?.default_branch" class="default-chip">
+                {{ 'GITHUB.BRANCH.DEFAULT' | translate }}
+              </mat-chip>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Protected Column -->
+        <ng-container matColumnDef="protected">
+          <th mat-header-cell *matHeaderCellDef>{{ 'GITHUB.BRANCH.COLUMNS.PROTECTED' | translate }}</th>
+          <td mat-cell *matCellDef="let branch">
+            <mat-chip [class.protected-chip]="branch.protected" [class.unprotected-chip]="!branch.protected">
+              {{ (branch.protected ? 'GITHUB.BRANCH.PROTECTED' : 'GITHUB.BRANCH.UNPROTECTED') | translate }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <!-- Commit Column -->
+        <ng-container matColumnDef="commit">
+          <th mat-header-cell *matHeaderCellDef>{{ 'GITHUB.BRANCH.COLUMNS.LAST_COMMIT' | translate }}</th>
+          <td mat-cell *matCellDef="let branch">
+            <div class="commit-info" *ngIf="branch.commit_sha">
+              <code class="commit-sha">{{ branch.commit_sha?.substring(0, 7) }}</code>
+              <span class="commit-message">{{ branch.commit_message }}</span>
+            </div>
+            <span *ngIf="!branch.commit_sha" class="no-commit">-</span>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>{{ 'user.label.actions' | translate }}</th>
+          <td mat-cell *matCellDef="let branch">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="action-menu-button">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="viewCommits(branch)">
+                <mat-icon>commit</mat-icon>
+                <span>{{ 'GITHUB.BRANCH.ACTIONS.ALL_COMMITS' | translate }}</span>
+              </button>
+              <button mat-menu-item (click)="toggleProtection(branch)">
+                <mat-icon>{{ branch.protected ? 'lock_open' : 'lock' }}</mat-icon>
+                <span>{{ (branch.protected ? 'GITHUB.BRANCH.ACTIONS.UNPROTECT' : 'GITHUB.BRANCH.ACTIONS.PROTECT') | translate }}</span>
+              </button>
+              <button mat-menu-item (click)="deleteBranch(branch)" [disabled]="branch.name === repository?.default_branch">
+                <mat-icon color="warn">delete</mat-icon>
+                <span>{{ 'GITHUB.BRANCH.ACTIONS.DELETE' | translate }}</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['name', 'protected', 'commit', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['name', 'protected', 'commit', 'actions']"></tr>
+      </table>
+
+      <mat-paginator
+        [length]="totalBranches"
+        [pageSize]="pageSize"
+        [pageIndex]="currentPage"
+        (page)="onPageChange($event)"
+        class="branches-paginator">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

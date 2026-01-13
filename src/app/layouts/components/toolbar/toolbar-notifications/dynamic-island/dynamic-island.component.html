@@ -1,0 +1,82 @@
+<div class="flex flex-col items-center justify-center">
+  <div
+    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 px-4 w-3/5 max-w-screen-sm pointer-events-none">
+    <div
+      @fadeInUp
+      id="island"
+      (click)="onIslandClick($event)"
+      class="relative bg-black backdrop-blur-md flex items-center justify-center overflow-visible -mt-1 mx-auto transition-all duration-500 ease-in-out cursor-pointer pointer-events-auto shadow-[0_0_0_1px_rgba(255,255,255,0.1)_inset,0_4px_12px_rgba(0,0,0,0.5)] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.15)_inset,0_6px_16px_rgba(0,0,0,0.6)]"
+      [ngClass]="{
+        'w-10 h-10 rounded-full sm:w-10 sm:h-10 sm:rounded-full md:w-48 md:h-10 md:rounded-full':
+          currentState === IslandState.Pill,
+        'w-48 max-w-60 h-11 rounded-[2.5rem] sm:w-80':
+          currentState === IslandState.Notification
+      }">
+      <!-- Badge pour unreadCount (visible en mode Pill pour tous les écrans) -->
+      <div
+        *ngIf="unreadCount > 0"
+        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full min-w-[1.25rem] h-5 flex items-center justify-center px-1 transition-opacity duration-300 z-10"
+        [ngClass]="{
+          'opacity-100': currentState === IslandState.Pill,
+          'opacity-0 pointer-events-none': currentState !== IslandState.Pill
+        }">
+        {{ unreadCount > 99 ? "99+" : (unreadCount > 9 ? "9+" : unreadCount) }}
+      </div>
+      <div
+        *ngIf="unreadCount == 0"
+        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full min-w-[1.25rem] h-5 flex items-center justify-center px-1 transition-opacity duration-300 z-10"
+        [ngClass]="{
+          'opacity-100': currentState === IslandState.Pill,
+          'opacity-0 pointer-events-none': currentState !== IslandState.Pill
+        }">
+        0
+      </div>
+      <!-- Contenu "Pill" (état de base) -->
+      <div
+        class="absolute inset-0 flex items-center justify-center transition-opacity duration-300"
+        [ngClass]="{
+          'opacity-100': currentState === IslandState.Pill,
+          'opacity-0 pointer-events-none': currentState !== IslandState.Pill
+        }">
+        <mat-icon
+          svgIcon="{{
+            unreadCount > 0
+              ? 'mat:notifications_active'
+              : 'mat:notifications_none'
+          }}"
+          class="text-sm sm:text-lg text-white"></mat-icon>
+      </div>
+
+      <!-- Contenu "Notification" -->
+      <div
+        class="absolute inset-0 flex items-center gap-2 sm:gap-4 px-3 sm:px-4 transition-all duration-300"
+        [ngClass]="{
+          'opacity-100 scale-100': currentState === IslandState.Notification,
+          'opacity-0 scale-95 pointer-events-none':
+            currentState !== IslandState.Notification
+        }">
+        <div
+          class="w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 relative">
+          <mat-icon
+            svgIcon="mat:notifications_active"
+            class="text-sm sm:text-lg text-white"></mat-icon>
+          <!-- Badge intégré dans l'icône pour l'état notification (visible sur tous les écrans) -->
+          <div
+            *ngIf="unreadCount > 0"
+            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full min-w-[1rem] h-4 flex items-center justify-center px-1 sm:min-w-[1.125rem] sm:h-4">
+            {{
+              unreadCount > 99 ? "99+" : (unreadCount > 9 ? "9+" : unreadCount)
+            }}
+          </div>
+        </div>
+        <div class="min-w-0 flex-1">
+          <span
+            class="text-xs sm:text-sm md:text-sm lg:text-sm font-light sm:font-normal md:font-medium text-white truncate">
+            {{ unreadCount === 1 ? ('notifications.singular' | translate)
+            : ('notifications.plural' | translate:{count: unreadCount}) }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="button-container">
+    <button
+        *ngIf="props['appearance'] === 'raised'"
+        mat-raised-button
+        [color]="props['color'] || 'primary'"
+        [type]="props['btnType'] || 'button'"
+        [disabled]="props['disabled']"
+        (click)="props['onClick']?.()"
+        [ngClass]="props['className']"
+        class="btn">
+        <ng-container *ngIf="props['translate']">
+            {{ props['text'] | translate }}
+        </ng-container>
+        <ng-container *ngIf="!props['translate']">
+            {{ props['text'] }}
+        </ng-container>
+    </button>
+
+    <button
+        *ngIf="props['appearance'] === 'flat'"
+        mat-flat-button
+        [color]="props['color'] || 'primary'"
+        [type]="props['btnType'] || 'button'"
+        [disabled]="props['disabled']"
+        (click)="props['onClick']?.()"
+        [ngClass]="props['className']"
+        class="btn">
+        <ng-container *ngIf="props['translate']">
+            {{ props['text'] | translate }}
+        </ng-container>
+        <ng-container *ngIf="!props['translate']">
+            {{ props['text'] }}
+        </ng-container>
+    </button>
+
+    <button
+        *ngIf="props['appearance'] === 'stroked'"
+        mat-stroked-button
+        [color]="props['color'] || 'primary'"
+        [type]="props['btnType'] || 'button'"
+        [disabled]="props['disabled']"
+        (click)="props['onClick']?.()"
+        [ngClass]="props['className']"
+        class="btn">
+        <ng-container *ngIf="props['translate']">
+            {{ props['text'] | translate }}
+        </ng-container>
+        <ng-container *ngIf="!props['translate']">
+            {{ props['text'] }}
+        </ng-container>
+    </button>
+
+    <button
+        *ngIf="!props['appearance'] || props['appearance'] === 'basic'"
+        mat-button
+        [color]="props['color'] || 'primary'"
+        [type]="props['btnType'] || 'button'"
+        [disabled]="props['disabled']"
+        (click)="props['onClick']?.()"
+        [ngClass]="props['className']"
+        class="btn">
+        <ng-container *ngIf="props['translate']">
+            {{ props['text'] | translate }}
+        </ng-container>
+        <ng-container *ngIf="!props['translate']">
+            {{ props['text'] }}
+        </ng-container>
+    </button>
+</div>

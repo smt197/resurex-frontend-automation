@@ -1,0 +1,49 @@
+<ng-container *ngIf="!isloading; else spinner">
+  <div class="w-full h-full bg-pattern flex flex-col items-center justify-center">
+    <div [@fadeInUp] class="card overflow-hidden w-full max-w-lg">
+      <div class="text-center mt-4">
+        <h2 class="title m-0" rxTranslate="otp.title">Code OTP verification</h2>
+        <h4 class="body-2 text-lg font-semibold text-red-600 m-4" *ngIf="!isOtpComplete && timeLeft > 0" rxTranslate="otp.subtile">
+          Un code est envoye par mail, veuillez verifier votre mail .
+        </h4>
+        <h4 class="timer" *ngIf="Errormessage">
+          {{ Errormessage }}
+        </h4>
+      </div>
+      <div [formGroup]="formOTP" class="p-6 flex flex-col">
+        <div class="p-6 flex flex-col items-center">
+          <ngx-otp-input #otpInput (otpChange)="onOtpChange($event)" [options]="otpOptions"
+            [disabled]="isInputDisabled">
+          </ngx-otp-input>
+          <div *ngIf="timeLeft > 0 && !res" class="text-red-500 text-lg font-semibold">
+        <span rxTranslate="otp.time">Temps restant :  </span>    {{ minutes }}:{{ seconds }}
+          </div>
+          <div *ngIf="res" class="timer">
+          <span rxTranslate="otp.reessayer"> Réessayer dans </span>   {{ minutes }}:{{ seconds | number:'2.0' }}
+          </div>
+          <div *ngIf="!isOtpComplete && timeLeft > 0" class="info-message" rxTranslate="otp.message">
+            Veuillez saisir les 6 chiffres de l'OTP.
+          </div>
+          <div *ngIf="timeLeft === 0" class="flex items-center justify-between">
+              <button mat-raised-button (click)="resendOtp($event)" color="primary" rxTranslate="otp.renvoie">Renvoyer l'OTP</button>
+          </div>
+
+          <button (click)="sendOTP()" class="mt-2" color="primary" [disabled]="!isOtpComplete || isInputDisabled"
+            mat-raised-button type="button" rxTranslate="otp.submit">
+            SEND
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-container>
+<ng-template #spinner>
+  <div class="w-full h-full bg-pattern flex flex-col items-center justify-center">
+    <div [@fadeInUp] class="card overflow-hidden w-full max-w-lg">
+      <div class="p-6 flex items-center justify-center">
+        <vex-loading-spinner></vex-loading-spinner>
+      </div>
+    </div>
+  </div>
+</ng-template>

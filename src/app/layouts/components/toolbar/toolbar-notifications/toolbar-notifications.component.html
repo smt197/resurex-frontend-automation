@@ -1,0 +1,19 @@
+<vex-dynamic-island
+#originRef
+[class.bg-hover]="dropdownOpen"
+  (islandClick)="showPopover()"
+[unreadnotificationcount$]="unreadnotificationcount$">
+</vex-dynamic-island>
+<!-- 
+<button
+  #originRef
+  (click)="showPopover()"
+  [class.bg-hover]="dropdownOpen"
+  class="button relative z-[60]"
+  mat-icon-button
+  type="button">
+  <mat-icon color="primary" svgIcon="mat:notifications_active"></mat-icon>
+  <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full top-1 end-1 dark:border-gray-900">
+    {{ unreadnotificationcount$ | async}}
+  </div>
+</button> -->

@@ -1,0 +1,62 @@
+.dialog-container {
+  padding: 0;
+  min-width: 400px;
+}
+
+.dialog-header {
+  padding: 32px 24px 24px;
+  text-align: center;
+
+  .header-icon {
+    color: #ef4444;
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    display: block;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+mat-dialog-content {
+  padding: 0 24px 24px;
+  text-align: center;
+
+  .file-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 16px;
+    word-break: break-word;
+  }
+
+  .warning-text {
+    font-size: 13px;
+    color: #dc2626;
+    margin: 0;
+  }
+}
+
+mat-dialog-actions {
+  padding: 16px 24px;
+  margin: 0;
+  border-top: 1px solid var(--border);
+  justify-content: flex-end;
+  gap: 8px;
+
+  button {
+    min-width: 90px;
+
+    mat-icon {
+      margin-right: 4px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

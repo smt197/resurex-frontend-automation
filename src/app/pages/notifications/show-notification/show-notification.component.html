@@ -1,0 +1,35 @@
+<div class="page-container p-4 md:p-6"> <!-- Ajoutez vos classes de layout VEX si besoin -->
+  <div class="flex items-center mb-6">
+     <button mat-icon-button (click)="goBack()" aria-label="Retour à la liste des notifications" class="mr-2">
+         <mat-icon>arrow_back</mat-icon>
+     </button>
+     <!-- Changement du titre si vous le souhaitez pour correspondre au contenu -->
+     <h1 class="text-2xl font-semibold">Autres Notifications</h1>
+  </div>
+
+  <!-- SECTION POUR LE CHARGEMENT -->
+  <div *ngIf="isLoading" class="flex justify-center items-center py-10">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p class="ml-4">Chargement des détails...</p>
+  </div>
+
+  <!-- SECTION POUR LES ERREURS (affichée si !isLoading ET errorMessage existe) -->
+  <div *ngIf="errorMessage && !isLoading" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+    <strong class="font-bold">Erreur !</strong>
+    <span class="block sm:inline">{{ errorMessage }}</span>
+  </div>
+
+  <!-- SECTION POUR LES DONNÉES (affichée si !isLoading ET PAS d'errorMessage ET données existent) -->
+  <div *ngIf="notificationCardData && notificationCardData.length > 0 && !isLoading && !errorMessage">
+    <vex-show-dynamic-card
+      [data]="notificationCardData"
+      [showEditButton]="false">
+      <!-- Vous pourriez vouloir ajouter un titre au-dessus ou un header spécifique ici -->
+    </vex-show-dynamic-card>
+  </div>
+
+  <!-- SECTION POUR AUCUNE DONNÉE (affichée si !isLoading ET PAS d'errorMessage ET PAS de données) -->
+  <div *ngIf="!notificationCardData && !isLoading && !errorMessage" class="text-center py-10">
+     <p>Aucun détail de notification à afficher.</p>
+  </div>
+</div>

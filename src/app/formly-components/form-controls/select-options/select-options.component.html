@@ -1,0 +1,59 @@
+<div class="container-fluid w-full">
+  <div class="grid grid-cols-1 gap-6 w-full">
+    <!-- Champ Pays -->
+    <ng-container *ngIf="isCountryField()">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>{{ field.props.label }}</mat-label>
+        <mat-select 
+          [formControl]="countryCtrl"
+          (selectionChange)="onCountrySelected($event.value)"
+          [compareWith]="compareCountries"
+          class="w-full">
+          
+          <!-- Option de recherche -->
+          <mat-option>
+            <lib-mat-select-search
+              [list]="countriesAsRecords"
+              [searchProperties]="['country_name', 'country_code', 'dial_code']"
+              (filtered)="onCountriesFiltered($event)"
+              [clearSearchInput]="false">
+            </lib-mat-select-search>
+          </mat-option>
+          
+          <!-- Liste des pays filtrés -->
+          <mat-option *ngFor="let country of filteredCountries" [value]="country">
+            <span class="flex items-center">
+              <img [src]="country.image_url" class="align-middle mr-4 shadow-lg h-6 inline-block" />
+              <span class="flex flex-col">
+                <span class="body-1 leading-snug">{{ country.country_name }}</span>
+                <span class="caption text-secondary">{{ country.dial_code }}</span>
+              </span>
+            </span>
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="showError">
+          {{ field.validation?.messages || 'Ce champ est requis' }}
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+
+    <!-- Champ Téléphone -->
+    <ng-container *ngIf="isPhoneField()">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>{{ field.props.label }}</mat-label>
+        <ngx-mat-intl-tel-input
+          [preferredCountries]="preferredCountries"
+          [enablePlaceholder]="true"
+          [enableSearch]="true"
+          [onlyCountries]="onlyCountries"
+          name="phone"
+          [formControl]="phoneControl"
+          #phoneInput
+        ></ngx-mat-intl-tel-input>
+        <mat-error *ngIf="showError">
+          {{ phoneErrorMessage }}
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+  </div>
+</div>

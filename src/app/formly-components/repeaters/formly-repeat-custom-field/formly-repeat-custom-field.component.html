@@ -1,0 +1,8 @@
+<div *ngFor="let field of field.fieldGroup; let i = index;"
+  class="card flex w-full items-start gap-x-4 p-4 shadow-lg mb-4">
+
+  <div class="flex-grow">
+    <!-- 'field' ici représente une ligne du tableau, donc on l'affiche -->
+    <formly-field [field]="field"></formly-field>
+  </div>
+</div>

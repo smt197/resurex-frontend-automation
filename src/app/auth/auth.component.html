@@ -1,0 +1,41 @@
+<div
+  class="toolbar text-default w-full px-2 sm:px-4 md:px-6 flex flex-col sm:flex-row items-center justify-between py-2 gap-2">
+  <!-- Logo et titre - Responsive et centré sur mobile -->
+  <div
+    class="sidenav-toolbar flex items-center cursor-pointer w-full sm:w-auto justify-center sm:justify-start mb-2 sm:mb-0"
+    (click)="login()">
+    <a class="flex items-center">
+      <img alt="Logo" class="w-6 sm:w-8 select-none" [src]="imageUrl$ | async" />
+      <h1 class="text-xl sm:text-2xl font-bold tracking-wide ltr:pl-2 sm:ltr:pl-4 rtl:pr-2 sm:rtl:pr-4 m-0 select-none">
+        {{ title$ | async }}
+      </h1>
+    </a>
+  </div>
+
+  <!-- Conteneur pour les boutons et le sélecteur de langue -->
+  <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 w-full sm:w-auto">
+
+  </div>
+  <div class="flex items-end justify-end pt-4">
+    <vex-change-languague></vex-change-languague>
+    <button (click)="login()" class="ltr:ml-1 rtl:mr-1 flex-none sm:hidden bg-white text-primary-600" mat-mini-fab
+      matTooltip="Add Contact" type="button">
+      <mat-icon svgIcon="mat:lock"></mat-icon>
+    </button>
+
+    <button (click)="login()" class="ltr:ml-4 rtl:mr-4 flex-none hidden sm:inline-block hover:border-primary-600" color="primary" mat-stroked-button
+      type="button">
+      <mat-icon class="ltr:mr-2 rtl:ml-2 ltr:-ml-1 rtl:-mr-1 icon-sm" svgIcon="mat:lock"></mat-icon>
+      <span rxTranslate="auth.signin.title">Log In</span>
+    </button>
+
+    <button *ngIf="!isAdminLogin" (click)="register()" class="ltr:ml-4 rtl:mr-4 flex-none hidden sm:inline-block" color="primary"
+      mat-flat-button type="button">
+      <mat-icon class="ltr:mr-2 rtl:ml-2 ltr:-ml-1 rtl:-mr-1 icon-sm" svgIcon="mat:person_add"></mat-icon>
+      <span class="text-white" rxTranslate="auth.signup.title">Sign Up</span>
+    </button>
+
+  </div>
+</div>
+
+<router-outlet></router-outlet>

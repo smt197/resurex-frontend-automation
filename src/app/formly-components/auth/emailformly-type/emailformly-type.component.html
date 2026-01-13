@@ -1,0 +1,10 @@
+
+    <mat-form-field class="w-full">
+        <mat-label>{{ field.props.label }}</mat-label>
+        <mat-icon class="mr-2" matIconPrefix svgIcon="mat:mail"></mat-icon>
+        <input  [formControl]="formControl" matInput required />
+    </mat-form-field>
+
+    <mat-error *ngIf="showError">
+        <formly-validation-message [field]="field"></formly-validation-message>
+      </mat-error>

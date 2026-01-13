@@ -1,0 +1,170 @@
+<mat-accordion class="w-full">
+  <mat-expansion-panel *ngFor="let cardData of data; trackBy: trackByFn" [expanded]="cardData.isExpanded"
+    (opened)="cardData.isExpanded = true" (closed)="cardData.isExpanded = false"
+    class="bg-white rounded-lg shadow-sm hover:shadow-none border border-transparent hover:border-primary-500 transition-all duration-300 ease-in-out overflow-hidden border-2 hover:border-2 my-6 p-2">
+    <!-- En-tête personnalisée -->
+    <mat-expansion-panel-header class="px-2 py-2 sm:px-10 sm:py-8 hover:bg-gray-50 transition-colors duration-200">
+      <div class="flex flex-wrap items-center w-full min-w-0">
+        <!-- Icône et titre/description -->
+        <div class="flex gap-4 sm:gap-6 flex-grow">
+          <mat-icon class="icon-lg text-primary-600 flex-shrink-0">{{
+            cardData.icon
+            }}</mat-icon>
+          <div class="flex flex-col min-w-0">
+            <h2 class="title m-0 text-lg font-semibold text-gray-700 truncate">
+              {{ cardData.title }}
+            </h2>
+            <p class="text-gray-600 text-sm mt-2 mb-0 truncate" *ngIf="cardData.description">
+              {{ cardData.description }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Contrôles à droite -->
+        <div class="flex items-center ml-auto flex-shrink-0">
+          <span class="text-sm text-gray-500 mr-3">
+            {{ (cardData.isExpanded ? "global.expansion.Unfolded" : "global.expansion.Folded") | translate }}
+          </span>
+          <mat-icon class="transition-transform duration-200 transform -rotate-90 text-gray-600"
+            [class.rotate-0]="cardData.isExpanded">
+            expand_more
+          </mat-icon>
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngIf="!cardData.isLoading; else loading">
+      <!-- Header interne avec bouton d'édition -->
+      <div class="px-10 pt-6 pb-3 flex justify-end border-b border-gray-100">
+        <button mat-icon-button
+          class="text-gray-500 hover:text-primary-600 hover:bg-gray-100 rounded-full p-1 transition-colors duration-200"
+          (click)="toggleEditMode(cardData, $event)"
+          *ngIf="showEditButton && !cardData.isLoading && cardData.isExpanded">
+          <mat-icon>{{ cardData.editing ? "close" : "edit" }}</mat-icon>
+        </button>
+      </div>
+
+      <!-- Mode édition -->
+      <div *ngIf="cardData.editing" class="px-10 pb-10">
+        <div class="space-y-6 pt-6">
+          <!-- Image preview during edit -->
+          <div class="flex justify-center mb-6" *ngIf="hasPhotoField(cardData)">
+            <div class="flex flex-col items-center">
+              <img [src]="getImageUrl(cardData)" [alt]="getPhotoFieldKey(cardData)"
+                class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-2 border-gray-200" />
+              <p class="mt-3 text-sm text-gray-500">
+                {{ getPhotoFieldKey(cardData) }}
+              </p>
+            </div>
+          </div>
+
+          <formly-form [form]="form" [fields]="cardData.form" [model]="cardData.model">
+          </formly-form>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:justify-end gap-4 pt-6 mt-8 border-t border-gray-100">
+          <button type="button" color="basic" mat-button (click)="toggleEditMode(cardData, $event)"
+            rxTranslate="global.show_dynamic_cancel">
+            Annuler
+          </button>
+          <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary"
+            (click)="submitForm($event, cardData)" rxTranslate="global.show_dynamic_submit">
+            Enregistrer
+          </button>
+        </div>
+      </div>
+
+      <!-- Mode visualisation -->
+      <div *ngIf="!cardData.editing" class="px-4 pb-4 pt-4 sm:px-10 sm:pb-10 sm:pt-8 flex flex-wrap gap-8">
+        <!-- Photo section -->
+        <div class="py-4 flex items-center w-full justify-center" *ngIf="hasPhotoField(cardData)">
+          <div class="flex flex-col items-center space-y-3">
+            <img [src]="getImageUrl(cardData)" [alt]="getPhotoFieldKey(cardData)"
+              class="w-32 h-32 rounded-full object-cover border-2 border-gray-200" />
+            <p class="m-0 text-sm text-gray-500">
+              {{ getPhotoFieldKey(cardData) }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Dynamic fields -->
+        <ng-container *ngFor="let field of cardData.form">
+          <div class="py-4 flex items-start flex-1 min-w-[calc(50%-1rem)]" *ngIf="!isPhotoField(field)">
+            <div
+              class="flex-shrink-0 w-12 h-12 rounded-full bg-primary-50 text-primary-600 flex items-center justify-center mt-1">
+              <mat-icon class="icon-sm">{{
+                field.props?.["icon"] || "info"
+                }}</mat-icon>
+            </div>
+
+            <div class="ml-3 sm:ml-5">
+              <p class="m-0 text-base font-medium text-gray-800">
+                <ng-container *ngIf="field.key === 'roles'">
+                  {{ getRolesNames(cardData.model[field.key]) || "-" }}
+                </ng-container>
+                <ng-container *ngIf="field.key === 'permissions'">
+                  {{ getPermissionsNames(cardData.model[field.key]) || "-" }}
+                </ng-container>
+                <ng-container *ngIf="field.key === 'available_countries'">
+                  <!-- Utilisation d'une fonction helper pour normaliser l'affichage -->
+                  <ng-container
+                    *ngIf="getDisplayCountry(cardData.model.available_countries) as country; else noCountry">
+                    <div class="flex items-center gap-2">
+                      <!-- Drapeau -->
+                      <img *ngIf="country.image_url" [src]="country.image_url" class="w-8 h-5 rounded-sm"
+                        [alt]="country.country_name || 'Drapeau du pays'">
+
+                      <!-- Nom du pays -->
+                      <span>{{ country.country_name || 'Non spécifié' }}</span>
+
+                      <!-- Code pays -->
+                      <span *ngIf="country.country_code" class="text-sm text-gray-500">
+                        ({{ country.country_code }})
+                      </span>
+
+                      <!-- Indicatif téléphonique -->
+                      <span *ngIf="country.dial_code" class="text-sm text-gray-500">
+                        {{ country.dial_code }}
+                      </span>
+                    </div>
+                  </ng-container>
+
+                  <!-- Aucun pays sélectionné -->
+                  <ng-template #noCountry>
+                    <div class="text-gray-500">
+                      Aucun pays sélectionné
+                    </div>
+                  </ng-template>
+                </ng-container>
+                <ng-container *ngIf="
+                    field.key !== 'roles' &&
+                    field.key !== 'permissions' &&
+                    field.key !== 'preferred_language' &&
+                    field.key !== 'available_countries'
+                  ">
+                  {{ getValue(cardData.model, getSafeKey(field.key)) || "-" }}
+                </ng-container>
+              </p>
+              <p class="m-0 text-sm text-gray-500 mt-2">
+                {{ field.props?.label || field.key }}
+              </p>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <!-- Template de chargement -->
+    <ng-template #loading>
+      <div class="p-10">
+        <div class="flex flex-col items-center justify-center space-y-6">
+          <p class="text-lg text-gray-600" rxTranslate="global.loading">
+            Chargement en cours...
+          </p>
+          <mat-progress-spinner mode="indeterminate" class="icon-2xl" color="primary" diameter="35">
+          </mat-progress-spinner>
+        </div>
+      </div>
+    </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>

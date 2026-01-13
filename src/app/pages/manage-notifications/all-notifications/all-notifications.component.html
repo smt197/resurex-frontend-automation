@@ -1,0 +1,97 @@
+<!-- <vex-page-header
+  [title]="title"
+  [breadcrumbs]="['Dashboard', 'Notifications']"
+  [layoutControl]="layoutCtrl">
+</vex-page-header> -->
+
+<div class="h-full flex flex-col min-h-0">
+  <!-- Header Section -->
+  <div class="flex-shrink-0 p-6 pb-0 bg-foreground shadow-b border-b">
+    <div class="container px-0">
+      <h2 class="display-1 font-bold mt-0 mb-4 flex items-center">
+        <span
+          @scaleIn
+          class="w-12 h-12 rounded-full text-primary-600 ltr:mr-4 rtl:ml-4 flex items-center justify-center bg-primary-600/10">
+          <mat-icon svgIcon="mat:notifications"></mat-icon>
+        </span>
+        <span @fadeInRight class="block">{{ title }}</span>
+      </h2>
+
+      <div class="flex items-center">
+        <nav [tabPanel]="tabPanel" class="border-0 flex-auto" mat-tab-nav-bar>
+          <a
+            #rla="routerLinkActive"
+            *ngFor="let link of links"
+            [active]="rla.isActive"
+            [disabled]="link.disabled || isLoading"
+            [routerLink]="link.route"
+            mat-tab-link
+            routerLinkActive="">
+            {{ link.label | translate }}
+          </a>
+        </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Body (Relative for spinner positioning) -->
+  <div class="relative flex-1 min-h-0 flex flex-col">
+    <!-- Spinner Overlay -->
+    <div
+      *ngIf="isLoading"
+      class="absolute inset-0 flex items-center justify-center z-10 bg-white bg-opacity-75">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+
+    <div
+      class="flex-1 min-h-0 flex flex-col"
+      [class.opacity-0]="isLoading"
+      [class.invisible]="isLoading">
+      <ng-container *ngIf="notifications$ | async as notifications">
+        <!-- Scrollable Content Area -->
+        <div class="flex-1 min-h-0 overflow-y-auto">
+          <div class="p-6">
+            <div
+              *ngIf="notifications.length > 0; else noNotifications"
+              @stagger
+              class="container px-0 mx-auto space-y-4">
+              <vex-card-notification
+                @fadeInUp
+                *ngFor="
+                  let notification of notifications;
+                  trackBy: trackById
+                "
+                [notification]="notification"
+                (markAsRead)="markAsRead(notification)">
+              </vex-card-notification>
+            </div>
+
+            <!-- "No Notifications" Template -->
+            <ng-template #noNotifications>
+              <div
+                @scaleFadeIn
+                class="min-h-[400px] flex flex-col items-center justify-center">
+                <img
+                  class="m-12 h-64"
+                  src="assets/img/illustrations/idea.svg" />
+                <h2 class="headline m-0 text-center">{{ 'notifications.no_notifications' | translate }}</h2>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <!-- Pagination (Stays at the bottom) -->
+        <div class="flex-shrink-0 border-t bg-white">
+          <mat-paginator
+            [length]="pagination.total"
+            [pageIndex]="pagination.current_page - 1"
+            [pageSize]="pagination.per_page"
+            (page)="onPageChange($event)"
+            aria-label="Sélectionner une page">
+          </mat-paginator>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

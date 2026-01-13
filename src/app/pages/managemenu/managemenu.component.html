@@ -1,0 +1,16 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4">{{ 'menu.managemenu' | translate }}</h1>
+  <formly-form *ngIf="resourceList && resourceList.data && resourceList.data.length > 0"
+    [fields]="filtersFormlyFields"
+    [model]="filtersModel"
+    [form]="filtersForm">
+  </formly-form>
+
+  <vex-generic-resource-list *ngIf="dataService"
+    [type]="type"
+    [formlyFields]="formlyFields"
+    [dataService]="dataService"
+    [externalFilters]="currentFilters"
+    (action)="handleAction($event)">
+  </vex-generic-resource-list>
+</div>

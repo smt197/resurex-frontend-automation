@@ -1,0 +1,733 @@
+{
+  "response": {
+    "en-cours": "Operation in progress…"
+  },
+  "access_denied": {
+    "title": "Maintenance",
+    "message": "Your account has been temporarily suspended by an administrator. You cannot access the application at this time.",
+    "contact_admin": "If you believe this is an error, please contact an administrator.",
+    "logout": "Logout",
+    "back_to_login": "Back to Login"
+  },
+  "global": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "plus": "more",
+    "addText": "Add",
+    "title": "resurex",
+    "language": "English",
+    "code": "en",
+    "fr": "French",
+    "en": "English",
+    "pt": "Portuguese",
+    "country": "Country",
+    "phone": "phone",
+    "language_name": "Language",
+    "rememberme": " remember me",
+    "forgotpassword": " forgot password",
+    "loading": "Please wait...",
+    "dashboard": "Dashboard",
+    "button-toggle-box": "Boxed",
+    "button-toggle-full": "Full-Width",
+    "close": "Close",
+    "show_dynamic_submit": "Update",
+    "show_dynamic_cancel": "Cancel",
+    "show_dynamic_descrip": "Manage your personal information, avatar and account preferences",
+    "logout": "logout",
+    "languages": "Language",
+    "no_data": "No {{type}} found.",
+    "types": {
+      "users": "User",
+      "roles": "Role",
+      "permissions": "Permission",
+      "documents": "Documents",
+      "user-jobs": "Jobs",
+      "tous_les_menus": "All menus",
+      "tous_les_roles": "All roles",
+      "toutes_les_categories": "All categories",
+      "menus": "Menus",
+      "category": "Category",
+      "module-managers": "Module Manager",
+      "tasks": "Task"
+    },
+    "expansion": {
+      "Folded": "Show more",
+      "Unfolded": "Collapse"
+    },
+    "backup": {
+      "title": "Backup System",
+      "submit": "start backup",
+      "reset": "reset",
+      "process_title": "Initializing backup process...",
+      "show_process": "Database backup in progress..."
+    },
+    "chats": {
+      "title": "Chats",
+      "submit": "New Chat",
+      "search": "Search chat ...",
+      "add_contact": "Add Contact",
+      "all_conversation": "All Conversation",
+      "no_chat_matching": " No chat found",
+      "try_message": "type your message ...",
+      "loading_conversation": "Loading conversation...",
+      "not_message": "No messages yet.",
+      "start_conversation": "Start the conversation!",
+      "add_new_discussion": "start a new discussion",
+      "search_user": "Search users...",
+      "Cancel": "Cancel",
+      "add_attachment": "Add Attachment",
+      "block_message": "This user is suspended. You cannot send messages to this user.",
+      "recently_list": "Recently contacted",
+      "no_recent_contacts": "No recent contacts"
+    },
+    "filepond": {
+      "label_idle": "Drag & drop or <span class='filepond--label-action'>Browse</span>"
+    }
+  },
+  "menu": {
+    "home": "Home",
+    "dashboards": "Dashboard",
+    "users": "Users",
+    "settings": "Settings",
+    "analytics": "Analytics",
+    "roles": "Roles",
+    "permissions": "Permissions",
+    "autorisation": "Authorization",
+    "administration": "Administration",
+    "chat": "Chat",
+    "notifications": "Notifications",
+    "logs": "Activity Logs",
+    "documents": "Documents",
+    "user-jobs": "Jobs",
+    "managemenu": "Menu Management",
+    "category": "Category",
+    "filter_by_role": "Filter by role",
+    "filter_by_category": "Filter by category",
+    "menus": "Menus",
+    "menu_create": "New Menu",
+    "categories": "Categories",
+    "label": {
+      "name": "Menu name",
+      "icon": "Icon",
+      "color": "Color",
+      "order": "Order",
+      "roles": "Roles",
+      "actions": "Actions",
+      "route": "Route",
+      "disable": "Disable Menu",
+      "category": "Category"
+    },
+    "disabled": "Menu disabled",
+    "module-managers": "Module Managers",
+    "tasks": "Tasks"
+  },
+  "labels": {
+    "menu_name": "Menu name",
+    "icon": "Icon",
+    "color": "Color",
+    "order": "Order",
+    "roles": "Roles",
+    "actions": "Actions",
+    "no_data_available": "No data available"
+  },
+  "login": {
+    "title": "welcome",
+    "subtile": "Sign in with your credentials below.",
+    "submit": "Sign In"
+  },
+  "otp": {
+    "title": "OTP Verification",
+    "subtile": "A code has been sent by email, please check your mailbox.",
+    "time": "Time remaining",
+    "reessayer": "Retry in",
+    "message": "Please enter the 6-digit OTP code.",
+    "renvoie": "Resend OTP",
+    "submit": "Submit",
+    "status": {
+      "active": "OTP enabled",
+      "disabled": "OTP disabled"
+    }
+  },
+  "forgot-password": {
+    "title": "Reset Password",
+    "subtile": "Enter your email for password recovery.",
+    "submit": "Send recovery link",
+    "success_bloc": {
+      "title": "Check your email for the reset link.",
+      "submit": "Go back"
+    }
+  },
+  "reset-password": {
+    "title": "Reset Password",
+    "subtile": "Modify your password.",
+    "submit": "Update",
+    "resender_bloc": {
+      "title": " Resend password reset link."
+    }
+  },
+  "form": {
+    "email": {
+      "label": "email",
+      "validation": {
+        "required": " the field email is required",
+        "minLength": "Email must be at least 8 characters",
+        "maxLength": "Email cannot exceed 254 characters",
+        "pattern": "Please enter a valid email address"
+      }
+    },
+    "password": {
+      "label": "password",
+      "validation": {
+        "required": " the field password is required",
+        "minLength": "Password must be at least 8 characters",
+        "maxLength": "Password cannot exceed 8 characters",
+        "passwordMismatch": "Passwords do not match",
+        "invalidLength": "Password must be exactly 8 characters",
+        "containsLink": "Cannot contain links",
+        "containsEmail": "containsEmail",
+        "passwordStrength": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+        "sameAsCurrent": "The new password must be different from the current one"
+      }
+    },
+    "password_confirmation": {
+      "label": "password confirmation",
+      "validation": {
+        "required": " the field password is required",
+        "minLength": "Password must be at least 8 characters",
+        "maxLength": "Password cannot exceed 8 characters",
+        "passwordMismatch": "Passwords do not match",
+        "invalidLength": "Password must be exactly 8 characters",
+        "containsLink": "Cannot contain links",
+        "containsEmail": "containsEmail",
+        "passwordStrength": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+      }
+    },
+    "current_password": {
+      "label": "Current Password",
+      "validation": {
+        "required": "The current password field is required",
+        "minLength": "Current password must be at least 8 characters",
+        "maxLength": "Current password cannot exceed 8 characters",
+        "invalidLength": "Current password must be exactly 8 characters",
+        "containsLink": "Current password cannot contain links",
+        "containsEmail": "Current password cannot contain an email address",
+        "passwordStrength": "The current password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+      }
+    },
+    "first_name": {
+      "label": "first name",
+      "validation": {
+        "required": " the field first name is required",
+        "minLength": "first name must be at least 8 characters",
+        "maxLength": "first name cannot exceed 254 characters"
+      }
+    },
+    "last_name": {
+      "label": "last name",
+      "validation": {
+        "required": " the field last name is required",
+        "minLength": "last name must be at least 8 characters",
+        "maxLength": "last name cannot exceed 254 characters"
+      }
+    },
+    "confirmed": {
+      "label": "I agree to the terms of service and the usual stuff. * *",
+      "validation": {
+        "required": " the field confirmed is required",
+        "pattern": "Please accept the terms"
+      }
+    },
+    "btn_reset": "Reset",
+    "btn_previous": "Previous",
+    "btn_next": "Next",
+    "btn_continue": "Continue",
+    "remember_me": {
+      "label": "Remember Me"
+    },
+    "forgotpasswordurl": {
+      "label": "Forgot Password?"
+    },
+    "roles": {
+      "label": "Role name",
+      "validation": {
+        "required": "The field role is required"
+      }
+    },
+    "birthday": {
+      "label": "Birthday",
+      "placeholder": "Select birth date",
+      "format": "YYYY-MM-DD",
+      "validation": {
+        "minDate": "The date must be after 01/01/1900",
+        "maxDate": "The date cannot be in the future"
+      }
+    },
+    "permissions": {
+      "label": "Permission name",
+      "validation": {
+        "required": "The field permission is required"
+      }
+    },
+    "is_blocked": {
+      "label": "Blocked User"
+    },
+    "otp_enabled": {
+      "label": "OTP Status"
+    },
+    "site_name": {
+      "label": "Site Name",
+      "validation": {
+        "required": " Site name is required",
+        "maxlength": "Site name cannot exceed 100 characters"
+      }
+    },
+    "site_subtitle": {
+      "label": "Site Subtitle",
+      "validation": {
+        "required": " Site Subtitle is required",
+        "maxlength": "Site Subtitle cannot exceed 100 characters"
+      }
+    },
+    "site_web": {
+      "label": "Website URL",
+      "placeholder": "example.com",
+      "validation": {
+        "required": " Website URL is required",
+        "pattern": "Please enter a valid URL"
+      }
+    },
+    "site_description": {
+      "label": "Site Description",
+      "placeholder": "Enter site description",
+      "validation": {
+        "maxlength": "Description cannot exceed 500 characters"
+      }
+    },
+    "site_active": {
+      "label": "Site Status"
+    },
+    "site_logo": {
+      "label": "Site Logo"
+    },
+    "photo": {
+      "label": "Profile Picture"
+    },
+    "validation": {
+      "required": " the field is required"
+    },
+    "expiry_link": "Your verification link has expired. Please enter your email to receive a new one."
+  },
+  "register": {
+    "title": "Register for an account",
+    "subtile": "Simply fill out the form below",
+    "step": {
+      "label_step1": "Create Account",
+      "label_step2": "Select a Password",
+      "label_step3": "Confirm Creation"
+    },
+    "submit": "Create Account"
+  },
+  "auth": {
+    "signup": {
+      "title": "Sign Up",
+      "button": "Register"
+    },
+    "signin": {
+      "title": "Login",
+      "button": "Sign In"
+    }
+  },
+  "home": {
+    "header": "welcome",
+    "title_bloc": "list of users",
+    "subtile_bloc": "list of users system"
+  },
+  "user": {
+    "title": "Users",
+    "select": "User",
+    "selected": "selected",
+    "search": "Search …",
+    "mot_cle": "Keyword",
+    "mot_cle_date_debut": "START DATE",
+    "mot_cle_date_fin": "END DATE",
+    "filter": "Filter Columns",
+    "filter_date": "Filter by date",
+    "add-user": "Add User",
+    "label": {
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "role": "Role Name",
+      "status": "status",
+      "photo": "PHOTO",
+      "email": "email",
+      "actions": "Actions",
+      "roles": "roles",
+      "permissions": "permissions",
+      "phone": "phone",
+      "birthday": "Birthday",
+      "is_blocked": "Blocked Status",
+      "otp_enabled": "OTP Status"
+    },
+    "no_user_matching": "No matching users found",
+    "show": "show",
+    "modify": "modify",
+    "delete": "delete",
+    "user_create": "New User",
+    "cancel": "Cancel",
+    "block": "Block",
+    "unblock": "Unblock",
+    "block_confirm": "Are you sure you want to block this user?",
+    "unblock_confirm": "Are you sure you want to unblock the user?",
+    "status": {
+      "online": "Online",
+      "offline": "Offline"
+    }
+  },
+  "role": {
+    "role_create": "New Role",
+    "select": "role",
+    "label": {
+      "name": "Role Name",
+      "guard_name": "Guard Name"
+    }
+  },
+  "permission": {
+    "permission_create": "New Permission",
+    "select": "permission",
+    "label": {
+      "name": "Permission Name",
+      "guard_name": "Guard Name"
+    }
+  },
+  "document": {
+    "document_create": "New Document",
+    "select": "document",
+    "label": {
+      "name": "Document Name",
+      "guard_name": "Guard Name",
+      "description": "Description",
+      "files": "File",
+      "size": "Size",
+      "file_count": "File Count"
+    },
+    "create_update": {
+      "title": "Create/Update Document",
+      "submit_button": "Save Document",
+      "create_title": "File Management",
+      "edit_title": "File Management"
+    },
+    "edit": {
+      "name": "edit"
+    },
+    "detail": {
+      "title": "Detail document"
+    },
+    "create": {
+      "title": "New document"
+    },
+    "filepond": {
+      "label": "Upload(pdf, docx, xlsx...)"
+    },
+    "status": {
+      "name": "Starting treatment...",
+      "en_cours": "ongoing",
+      "tache": "task"
+    }
+  },
+  "settings": {},
+  "paginator": {
+    "items_per_page": "Items per page:",
+    "next_page": "Next page",
+    "previous_page": "Previous page",
+    "first_page": "First page",
+    "last_page": "Last page",
+    "range": "{{start}} – {{end}} of {{length}}"
+  },
+  "file_upload": {
+    "label": {
+      "idle": "Drag & drop your {{type}} or <span class='filepond--label-action'>{{action}}</span>",
+      "action": "browse"
+    },
+    "validation": {
+      "file_type": "Invalid file type. Only PNG, JPG, and JPEG files are allowed.",
+      "duplicate": "File {{filename}} is already added.",
+      "size_limit": "Adding {{filename}} would exceed the {{size}} MB limit.",
+      "success": "File {{filename}} was successfully added.",
+      "removed": "File {{filename}} has been removed."
+    },
+    "file_types": {
+      "photo": "images"
+    },
+    "fields": {
+      "photo": "Photo"
+    },
+    "total_size": "Total size",
+    "size_text": "Total size",
+    "size": {
+      "bytes": "{{value}} Bytes",
+      "kb": "{{value}} KB",
+      "mb": "{{value}} MB",
+      "gb": "{{value}} GB",
+      "tb": "{{value}} TB"
+    }
+  },
+  "card": {
+    "language": {
+      "title": "System Language",
+      "description": "Select the language you want to use in the interface"
+    },
+    "password": {
+      "title": "Password Security",
+      "description": "Enhance your account's security by updating your password regularly"
+    },
+    "backup": {
+      "title": "Data Backup",
+      "description": "Set up and manage automatic backups to prevent data loss",
+      "start": "Launch Backup",
+      "reset": "Reset Backup State",
+      "status": " Backup Status",
+      "no_status_backup": " Click Launch Backup to start a new process.",
+      "backup_process": "Backup process has been dispatched. Awaiting completion...",
+      "backup_ready": "Ready to start backup."
+    },
+    "otp": {
+      "title": "Two-Factor Authentication (2FA)",
+      "description": "Enable or disable two-step verification to better secure your account"
+    },
+    "maintenance": {
+      "title": "Maintenance Mode",
+      "description": "Enable or disable maintenance mode to block user access"
+    }
+  },
+  "NOTIFICATION_DETAIL": {
+    "GENERIC_TITLE": "Notification Details",
+    "GENERIC_DESCRIPTION": "Information related to the notification.",
+    "USER_TITLE": "User Notification Details",
+    "USER_DESCRIPTION": "Information regarding the user notification.",
+    "SETTINGS_TITLE": "Settings Notification Details",
+    "SETTINGS_DESCRIPTION": "Information regarding the settings notification."
+  },
+  "profile": {
+    "my_inbox": "My Inbox",
+    "my_inbox_description": "Chats List",
+    "parameters": "Parameters",
+    "parameters_description": "Account Parameters",
+    "notifications": "Notifications",
+    "notifications_description": "Notifications List"
+  },
+  "table": {
+    "guard_name": "Guard Name",
+    "name": "NAME",
+    "actions": "Actions"
+  },
+  "notification_onglet": {
+    "non_lues": "Unread notifications",
+    "histories": "Notification history"
+  },
+  "log": {
+    "title": "Activity Logs",
+    "description": "DESCRIPTION",
+    "event": "EVENT",
+    "causer": "UTILISATEUR",
+    "created_at": "CREATED AT"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "singular": "You have one notification",
+    "plural": "You have {{count}} notifications",
+    "new_notification": "You have {{count}} new notifications",
+    "no_notifications": "No notifications",
+    "see_more": "View all"
+  },
+  "message": {
+    "show": "New message from {{name}}"
+  },
+  "dashboard_assistant": {
+    "good_job": "Good Job,",
+    "description": "You've finished all of your tasks for this week.",
+    "tache1": "finish notifications",
+    "tache2": "manage charts",
+    "tache3": "manage messages"
+  },
+  "dashboard_analytic": {
+    "log_activity_label": "Log Activity (per day)",
+    "unique_users": "Unique Users",
+    "online_users": "Online Users",
+    "total_users": "Total Users (Unique)",
+    "total_roles_permissions": "Total Roles & Permissions",
+    "logs_label": "Logs",
+    "log": "Logs",
+    "label_role": "Roles",
+    "label_permission": "Permissions"
+  },
+  "common": {
+    "yesterday": "Yesterday",
+    "no_data_available": "No data available."
+  },
+  "menu_action": {
+    "show": "Show",
+    "edit": "Edit",
+    "create": "Create",
+    "delete": "Delete",
+    "action": "Action",
+    "block": "Block",
+    "unblock": "Unblock"
+  },
+  "jobMonitor": {
+    "title": "Background Tasks",
+    "uploading": "Uploading {{count}} document(s)",
+    "processing": "Processing...",
+    "multipleUploads": "{{jobCount}} uploads ({{totalFiles}} files)",
+    "completed": "Upload completed: {{count}} files",
+    "files": "files",
+    "globalProgress": "Global Progress",
+    "estimatedTime": "Estimated Time Remaining",
+    "status": {
+      "executing": "Processing",
+      "queued": "Waiting",
+      "completed": "Completed",
+      "failed": "Failed"
+    }
+  },
+  "uploadStatus": {
+    "initializing": "Initializing...",
+    "waiting": "Waiting...",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "job_status": {
+    "label": {
+      "id": "ID",
+      "job_id": "Job ID",
+      "type": "Type",
+      "queue": "Queue",
+      "status": "Status",
+      "attempts": "Attempts",
+      "progress": "Progress",
+      "file_count": "Number of files",
+      "main_document_id": "Main document ID",
+      "input_type": "Input Type",
+      "created_at": "Created on",
+      "started_at": "Started on",
+      "finished_at": "Finished on",
+      "user_id": "User ID"
+    },
+    "status": {
+      "queued": "Queued",
+      "executing": "Executing",
+      "finished": "Finished",
+      "failed": "Failed",
+      "retrying": "Retrying"
+    }
+  },
+  "categorie": {
+    "label": {
+      "name": "Category Name",
+      "order": "Display Order",
+      "icon": "Icon",
+      "navigation_type": "Navigation Type",
+      "position_reference": "Position Reference",
+      "position_type": "Position Type"
+    },
+    "position_type": {
+      "before": "Before",
+      "after": "After"
+    },
+    "navigation_type": {
+      "subheading": "Subheading",
+      "dropdown": "Dropdown"
+    },
+    "categorie_create": "New Category"
+  },
+  "admin_maintenance": {
+    "title": "Maintenance Mode Management",
+    "mode_title": "Maintenance Mode",
+    "status_active": "Active - Users cannot access the application",
+    "status_inactive": "Inactive - Application is accessible",
+    "message_label": "Maintenance message",
+    "message_placeholder": "Message to display to users during maintenance",
+    "message_hint": "This message will be displayed to users when attempting to login",
+    "save_button": "Save",
+    "saving_button": "Saving...",
+    "logout_button": "Logout",
+    "info_title": "ℹ️ Information",
+    "info_admin_access": "Only administrators can access the application in maintenance mode",
+    "info_users_blocked": "Users with the \"user\" role will be blocked upon activation",
+    "info_pages_blocked": "Login and register pages will be inaccessible in maintenance mode",
+    "en_cours": "Maintenance in progress…"
+  },
+  "maintenance_dialog": {
+    "activate_title": "Activate Maintenance Mode",
+    "activate_message": "Are you sure you want to activate maintenance mode?",
+    "activate_description": "Users will no longer be able to access the application. Only administrators will have access.",
+    "activate_button": "Activate",
+    "deactivate_title": "Deactivate Maintenance Mode",
+    "deactivate_message": "Are you sure you want to deactivate maintenance mode?",
+    "deactivate_description": "Users will be able to access the application normally again.",
+    "deactivate_button": "Deactivate"
+  },
+  "module-manager": {
+    "module-manager_create": "New Module Manager",
+    "label": {
+      "name": "Name",
+      "displayName": "DisplayName",
+      "displayNameSingular": "DisplayNameSingular",
+      "resourceType": "ResourceType",
+      "enabled": "Enabled",
+      "devMode": "DevMode"
+    },
+    "placeholder": {
+      "name": "Enter name",
+      "displayName": "Enter displayName",
+      "displayNameSingular": "Enter displayNameSingular",
+      "resourceType": "Enter resourceType",
+      "enabled": "Enter enabled",
+      "devMode": "Enter devMode"
+    },
+    "validation": {
+      "name_required": "Name is required",
+      "displayName_required": "DisplayName is required",
+      "displayNameSingular_required": "DisplayNameSingular is required",
+      "resourceType_required": "ResourceType is required"
+    }
+  },
+  "MODULE_MANAGER": {
+    "CREATE_TITLE": "Generate New Module",
+    "UPDATE_TITLE": "Update Module",
+    "TABS": {
+      "BASIC_INFO": "Basic Info",
+      "FIELDS": "Fields",
+      "SUMMARY": "Summary"
+    },
+    "FIELDS": {
+      "TITLE": "Module Fields",
+      "ADD_FIELD": "Add Field"
+    },
+    "SUMMARY": {
+      "TITLE": "Module Configuration Summary"
+    },
+    "NAVIGATION": {
+      "NEXT": "Next",
+      "PREVIOUS": "Previous"
+    },
+    "ACTIONS": {
+      "CANCEL": "Cancel",
+      "GENERATE": "Generate Module",
+      "UPDATE": "Update Module"
+    }
+  },
+  "task": {
+    "task_create": "New Task",
+    "label": {
+      "name": "Name",
+      "profile": "Profile"
+    },
+    "placeholder": {
+      "name": "Enter name",
+      "profile": "Enter profile"
+    },
+    "validation": {
+      "name_required": "Name is required"
+    }
+  }
+}

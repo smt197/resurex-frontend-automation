@@ -1,0 +1,898 @@
+{
+    "response": {
+        "en-cours": "Operation en cours…"
+    },
+    "access_denied": {
+        "title": "Maintenance",
+        "message": "Votre compte a été temporairement suspendu par un administrateur. Vous ne pouvez pas accéder à l'application pour le moment.",
+        "contact_admin": "Si vous pensez que c'est une erreur, veuillez contacter un administrateur.",
+        "logout": "Se déconnecter",
+        "back_to_login": "Retour à la connexion"
+    },
+    "global": {
+        "save": "Enregistrer",
+        "plus": "plus",
+        "addText": "Ajouter",
+        "cancel": "Annuler",
+        "create": "Créer",
+        "update": "Modifier",
+        "retour": "Retour",
+        "refresh": "Rafraîchir",
+        "title": "resurex",
+        "language": "Anglais",
+        "code": "en",
+        "fr": "Français",
+        "en": "Anglais",
+        "pt": "Portugais",
+        "language_name": "Langue",
+        "rememberme": " Se souvenir de moi",
+        "forgotpassword": " Mot de passe oublié",
+        "loading": "Veuillez patienter...",
+        "dashboard": "Tableau de bord",
+        "button-toggle-box": "Encadré",
+        "country": "Pays",
+        "phone": "Téléphone",
+        "button-toggle-full": "Pleine largeur",
+        "close": "Fermer",
+        "show_dynamic_submit": "Mise a jour",
+        "show_dynamic_cancel": "annuler",
+        "show_dynamic_descrip": "Gérez vos informations personnelles, votre avatar et vos préférences de compte",
+        "logout": "Déconnexion",
+        "languages": "Language",
+        "no_data": "Aucun {{type}} trouvé.",
+        "types": {
+            "users": "Utilisateur",
+            "roles": "Rôle",
+            "permissions": "Permission",
+            "documents": "Documents",
+            "user-jobs": "Tâches",
+            "tous_les_menus": "Tous les menus",
+            "tous_les_roles": "Tous les rôles",
+            "toutes_les_categories": "Toutes les catégories",
+            "menus": "Menus",
+            "category": "Catégorie",
+            "module-managers": "Module Manager",
+            "github-repositories": "Dépôts GitHub"
+        },
+        "chats": {
+            "title": "Chats",
+            "submit": "Nouveau Chat",
+            "search": "Rechercher un chat...",
+            "add_contact": "Ajouter un Contact",
+            "all_conversation": "Toutes les Conversations",
+            "no_chat_matching": " Aucune conversation trouvée",
+            "try_message": "tapez votre message...",
+            "loading_conversation": "Chargement de la conversation...",
+            "not_message": "Aucun message pour l'instant.",
+            "start_conversation": "Commencez la conversation !",
+            "add_new_discussion": "commencer une nouvelle discussion",
+            "search_user": "Rechercher des utilisateurs...",
+            "Cancel": "Annuler",
+            "add_attachment": "Ajouter une pièce jointe",
+            "block_message": "Cet utilisateur est suspendu. Vous ne pouvez pas envoyer de messages à cet utilisateur.",
+            "recently_list": "Contacté récemment",
+            "no_recent_contacts": "Aucun contact récent"
+        },
+        "expansion": {
+            "Folded": "Voir plus",
+            "Unfolded": "Réduire"
+        },
+        "backup": {
+            "title": "Système de Sauvegarde",
+            "submit": "Démarrer la sauvegarde",
+            "reset": "Réinitialiser",
+            "process_title": "Initialisation du processus de sauvegarde...",
+            "show_process": "Sauvegarde de la base de données en cours..."
+        },
+        "filepond": {
+            "label_idle": "Glissez-déposez ou <span class='filepond--label-action'>Parcourir<\/span>",
+            "maxFileSizeExceeded": "Le fichier est trop volumineux ({{filesize}} MB). La taille maximale autorisée est de {{maxsize}}."
+        }
+    },
+    "menu": {
+        "home": "Accueil",
+        "dashboards": "Tableau de bord",
+        "users": "Utilisateurs",
+        "settings": "Paramètres",
+        "analytics": "Analytiques",
+        "roles": "Rôles",
+        "permissions": "Permissions",
+        "autorisation": "Autorisation",
+        "administration": "Administration",
+        "chat": "Chat",
+        "notifications": "Notifications",
+        "logs": "Journal d'activités",
+        "documents": "Documents",
+        "github-repositories": "Dépôts GitHub",
+        "github":"GitHub",
+        "user-jobs": "Tâches",
+        "managemenu": "Gestion des menus",
+        "category": "Catégorie",
+        "filter_by_role": "Filtrer par rôle",
+        "filter_by_category": "Filtrer par catégorie",
+        "menus": "Menus",
+        "menu_create": "Nouveau Menu",
+        "categories": "Catégories",
+        "label": {
+            "name": "Nom du menu",
+            "description": "Description",
+            "descriptions": "Descriptions multilingues",
+            "description_fr": "Description (Français)",
+            "description_en": "Description (Anglais)",
+            "description_pt": "Description (Portugais)",
+            "icon": "Icône",
+            "color": "Couleur",
+            "order": "Ordre",
+            "roles": "Rôles",
+            "actions": "Actions",
+            "route": "Route",
+            "disable": "Désactiver le menu",
+            "category": "Catégorie"
+        },
+        "placeholder": {
+            "name": "Entrez le nom du menu",
+            "description": "Entrez une description pour le menu",
+            "description_fr": "Entrez la description en français",
+            "description_en": "Entrez la description en anglais",
+            "description_pt": "Entrez la description en portugais",
+            "icon": "Entrez le nom de l'icône (ex: mat:home)",
+            "color": "Entrez la classe de couleur CSS (ex: bg-blue-600)",
+            "route": "Entrez le chemin de la route (ex: \/index\/dashboard)",
+            "category": "Sélectionnez la catégorie du menu",
+            "roles": "Sélectionnez les rôles pouvant accéder à ce menu"
+        },
+        "validation": {
+            "description_maxlength": "La description ne peut pas dépasser 200 caractères",
+            "name_required": "Le nom du menu est obligatoire",
+            "name_minlength": "Le nom du menu doit contenir au moins 2 caractères",
+            "name_maxlength": "Le nom du menu ne peut pas dépasser 50 caractères",
+            "icon_required": "L'icône est obligatoire",
+            "icon_minlength": "Le nom de l'icône doit contenir au moins 4 caractères",
+            "icon_maxlength": "Le nom de l'icône ne peut pas dépasser 50 caractères",
+            "color_required": "La classe de couleur est obligatoire",
+            "color_minlength": "La classe de couleur doit contenir au moins 5 caractères",
+            "color_maxlength": "La classe de couleur ne peut pas dépasser 30 caractères",
+            "route_required": "La route est obligatoire",
+            "route_minlength": "La route doit contenir au moins 2 caractères",
+            "route_maxlength": "La route ne peut pas dépasser 100 caractères",
+            "category_required": "La catégorie est obligatoire",
+            "roles_required": "Au moins un rôle doit être sélectionné"
+        },
+        "disabled": "Menu désactivé",
+        "module-managers": "Module Managers"
+    },
+    "labels": {
+        "menu_name": "Nom du menu",
+        "icon": "Icône",
+        "color": "Couleur",
+        "order": "Ordre",
+        "roles": "Rôles",
+        "actions": "Actions",
+        "no_data_available": "Aucune donnée disponible"
+    },
+    "login": {
+        "title": "Bienvenue",
+        "subtile": "Connectez-vous avec vos identifiants ci-dessous.",
+        "submit": "Se Connecter"
+    },
+    "otp": {
+        "title": "Code OTP verification",
+        "subtile": " Un code est envoye par mail, veuillez verifier votre mail .",
+        "time": "Temps restant",
+        "reessayer": "Réessayer dans",
+        "message": "Veuillez saisir les 6 chiffres de l'OTP.",
+        "renvoie": "Renvoyer l'OTP",
+        "submit": "Envoyer",
+        "status": {
+            "active": "OTP activé",
+            "disabled": "OTP désactivé"
+        }
+    },
+    "forgot-password": {
+        "title": "Réinitialiser le mot de passe",
+        "subtile": "Entrez votre email pour récupérer votre mot de passe.",
+        "submit": "Envoyer le lien de récupération",
+        "success_bloc": {
+            "title": "Vérifiez votre email pour le lien de réinitialisation.",
+            "submit": "Retour"
+        }
+    },
+    "reset-password": {
+        "title": "Réinitialiser le mot de passe",
+        "subtile": "Modifier votre mot de passe.",
+        "submit": "Mettre à jour",
+        "resender_bloc": {
+            "title": "Renvoyer le lien de réinitialisation du mot de passe."
+        }
+    },
+    "form": {
+        "email": {
+            "label": "Email",
+            "placeholder": "Saisissez votre email",
+            "validation": {
+                "required": "Le champ email est obligatoire",
+                "minLength": "L'email doit contenir au moins 8 caractères",
+                "maxLength": "L'email ne peut pas dépasser 254 caractères",
+                "pattern": "Veuillez entrer une adresse email valide"
+            }
+        },
+        "password": {
+            "label": "Mot de passe",
+            "validation": {
+                "required": "Le champ mot de passe est obligatoire",
+                "minLength": "Le mot de passe doit contenir au moins 8 caractères",
+                "maxLength": "Le mot de passe ne peut pas dépasser 8 caractères",
+                "passwordMismatch": "Les mots de passe ne correspondent pas",
+                "invalidLength": "Le mot de passe doit contenir exactement 8 caractères",
+                "containsLink": "Ne peut pas contenir de liens",
+                "containsEmail": "Contient un email",
+                "passwordStrength": "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.",
+                "sameAsCurrent": "Le nouveau mot de passe doit être différent de l'ancien"
+            }
+        },
+        "password_confirmation": {
+            "label": "Confirmation du mot de passe",
+            "validation": {
+                "required": "Le champ mot de passe est obligatoire",
+                "minLength": "Le mot de passe doit contenir au moins 8 caractères",
+                "maxLength": "Le mot de passe ne peut pas dépasser 8 caractères",
+                "passwordMismatch": "Les mots de passe ne correspondent pas",
+                "invalidLength": "Le mot de passe doit contenir exactement 8 caractères",
+                "containsLink": "Ne peut pas contenir de liens",
+                "containsEmail": "Contient un email",
+                "passwordStrength": "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial."
+            }
+        },
+        "current_password": {
+            "label": "Mot de passe actuel",
+            "validation": {
+                "required": "Le champ mot de passe actuel est requis",
+                "minLength": "Le mot de passe actuel doit contenir au moins 8 caractères",
+                "maxLength": "Le mot de passe actuel ne peut pas dépasser 8 caractères",
+                "invalidLength": "Le mot de passe actuel doit contenir exactement 8 caractères",
+                "containsLink": "Le mot de passe actuel ne peut pas contenir de liens",
+                "containsEmail": "Le mot de passe actuel ne peut pas contenir d’adresse e-mail",
+                "passwordStrength": "Le mot de passe actuel doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial"
+            }
+        },
+        "first_name": {
+            "label": "Prénom",
+            "placeholder": "Saisissez votre prénom",
+            "validation": {
+                "required": "Le champ prénom est obligatoire",
+                "minLength": "Le prénom doit contenir au moins 8 caractères",
+                "maxLength": "Le prénom ne peut pas dépasser 254 caractères"
+            }
+        },
+        "last_name": {
+            "label": "Nom de famille",
+            "placeholder": "Saisissez votre nom de famille",
+            "validation": {
+                "required": "Le champ nom de famille est obligatoire",
+                "minLength": "Le nom de famille doit contenir au moins 8 caractères",
+                "maxLength": "Le nom de famille ne peut pas dépasser 254 caractères"
+            }
+        },
+        "confirmed": {
+            "label": "J'accepte les conditions d'utilisation et tout le reste. * *",
+            "description": "Pour continuer, veuillez accepter les conditions",
+            "validation": {
+                "required": "Le champ confirmation est obligatoire",
+                "pattern": "Veuillez accepter les conditions"
+            }
+        },
+        "btn_reset": "Reinitialiser",
+        "btn_previous": "Precedent",
+        "btn_next": "Suivant",
+        "btn_continue": "Continuer",
+        "remember_me": {
+            "label": "Se souvenir de moi"
+        },
+        "forgotpasswordurl": {
+            "label": "Mot de passe oublié ?"
+        },
+        "roles": {
+            "label": "Nom du rôle",
+            "validation": {
+                "required": "Le champ rôle est obligatoire"
+            }
+        },
+        "birthday": {
+            "label": "Date de naissance",
+            "placeholder": "Sélectionnez une date",
+            "format": "DD-MM-YYYY",
+            "validation": {
+                "minDate": "La date doit être postérieure au 01\/01\/1900",
+                "maxDate": "La date ne peut pas être dans le futur"
+            }
+        },
+        "permissions": {
+            "label": "Nom de la permission",
+            "validation": {
+                "required": "Le champ permission est obligatoire"
+            }
+        },
+        "is_blocked": {
+            "label": "bloqué"
+        },
+        "otp_enabled": {
+            "label": "Statut OTP"
+        },
+        "site_name": {
+            "label": "Nom du site",
+            "validation": {
+                "required": "Le nom du site est obligatoire",
+                "maxlength": "Le nom du site ne peut pas dépasser 100 caractères"
+            }
+        },
+        "site_subtitle": {
+            "label": "Sous-titre du Site",
+            "validation": {
+                "required": "Le Sous-titre du Site est obligatoire",
+                "maxlength": "Le Sous-titre du Site ne peut pas dépasser 100 caractères"
+            }
+        },
+        "site_web": {
+            "label": "URL du site",
+            "placeholder": "exemple.com",
+            "validation": {
+                "required": "L'URL du site est obligatoire",
+                "pattern": "Veuillez saisir une URL valide"
+            }
+        },
+        "site_description": {
+            "label": "Description du site",
+            "placeholder": "Saisissez la description du site",
+            "validation": {
+                "maxlength": "La description ne peut pas dépasser 500 caractères"
+            }
+        },
+        "site_active": {
+            "label": "Statut du site"
+        },
+        "site_logo": {
+            "label": "Logo du site"
+        },
+        "photo": {
+            "label": "Photo de profil"
+        },
+        "validation": {
+            "required": "Le champ est obligatoire"
+        },
+        "expiry_link": "Votre lien de vérification a expiré. Veuillez saisir votre email pour en recevoir un nouveau."
+    },
+    "register": {
+        "title": "Créer un compte",
+        "subtile": "Remplissez simplement le formulaire ci-dessous",
+        "step": {
+            "label_step1": "Créer un compte",
+            "label_step2": "Choisir un mot de passe",
+            "label_step3": "Confirmer la création"
+        },
+        "submit": "Créer un compte",
+        "preview": {
+            "button": "Suivant"
+        }
+    },
+    "auth": {
+        "signup": {
+            "title": "Créer un compte",
+            "button": "S'inscrire"
+        },
+        "signin": {
+            "title": "Connexion",
+            "button": "Se connecter"
+        }
+    },
+    "home": {
+        "title": "Accueil",
+        "header": "Bienvenue",
+        "title_bloc": "Liste des utilisateurs",
+        "subtile_bloc": "Liste des utilisateurs du système"
+    },
+    "user": {
+        "title": "Utilisateurs",
+        "select": "Utilisateur",
+        "selected": "sélectionné",
+        "search": "Rechercher …",
+        "mot_cle": "Mot clé",
+        "mot_cle_date_debut": "DATE DEBUT",
+        "mot_cle_date_fin": "DATE FIN",
+        "filter": "Filtrer les colonnes",
+        "filter_date": "Filtrer par date",
+        "add-user": "Ajouter un utilisateur",
+        "label": {
+            "first_name": "Prénom",
+            "last_name": "Nom",
+            "role": "Rôle",
+            "email": "Email",
+            "status": "status",
+            "photo": "PHOTO",
+            "actions": "Actions",
+            "roles": "rôles",
+            "permissions": "permissions",
+            "phone": "Téléphone",
+            "birthday": "Date de naissance",
+            "is_blocked": "Statut Blocage",
+            "otp_enabled": "Statut OTP"
+        },
+        "no_user_matching": "Aucun utilisateur correspondant",
+        "show": "Voir",
+        "modify": "Modifier",
+        "delete": "Supprimer",
+        "user_create": "Nouvel utilisateur",
+        "cancel": "Annuler",
+        "block": "Bloquer",
+        "unblock": "Débloquer",
+        "block_confirm": "Êtes-vous sûr de vouloir bloquer cet utilisateur ?",
+        "unblock_confirm": "Êtes-vous sûr de vouloir débloquer cet utilisateur ?",
+        "status": {
+            "online": "En ligne",
+            "offline": "Hors ligne"
+        }
+    },
+    "role": {
+        "role_create": "Nouveau Rôle",
+        "select": "rôle",
+        "label": {
+            "name": "Nom du Rôle",
+            "guard_name": "Nom du Gardien"
+        }
+    },
+    "permission": {
+        "permission_create": "Nouvelle Permission",
+        "select": "permission",
+        "label": {
+            "name": "Nom de la Permission",
+            "guard_name": "Nom du Gardien"
+        }
+    },
+    "document": {
+        "document_create": "Nouveau Document",
+        "select": "document",
+        "label": {
+            "name": "Nom du Document",
+            "guard_name": "Nom du Gardien",
+            "description": "Description",
+            "files": "Fichier",
+            "size": "Taille",
+            "file_count": "Nombre de fichiers"
+        },
+        "create_update": {
+            "title": "Créer\/Mettre à jour un Document",
+            "submit_button": "Enregistrer le Document",
+            "create_title": "Gestion de Fichiers",
+            "edit_title": "Gestion de Fichiers"
+        },
+        "edit": {
+            "name": "modifier"
+        },
+        "detail": {
+            "title": "Détail document"
+        },
+        "create": {
+            "title": "Nouveau document"
+        },
+        "filepond": {
+            "label": "Telecharger(pdf, docx, xlsx...)"
+        },
+        "status": {
+            "name": "Démarrage du traitement...",
+            "en_cours": "en cours",
+            "tache": "tâche"
+        }
+    },
+    "paginator": {
+        "items_per_page": "Éléments par page :",
+        "next_page": "Page suivante",
+        "previous_page": "Page précédente",
+        "first_page": "Première page",
+        "last_page": "Dernière page",
+        "range": "{{start}} - {{end}} sur {{length}}"
+    },
+    "file_upload": {
+        "label": {
+            "idle": "Glissez-déposez vos {{type}} ou <span class='filepond--label-action'>{{action}}<\/span>",
+            "action": "parcourir"
+        },
+        "validation": {
+            "file_type": "Type de fichier invalide. Seuls les fichiers PNG, JPG et JPEG sont autorisés.",
+            "duplicate": "Le fichier {{filename}} est déjà ajouté.",
+            "size_limit": "L'ajout de {{filename}} dépasserait la limite de {{size}} Mo.",
+            "success": "Le fichier {{filename}} a été ajouté avec succès.",
+            "removed": "Le fichier {{filename}} a été supprimé."
+        },
+        "file_types": {
+            "photo": "images"
+        },
+        "fields": {
+            "photo": "Photo"
+        },
+        "total_size": "Taille totale",
+        "size_text": "Taille total",
+        "size": {
+            "bytes": "{{value}} octets",
+            "kb": "{{value}} Ko",
+            "mb": "{{value}} Mo",
+            "gb": "{{value}} Go",
+            "tb": "{{value}} To"
+        }
+    },
+    "card": {
+        "language": {
+            "title": "Langue du système",
+            "description": "Sélectionnez la langue que vous souhaitez utiliser dans l’interface"
+        },
+        "password": {
+            "title": "Sécurité du mot de passe",
+            "description": "Renforcez la sécurité de votre compte en modifiant régulièrement votre mot de passe"
+        },
+        "backup": {
+            "title": "Sauvegarde des données",
+            "description": "Configurez et gérez vos sauvegardes automatiques pour éviter toute perte de données",
+            "start": "Lancer la sauvegarde",
+            "reset": "Réinitialiser l'état de sauvegarde",
+            "status": "Statut de sauvegarde",
+            "no_status_backup": "Cliquez sur 'Lancer la sauvegarde' pour démarrer un nouveau processus.",
+            "backup_process": "Processus de sauvegarde lancé. En attente d'achèvement...",
+            "backup_ready": "Prêt à lancer la sauvegarde."
+        },
+        "otp": {
+            "title": "Authentification à deux facteurs (2FA)",
+            "description": "Activez ou désactivez la vérification en deux étapes pour mieux sécuriser votre compte"
+        },
+        "maintenance": {
+            "title": "Mode Maintenance",
+            "description": "Activez ou désactivez le mode maintenance pour bloquer l'accès des utilisateurs"
+        }
+    },
+    "NOTIFICATION_DETAIL": {
+        "GENERIC_TITLE": "Détails de la Notification",
+        "GENERIC_DESCRIPTION": "Informations relatives à la notification.",
+        "USER_TITLE": "Détails de la Notification Utilisateur",
+        "USER_DESCRIPTION": "Informations concernant la notification utilisateur.",
+        "SETTINGS_TITLE": "Détails de la Notification Paramètres",
+        "SETTINGS_DESCRIPTION": "Informations concernant la notification des paramètres."
+    },
+    "profile": {
+        "my_inbox": "Boite de Réception",
+        "my_inbox_description": "Liste des messages",
+        "parameters": "Paramètres",
+        "parameters_description": "Paramètres du compte",
+        "notifications": "Notifications",
+        "notifications_description": "Liste des Notifications"
+    },
+    "table": {
+        "guard_name": "Nom du gardien",
+        "name": "NOM",
+        "actions": "Actions"
+    },
+    "notification_onglet": {
+        "non_lues": "Notifications non lues",
+        "histories": "Historique des notifications"
+    },
+    "log": {
+        "title": "Journal des activités",
+        "description": "DESCRIPTION",
+        "event": "EVENEMENT",
+        "causer": "UTILISATEUR",
+        "created_at": "CREE LE"
+    },
+    "notifications": {
+        "title": "Notifications",
+        "singular": "Tu as une notification",
+        "plural": "Tu as {{count}} notifications",
+        "new_notification": "Tu as {{count}} notifications",
+        "no_notifications": "Aucune notification",
+        "see_more": "Voir plus"
+    },
+    "message": {
+        "show": "Nouveau message de {{name}}"
+    },
+    "dashboard_assistant": {
+        "good_job": "Beau travail,",
+        "description": "Tu as remplis ta mission pour cette semaine.",
+        "tache1": "terminer les notifications",
+        "tache2": "Gerer les charts",
+        "tache3": "Gerer les messages"
+    },
+    "dashboard_analytic": {
+        "log_activity_label": "Activité des Logs (par jour)",
+        "unique_users": "Utilisateurs uniques",
+        "online_users": "Utilisateurs en Ligne",
+        "total_users": "Total Utilisateurs (Uniques)",
+        "total_roles_permissions": "Total Rôles & Permissions",
+        "logs_label": "Journal",
+        "log": "logs",
+        "label_role": "Rôles",
+        "label_permission": "Permissions"
+    },
+    "common": {
+        "yesterday": "Hier",
+        "no_data_available": "Aucune donnée disponible."
+    },
+    "menu_action": {
+        "show": "Voir",
+        "edit": "Modifier",
+        "create": "Créer",
+        "delete": "Supprimer",
+        "action": "Action",
+        "block": "Bloquer",
+        "unblock": "Débloquer"
+    },
+    "jobMonitor": {
+        "title": "Tâches en arrière-plan",
+        "uploading": "Upload de {{count}} document(s)",
+        "processing": "Traitement en cours...",
+        "multipleUploads": "{{jobCount}} uploads ({{totalFiles}} fichiers)",
+        "completed": "Upload terminé : {{count}} fichiers",
+        "files": "fichiers",
+        "globalProgress": "Progression globale",
+        "estimatedTime": "Temps restant estimé",
+        "status": {
+            "executing": "En traitement",
+            "queued": "En attente",
+            "completed": "Terminé",
+            "failed": "Échoué"
+        }
+    },
+    "uploadStatus": {
+        "initializing": "Initialisation...",
+        "waiting": "En attente...",
+        "completed": "Terminé",
+        "failed": "Échec"
+    },
+    "job_status": {
+        "label": {
+            "id": "ID",
+            "job_id": "ID du Job",
+            "type": "Type",
+            "queue": "File d'attente",
+            "status": "Statut",
+            "attempts": "Tentatives",
+            "progress": "Progression",
+            "file_count": "Nombre de fichiers",
+            "main_document_id": "ID du document principal",
+            "input_type": "Type d'input",
+            "created_at": "Créé le",
+            "started_at": "Débuté le",
+            "finished_at": "Terminé le",
+            "user_id": "ID Utilisateur"
+        },
+        "status": {
+            "queued": "En attente",
+            "executing": "En cours",
+            "finished": "Terminé",
+            "failed": "Échoué",
+            "retrying": "Nouvelle tentative"
+        }
+    },
+    "category": {
+        "label": {
+            "name": "Nom de la Catégorie",
+            "order": "Ordre d'Affichage",
+            "icon": "Icône",
+            "navigation_type": "Type de Navigation",
+            "position_reference": "Référence de Position",
+            "position_type": "Type de Position"
+        },
+        "position_type": {
+            "before": "Avant",
+            "after": "Après"
+        },
+        "navigation_type": {
+            "subheading": "Sous-titre",
+            "dropdown": "Menu Déroulant"
+        },
+        "category_create": "Nouvelle Catégorie"
+    },
+    "categorie": {
+        "label": {
+            "name": "Nom de la Catégorie",
+            "order": "Ordre d'Affichage",
+            "icon": "Icône",
+            "navigation_type": "Type de Navigation",
+            "position_reference": "Référence de Position",
+            "position_type": "Type de Position"
+        },
+        "position_type": {
+            "before": "Avant",
+            "after": "Après"
+        },
+        "navigation_type": {
+            "subheading": "Sous-titre",
+            "dropdown": "Menu Déroulant"
+        },
+        "categorie_create": "Nouvelle Catégorie"
+    },
+    "admin_maintenance": {
+        "title": "Gestion du Mode Maintenance",
+        "mode_title": "Mode Maintenance",
+        "status_active": "Actif - Les utilisateurs ne peuvent pas accéder à l'application",
+        "status_inactive": "Inactif - L'application est accessible",
+        "message_label": "Message de maintenance",
+        "message_placeholder": "Message à afficher aux utilisateurs pendant la maintenance",
+        "message_hint": "Ce message sera affiché aux utilisateurs lors de la tentative de connexion",
+        "save_button": "Enregistrer",
+        "saving_button": "Enregistrement...",
+        "logout_button": "Déconnexion",
+        "info_title": "ℹ️ Informations",
+        "info_admin_access": "Seuls les administrateurs peuvent accéder à l'application en mode maintenance",
+        "info_users_blocked": "Les utilisateurs avec le rôle \"user\" seront bloqués dès l'activation",
+        "info_pages_blocked": "Les pages de login et register seront inaccessibles en mode maintenance",
+        "en_cours": "Maintenance en cours…",
+        "maintenance_mode_title": "Mode Maintenance",
+        "maintenance_status": {
+            "active": "Actif - Les utilisateurs ne peuvent pas accéder à l'application",
+            "inactive": "Inactif - L'application est accessible"
+        }
+    },
+    "maintenance_dialog": {
+        "activate_title": "Activer le mode maintenance",
+        "activate_message": "Êtes-vous sûr de vouloir activer le mode maintenance ?",
+        "activate_description": "Les utilisateurs ne pourront plus accéder à l'application. Seuls les administrateurs auront accès.",
+        "activate_button": "Activer",
+        "deactivate_title": "Désactiver le mode maintenance",
+        "deactivate_message": "Êtes-vous sûr de vouloir désactiver le mode maintenance ?",
+        "deactivate_description": "Les utilisateurs pourront à nouveau accéder à l'application normalement.",
+        "deactivate_button": "Désactiver"
+    },
+    "module-manager": {
+        "module-manager_create": "Nouveau Module Manager",
+        "label": {
+            "name": "Name",
+            "displayName": "DisplayName",
+            "displayNameSingular": "DisplayNameSingular",
+            "resourceType": "ResourceType",
+            "enabled": "Enabled",
+            "devMode": "DevMode"
+        },
+        "placeholder": {
+            "name": "Enter name",
+            "displayName": "Enter displayName",
+            "displayNameSingular": "Enter displayNameSingular",
+            "resourceType": "Enter resourceType",
+            "enabled": "Enter enabled",
+            "devMode": "Enter devMode"
+        },
+        "validation": {
+            "name_required": "Name is required",
+            "displayName_required": "DisplayName is required",
+            "displayNameSingular_required": "DisplayNameSingular is required",
+            "resourceType_required": "ResourceType is required"
+        }
+    },
+    "MODULE_MANAGER": {
+        "CREATE_TITLE": "Générer un Nouveau Module",
+        "UPDATE_TITLE": "Mettre à Jour le Module",
+        "TABS": {
+            "BASIC_INFO": "Infos de Base",
+            "FIELDS": "Champs",
+            "SUMMARY": "Résumé"
+        },
+        "FIELDS": {
+            "TITLE": "Champs du Module",
+            "ADD_FIELD": "Ajouter un Champ"
+        },
+        "SUMMARY": {
+            "TITLE": "Résumé de la Configuration du Module"
+        },
+        "NAVIGATION": {
+            "NEXT": "Suivant",
+            "PREVIOUS": "Précédent"
+        },
+        "ACTIONS": {
+            "CANCEL": "Annuler",
+            "GENERATE": "Générer le Module",
+            "UPDATE": "Mettre à Jour le Module"
+        }
+    },
+    "github-repository": {
+        "label": {
+            "name": "Nom",
+            "full_name": "Nom Complet",
+            "owner": "Propriétaire",
+            "description": "Description",
+            "html_url": "URL",
+            "default_branch": "Branche par Défaut",
+            "private": "Privé",
+            "visibility": "Visibilité"
+        }
+    },
+    "github-repositorie": {
+        "label": {
+            "name": "Nom",
+            "full_name": "Nom Complet",
+            "owner": "Propriétaire",
+            "description": "Description",
+            "html_url": "URL",
+            "default_branch": "Branche par Défaut",
+            "private": "Privé",
+            "visibility": "Visibilité"
+        },
+        "github-repositorie_create": "Nouveau Repository GitHub"
+    },
+    "GITHUB": {
+        "TITLE": "Repositories GitHub",
+        "FIELDS": {
+            "NAME": "Nom du Repository",
+            "NAME_PLACEHOLDER": "mon-projet",
+            "FULL_NAME": "Nom Complet",
+            "FULL_NAME_PLACEHOLDER": "propriétaire/mon-projet",
+            "FULL_NAME_HINT": "Format: propriétaire/nom-du-repo",
+            "OWNER": "Propriétaire",
+            "OWNER_PLACEHOLDER": "nom-utilisateur ou organisation",
+            "DESCRIPTION": "Description",
+            "DESCRIPTION_PLACEHOLDER": "Description du repository",
+            "URL": "URL GitHub",
+            "URL_HINT": "URL complète du repository sur GitHub",
+            "DEFAULT_BRANCH": "Branche par Défaut",
+            "PRIVATE": "Repository Privé",
+            "PRIVATE_HINT": "Le repository est privé ou public",
+            "VISIBILITY": "Visibilité"
+        },
+        "VISIBILITY": {
+            "PUBLIC": "Public",
+            "PRIVATE": "Privé"
+        },
+        "ACTIONS": {
+            "CREATE": "Ajouter un Repository",
+            "SYNC_FROM_GITHUB": "Synchroniser depuis GitHub",
+            "VIEW_BRANCHES": "Voir les Branches"
+        },
+        "DIALOG": {
+            "CREATE_TITLE": "Ajouter un Repository GitHub",
+            "UPDATE_TITLE": "Modifier le Repository GitHub"
+        },
+        "MESSAGES": {
+            "CREATED_SUCCESS": "Repository créé avec succès",
+            "CREATED_ERROR": "Erreur lors de la création du repository",
+            "UPDATED_SUCCESS": "Repository mis à jour avec succès",
+            "UPDATED_ERROR": "Erreur lors de la mise à jour du repository",
+            "DELETED_SUCCESS": "Repository supprimé avec succès",
+            "DELETED_ERROR": "Erreur lors de la suppression du repository",
+            "DELETE_CONFIRM": "Êtes-vous sûr de vouloir supprimer le repository \"{{name}}\" ?",
+            "DELETE_ALL_CONFIRM": "Êtes-vous sûr de vouloir supprimer {{count}} repositories ?",
+            "DELETED_ALL_SUCCESS": "Tous les repositories ont été supprimés",
+            "DELETED_ALL_ERROR": "Erreur lors de la suppression des repositories",
+            "SYNC_SUCCESS": "Repository synchronisé avec succès",
+            "SYNC_ERROR": "Erreur lors de la synchronisation du repository",
+            "SYNC_FROM_GITHUB_SUCCESS": "{{count}} repositories synchronisés depuis GitHub",
+            "SYNC_FROM_GITHUB_ERROR": "Erreur lors de la synchronisation depuis GitHub"
+        },
+        "BRANCH": {
+            "TITLE": "Branches du Repository",
+            "NAME": "Nom de la Branche",
+            "NAME_PLACEHOLDER": "feature/ma-fonctionnalite",
+            "PROTECTED": "Protégée",
+            "PROTECTED_HINT": "Empêche les push forcés et les suppressions",
+            "UNPROTECTED": "Non protégée",
+            "SOURCE": "Branche Source",
+            "SOURCE_HINT": "Branche à partir de laquelle créer la nouvelle branche",
+            "DEFAULT": "Défaut",
+            "CREATE_BRANCH": "Créer une branche",
+            "NO_BRANCHES": "Aucune branche trouvée pour ce repository",
+            "COLUMNS": {
+                "NAME": "Nom",
+                "PROTECTED": "Protection",
+                "LAST_COMMIT": "Dernier Commit"
+            },
+            "ACTIONS": {
+                "PROTECT": "Protéger la branche",
+                "UNPROTECT": "Retirer la protection",
+                "DELETE": "Supprimer la branche"
+            },
+            "MESSAGES": {
+                "LOAD_ERROR": "Erreur lors du chargement des branches",
+                "CREATED_SUCCESS": "Branche créée avec succès",
+                "CREATED_ERROR": "Erreur lors de la création de la branche",
+                "PROTECTED_SUCCESS": "Branche protégée avec succès",
+                "UNPROTECTED_SUCCESS": "Protection retirée avec succès",
+                "PROTECTION_ERROR": "Erreur lors de la modification de la protection",
+                "DELETED_SUCCESS": "Branche supprimée avec succès",
+                "DELETED_ERROR": "Erreur lors de la suppression de la branche",
+                "DELETE_CONFIRM": "Êtes-vous sûr de vouloir supprimer la branche \"{{name}}\" ?"
+            }
+        }
+    }
+}

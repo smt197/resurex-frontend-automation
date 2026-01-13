@@ -1,0 +1,113 @@
+:host {
+  .mat-expansion-panel {
+    // Base card styling
+    border-radius: 8px; // More rounded corners
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Subtle shadow
+    border: 1px solid #e0e0e0; // Light border
+    background-color: #f9f9f9; // Slightly off-white background
+    transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Slightly more prominent shadow on hover
+      border-color: #c0c0c0; // Slightly darker border on hover
+    }
+
+    &.mat-expanded {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Slightly more prominent shadow when expanded
+      border-color: #a0a0a0; // Darker border when expanded
+    }
+
+    .mat-expansion-panel-header {
+      height: auto !important; // Allow height to adjust based on content
+      padding: 16px 24px; // Increased padding
+      border-radius: 8px 8px 0 0; // Rounded top corners
+      transition: background-color 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #f0f0f0; // Light hover effect
+      }
+
+      .mat-expansion-panel-header-title,
+      .mat-expansion-panel-header-description {
+        flex-grow: 1; // Allow text to take available space
+        margin-right: 16px; // Space between text and controls
+      }
+
+      .mat-expansion-indicator::after {
+        color: #606060; // Darker arrow color
+      }
+    }
+
+    .mat-expansion-panel-content {
+      padding: 0 24px 24px; // Padding for content area
+    }
+  }
+
+  // Specific adjustments for elements within the card
+  .title {
+    font-size: 1.1rem; // Slightly larger title
+    font-weight: 600; // Semi-bold
+    color: #333;
+  }
+
+  p {
+    color: #666;
+  }
+
+  // Icon styling
+  mat-icon {
+    color: #0078d4; // Windows 11 accent blue for primary icons
+  }
+
+  // Button styling
+  button {
+    border-radius: 4px; // Slightly rounded buttons
+    &.mat-raised-button {
+      background-color: #0078d4;
+      color: white;
+      &:hover {
+        background-color: #005a9e;
+      }
+    }
+    &.mat-button {
+      color: #0078d4;
+      &:hover {
+        background-color: rgba(0, 120, 212, 0.1);
+      }
+    }
+  }
+
+  // Formly form adjustments (assuming Formly Material is used)
+  formly-form {
+    .mat-form-field-appearance-fill .mat-form-field-flex {
+      border-radius: 4px; // Rounded input fields
+      background-color: #e8e8e8; // Light background for inputs
+    }
+    .mat-form-field-wrapper {
+      padding-bottom: 0; // Remove extra padding
+    }
+  }
+
+  // Photo section
+  .photo-section {
+    img {
+      border-radius: 50%; // Ensure circular
+      border: 2px solid #e0e0e0; // Light border
+    }
+  }
+
+  // Dynamic fields in view mode
+  .dynamic-field-item {
+    .icon-container {
+      background-color: rgba(0, 120, 212, 0.1); // Light blue background for icons
+      border-radius: 50%; // Circular background
+    }
+    .field-value {
+      font-weight: 500; // Medium weight for values
+      color: #333;
+    }
+    .field-label {
+      color: #666;
+    }
+  }
+}

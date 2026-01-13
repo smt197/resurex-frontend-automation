@@ -1,0 +1,322 @@
+<div class="page-container">
+  <!-- Page Header -->
+  <div class="custom-page-header">
+    <button mat-icon-button (click)="cancel()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="page-title">{{ (mode === 'create' ? 'MODULE_MANAGER.CREATE_TITLE' : 'MODULE_MANAGER.UPDATE_TITLE') | translate }}</h1>
+  </div>
+
+  <!-- Loading Spinner -->
+   <div *ngIf="loading" class="flex items-center justify-center p-10">
+    <vex-loading-spinner></vex-loading-spinner>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!loading" class="content-container">
+    <mat-tab-group
+      class="module-tabs"
+      animationDuration="300ms"
+      [(selectedIndex)]="currentStep"
+      (selectedIndexChange)="onTabChange($event)"
+      [disableRipple]="true">
+
+      <!-- Tab 0: Git Configuration (Create mode only) -->
+      <mat-tab [disabled]="true" *ngIf="mode === 'create'">
+        <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">merge_type</mat-icon>
+          <span class="tab-label">Git Configuration</span>
+        </ng-template>
+        <div class="tab-content">
+          <div class="git-config-section">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4">GitHub Integration</h3>
+            <p class="text-sm text-gray-600 mb-6">
+              Push your generated module files directly to a GitHub repository. A new branch will be created automatically with all generated files.
+            </p>
+
+            <!-- Formly Form for Git Configuration -->
+            <form [formGroup]="gitForm" class="git-form">
+              <formly-form [form]="gitForm" [fields]="gitFields" [model]="gitModel"></formly-form>
+            </form>
+
+            <!-- Information Box -->
+            <div class="git-info-box" *ngIf="gitModel.createBranch && gitModel.repositorySlug">
+              <mat-icon class="info-icon">info</mat-icon>
+              <div class="info-content">
+                <p class="font-semibold">What will happen:</p>
+                <ol class="list-decimal ml-5 mt-2 space-y-1">
+                  <li>Generate all module files (Model, Controller, Resources, etc.)</li>
+                  <li>Create new branch: <code class="bg-gray-100 px-1 rounded">{{ gitModel.branchName || 'module/xxx' }}</code>
+                    from <code class="bg-gray-100 px-1 rounded">{{ gitModel.sourceBranch || 'main' }}</code>
+                  </li>
+                  <li>Upload generated files to GitHub as blobs</li>
+                  <li>Create a tree structure with all files</li>
+                  <li>Commit changes with message: <code class="bg-gray-100 px-1 rounded text-xs">{{ gitModel.commitMessage?.split('\n')[0] || 'feat: Initialize module' }}</code></li>
+                  <li>Push to repository: <code class="bg-gray-100 px-1 rounded">{{ getSelectedRepoName() || 'Select a repository' }}</code></li>
+                  <li>Module info (branch, commit SHA) will be saved to database</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- Tab 1: Basic Information -->
+      <mat-tab [disabled]="true">
+        <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">info</mat-icon>
+          <span class="tab-label">{{ 'MODULE_MANAGER.TABS.BASIC_INFO' | translate }}</span>
+        </ng-template>
+        <div class="tab-content">
+          <form [formGroup]="form">
+            <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+          </form>
+        </div>
+      </mat-tab>
+
+      <!-- Tab 2: Fields Configuration -->
+      <mat-tab [disabled]="true">
+        <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">view_list</mat-icon>
+          <span class="tab-label">{{ 'MODULE_MANAGER.TABS.FIELDS' | translate }}</span>
+        </ng-template>
+        <div class="tab-content">
+          <div class="fields-header">
+            <h3 class="text-lg font-semibold text-gray-700">{{ 'MODULE_MANAGER.FIELDS.TITLE' | translate }}</h3>
+            <button mat-raised-button color="accent" type="button" (click)="addField()" class="add-field-btn">
+              <mat-icon>add</mat-icon>
+              {{ 'MODULE_MANAGER.FIELDS.ADD_FIELD' | translate }}
+            </button>
+          </div>
+
+          <div class="fields-list" [formGroup]="fieldsForm">
+            <div formArrayName="fields">
+              <div *ngFor="let field of fieldsArray.controls; let i = index" class="field-row" [formGroupName]="i">
+                <div class="field-row-content">
+                  <mat-form-field appearance="outline" class="field-name">
+                    <mat-label>Field Name</mat-label>
+                    <input matInput formControlName="name" placeholder="e.g., title, price, description">
+                    <mat-icon matPrefix>label</mat-icon>
+                    <mat-error *ngIf="field.get('name')?.hasError('required')">
+                      Field name is required
+                    </mat-error>
+                    <mat-error *ngIf="field.get('name')?.hasError('pattern')">
+                      Invalid name (use only letters, numbers, and underscores)
+                    </mat-error>
+                    <mat-hint>No spaces or special characters</mat-hint>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="field-type">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                      <mat-option value="string">
+                        <mat-icon>text_fields</mat-icon>
+                        String
+                      </mat-option>
+                      <mat-option value="email">
+                        <mat-icon>email</mat-icon>
+                        Email
+                      </mat-option>
+                      <mat-option value="password">
+                        <mat-icon>lock</mat-icon>
+                        Password
+                      </mat-option>
+                      <mat-option value="number">
+                        <mat-icon>numbers</mat-icon>
+                        Number
+                      </mat-option>
+                      <mat-option value="boolean">
+                        <mat-icon>toggle_on</mat-icon>
+                        Boolean
+                      </mat-option>
+                      <mat-option value="Date">
+                        <mat-icon>calendar_today</mat-icon>
+                        Date
+                      </mat-option>
+                      <mat-option value="File">
+                        <mat-icon>upload_file</mat-icon>
+                        File
+                      </mat-option>
+                      <mat-option value="textarea">
+                        <mat-icon>notes</mat-icon>
+                        Textarea
+                      </mat-option>
+                      <mat-option value="quill-editor">
+                        <mat-icon>article</mat-icon>
+                        Rich Text Editor (Quill)
+                      </mat-option>
+                    </mat-select>
+                    <mat-icon matPrefix>category</mat-icon>
+                  </mat-form-field>
+
+                  <div class="field-required-wrapper">
+                    <mat-checkbox formControlName="required" class="field-required" color="primary">
+                      Required
+                    </mat-checkbox>
+                  </div>
+
+                  <button mat-mini-fab color="warn" type="button" (click)="removeField(i)" class="delete-btn" matTooltip="Remove field">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div *ngIf="fieldsArray.length === 0" class="no-fields">
+                <mat-icon class="no-fields-icon">view_list</mat-icon>
+                <p class="no-fields-text">No fields added yet</p>
+                <p class="no-fields-hint">Click "Add Field" to start defining your module structure</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- Tab 3: Summary -->
+      <mat-tab [disabled]="true">
+        <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">summarize</mat-icon>
+          <span class="tab-label">{{ 'MODULE_MANAGER.TABS.SUMMARY' | translate }}</span>
+        </ng-template>
+        <div class="tab-content">
+          <h3 class="text-lg font-semibold text-gray-700 mb-4">{{ 'MODULE_MANAGER.SUMMARY.TITLE' | translate }}</h3>
+          <div class="summary-section">
+            <div class="summary-grid">
+              <div class="summary-item">
+                <mat-icon class="summary-icon">label</mat-icon>
+                <div class="summary-content">
+                  <span class="summary-label">Module Name</span>
+                  <span class="summary-value">{{ model.moduleName || 'Not set' }}</span>
+                </div>
+              </div>
+
+              <div class="summary-item">
+                <mat-icon class="summary-icon">badge</mat-icon>
+                <div class="summary-content">
+                  <span class="summary-label">Display Name</span>
+                  <span class="summary-value">{{ model.displayName || 'Not set' }}</span>
+                </div>
+              </div>
+
+              <div class="summary-item">
+                <mat-icon class="summary-icon">badge</mat-icon>
+                <div class="summary-content">
+                  <span class="summary-label">Singular</span>
+                  <span class="summary-value">{{ model.displayNameSingular || 'Not set' }}</span>
+                </div>
+              </div>
+
+              <div class="summary-item">
+                <mat-icon class="summary-icon">category</mat-icon>
+                <div class="summary-content">
+                  <span class="summary-label">Resource Type</span>
+                  <span class="summary-value">{{ model.resourceType || 'Same as module name' }}</span>
+                </div>
+              </div>
+
+              <div class="summary-item">
+                <mat-icon class="summary-icon">key</mat-icon>
+                <div class="summary-content">
+                  <span class="summary-label">Identifier</span>
+                  <span class="summary-value">{{ model.identifierField || 'id' }}</span>
+                </div>
+              </div>
+
+              <div class="summary-item">
+                <mat-icon class="summary-icon">{{ model.requiresAuth ? 'lock' : 'lock_open' }}</mat-icon>
+                <div class="summary-content">
+                  <span class="summary-label">Auth Required</span>
+                  <span class="summary-value" [class.text-green-600]="model.requiresAuth" [class.text-red-600]="!model.requiresAuth">
+                    {{ model.requiresAuth ? 'Yes' : 'No' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="summary-item">
+                <mat-icon class="summary-icon">{{ model.devMode ? 'code' : 'public' }}</mat-icon>
+                <div class="summary-content">
+                  <span class="summary-label">Dev Mode</span>
+                  <span class="summary-value" [class.text-orange-600]="model.devMode" [class.text-blue-600]="!model.devMode">
+                    {{ model.devMode ? 'Yes (Mock Data)' : 'No (API)' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="summary-item">
+                <mat-icon class="summary-icon">view_list</mat-icon>
+                <div class="summary-content">
+                  <span class="summary-label">Fields Count</span>
+                  <span class="summary-value font-bold text-primary">{{ fieldsArray.length }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="fieldsArray.length > 0" class="fields-preview">
+              <h4 class="text-md font-semibold text-gray-600 mb-3">Fields Preview</h4>
+              <div class="fields-preview-list">
+                <div *ngFor="let field of fieldsArray.controls; let i = index" class="field-preview-item">
+                  <mat-icon class="field-preview-icon">{{ getFieldIcon(field.value.type) }}</mat-icon>
+                  <div class="field-preview-content">
+                    <span class="field-preview-name">{{ field.value.name || 'Unnamed' }}</span>
+                    <span class="field-preview-type">{{ field.value.type || 'string' }}</span>
+                  </div>
+                  <mat-chip *ngIf="field.value.required" class="field-preview-chip" color="primary">Required</mat-chip>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <!-- Actions -->
+    <div class="page-actions">
+      <div class="nav-buttons">
+        <button
+          mat-button
+          type="button"
+          (click)="previousStep()"
+          [disabled]="isFirstStep() || saving"
+          class="prev-btn">
+          <mat-icon>arrow_back</mat-icon>
+          {{ 'MODULE_MANAGER.NAVIGATION.PREVIOUS' | translate }}
+        </button>
+
+        <div class="validation-message" *ngIf="!canProceedToNextStep() && !isLastStep()">
+          <mat-icon class="warning-icon">warning</mat-icon>
+          <span>{{ getStepValidationMessage() }}</span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button mat-button type="button" (click)="cancel()" [disabled]="saving" class="cancel-btn">
+          {{ 'MODULE_MANAGER.ACTIONS.CANCEL' | translate }}
+        </button>
+
+        <button
+          *ngIf="!isLastStep()"
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="nextStep()"
+          [disabled]="!canProceedToNextStep() || saving"
+          class="next-btn">
+          {{ 'MODULE_MANAGER.NAVIGATION.NEXT' | translate }}
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+
+        <button
+          *ngIf="isLastStep()"
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="save()"
+          [disabled]="!form.valid || !fieldsForm.valid || saving"
+          class="save-btn">
+          <mat-spinner *ngIf="saving" diameter="20" class="inline-spinner"></mat-spinner>
+          <mat-icon *ngIf="!saving">{{ mode === 'create' ? 'rocket_launch' : 'save' }}</mat-icon>
+          {{ (mode === 'create' ? 'MODULE_MANAGER.ACTIONS.GENERATE' : 'MODULE_MANAGER.ACTIONS.UPDATE') | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

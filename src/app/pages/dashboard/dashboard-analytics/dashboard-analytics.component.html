@@ -1,0 +1,64 @@
+<vex-secondary-toolbar current="Dashboards">
+  <vex-breadcrumbs
+    [crumbs]="['Dashboards', 'Analytics']"
+    class="flex-auto"></vex-breadcrumbs>
+
+  <button class="ml-2" color="primary" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+  </button>
+</vex-secondary-toolbar>
+
+<div class="container p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+  <vex-widget-assistant class="sm:col-span-2"></vex-widget-assistant>
+
+  <!-- NOUVEAU CHART POUR LES LOGS -->
+  <vex-widget-quick-line-chart
+    [series]="logActivitySeries"
+    [options]="logActivityOptions"
+    icon="mat:wysiwyg"
+    iconClass="text-teal-600 bg-teal-600/10"
+    [label]="'dashboard_analytic.log_activity_label' | translate"
+    [value]="logActivityValue">
+  </vex-widget-quick-line-chart>
+
+  <vex-widget-quick-value-center
+    icon="mat:group"
+    iconClass="text-green-600 bg-green-600/10"
+    [label]="'dashboard_analytic.online_users' | translate"
+    [value]="onlineUsersCount()">
+  </vex-widget-quick-value-center>
+
+  <!-- NOUVEAU CHART POUR LES uniqueUsers -->
+  <vex-widget-large-chart
+     [title]="'dashboard_analytic.total_users' | translate"
+    [series]="uniqueUsersSeries"
+    [options]="uniqueUsersOptions"
+    class="sm:col-span-2">
+  </vex-widget-large-chart>
+
+  <!-- NOUVEAU CHART POUR LES roles & permissions -->
+  <div *ngIf="isRolesChartReady()" class="sm:col-span-2">
+    <vex-widget-large-chart
+      [title]="'dashboard_analytic.total_roles_permissions' | translate"
+      [series]="rolesAndPermissionsSeries()!"
+      [options]="rolesAndPermissionsOptions()!"
+      class="sm:col-span-2">
+    </vex-widget-large-chart>
+  </div>
+
+  <div
+    *ngIf="!isRolesChartReady()"
+    class="sm:col-span-2 flex items-center justify-center h-full">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="50"></mat-progress-spinner>
+  </div>
+
+  <!-- <vex-widget-large-chart [series]="userSessionsSeries" class="sm:col-span-2">
+  </vex-widget-large-chart> -->
+  <!-- <vex-widget-table
+    [columns]="columns"
+    [data]="tableData()"
+    class="sm:col-span-2">
+  </vex-widget-table> -->
+</div>

@@ -1,0 +1,24 @@
+<mat-form-field class="w-full">
+  <mat-label>{{ props.label }}</mat-label>
+  <input
+    matInput
+    [matDatepicker]="picker"
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    [placeholder]="props.placeholder || ''"
+    [min]="minDate"
+    [max]="maxDate"
+    [required]="props.required || false">
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+
+  <mat-error *ngIf="formControl.hasError('required')">
+    {{ props['errorMessages']?.['required'] || 'This field is required' }}
+  </mat-error>
+  <mat-error *ngIf="formControl.hasError('matDatepickerMin')">
+    {{ props['errorMessages']?.['minDate'] || 'Date is too early' }}
+  </mat-error>
+  <mat-error *ngIf="formControl.hasError('matDatepickerMax')">
+    {{ props['errorMessages']?.['maxDate'] || 'Date is too late' }}
+  </mat-error>
+</mat-form-field>

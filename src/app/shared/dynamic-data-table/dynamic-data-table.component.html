@@ -1,0 +1,230 @@
+<!-- État de chargement -->
+<div *ngIf="isLoading" class="flex items-center justify-center p-10">
+    <vex-loading-spinner></vex-loading-spinner>
+</div>
+
+<!-- État sans données -->
+<div *ngIf="!isLoading && data.length === 0" class="flex flex-col items-center justify-center p-10">
+    <img class="m-12 h-64" src="assets/img/illustrations/idea.svg" />
+    <h2 class="headline m-0 text-center">{{ noDataMessage }}</h2>
+</div>
+
+<!-- Table et paginateur -->
+<div *ngIf="!isLoading && data.length > 0" class="overflow-auto">
+    <table @stagger mat-table [dataSource]="dataSource" matSort class="w-full">
+
+        <!-- Boucle sur les définitions de colonnes -->
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.property">
+
+            <!-- Colonne Checkbox (si un SelectionModel est fourni) -->
+            <ng-container *ngIf="column.type === 'checkbox' && selection">
+                <th *matHeaderCellDef mat-header-cell>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                        color="primary"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </th>
+                <td *matCellDef="let row" mat-cell>
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        color="primary"
+                        [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- NOUVEAU: Colonne Image -->
+            <ng-container *ngIf="column.type === 'image'">
+                <th *matHeaderCellDef mat-header-cell>{{ column.label | translate }}</th>
+                <td *matCellDef="let row" class="w-8 min-w-8 p-0" mat-cell>
+                    <ng-container *ngIf="row[column.property]; else noPicture">
+                        <img [src]="row[column.property]" class="avatar h-8 w-8 align-middle" />
+                    </ng-container>
+                    <ng-template #noPicture>
+                        <img src="assets/img/avatars/noavatar.png" class="avatar h-8 w-8 align-middle" />
+                    </ng-template>
+                </td>
+            </ng-container>
+
+            <!-- Colonne Texte/Standard -->
+            <ng-container *ngIf="column.type === 'text'">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header [disabled]="!column.sortable" class="uppercase">
+                    {{ column.label | translate }}
+                </th>
+                <td *matCellDef="let row" mat-cell>{{
+                    column.formatter
+                    ? column.formatter(row[column.property], row)
+                    : row[column.property]
+                    }}</td>
+
+            </ng-container>
+
+            <!-- Colonne Date -->
+            <ng-container *ngIf="column.type === 'date'">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header [disabled]="!column.sortable" class="uppercase">
+                    {{ column.label | translate }}
+                </th>
+                <td *matCellDef="let row" mat-cell>{{
+                    column.formatter
+                    ? column.formatter(row[column.property], row)
+                    : (row[column.property] | date: 'dd/MM/yyyy HH:mm')
+                    }}</td>
+            </ng-container>
+
+            <!-- NOUVEAU: Colonne Color -->
+            <ng-container *ngIf="column.type === 'color'">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header [disabled]="!column.sortable" class="uppercase">
+                    {{ column.label | translate }}
+                </th>
+                <td *matCellDef="let row" mat-cell>
+                    <div class="flex items-center gap-2">
+                        <!-- Cercle coloré -->
+                        <div class="w-4 h-4 rounded-full flex-shrink-0" [style.backgroundColor]="row[column.property]"
+                            [title]="row[column.property]">
+                        </div>
+                        <!-- Nom de la couleur -->
+                        <span>{{ row[column.property] }}</span>
+                    </div>
+                </td>
+            </ng-container>
+            <!-- NOUVEAU: Colonne File/Media avec nombre de fichiers -->
+            <ng-container *ngIf="column.type === 'file' || column.type === 'icon'">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header [disabled]="!column.sortable" class="uppercase">
+                    {{ column.label | translate }}
+                </th>
+                <td *matCellDef="let row" mat-cell>
+                    <div class="flex items-center justify-center">
+                        <!-- Afficher le nombre de fichiers -->
+                        <span class="text-sm">
+                            {{ row[column.property] && row[column.property].length > 0 ? row[column.property].length : 0 }}
+                        </span>
+                    </div>
+                </td>
+            </ng-container>
+
+
+            <!-- NOUVEAU: Colonne toggle slide -->
+            <ng-container *ngIf="column.type === 'disable'">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header [disabled]="!column.sortable" class="uppercase">
+                    {{ column.label | translate }}
+                </th>
+                <td *matCellDef="let row" mat-cell>
+                    <div class="flex items-center justify-center">
+                        <!-- Si c'est pour le blocage d'utilisateurs, utiliser slide toggle -->
+                        <ng-container *ngIf="type === 'users' && column.property === 'is_blocked'">
+                            <mat-slide-toggle [checked]="row[column.property]"
+                                (change)="emitAction('toggle-block', row)" [disabled]="isLoading"
+                                [matTooltip]="(row[column.property] ? 'menu_action.unblock' : 'menu_action.block') | translate"
+                                [color]="row[column.property] ? 'default' : 'primary'">
+                            </mat-slide-toggle>
+                        </ng-container>
+
+                        <!-- Pour les autres cas, garder l'icône -->
+                        <ng-container *ngIf="!(type === 'users' && column.property === 'is_blocked')">
+                            <mat-icon [class]="row[column.property] ? 'text-green-600' : 'text-red-600'"
+                                [svgIcon]="row[column.property] ? 'mat:check_circle' : 'mat:block'"></mat-icon>
+                        </ng-container>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Colonne Actions avec Menu -->
+            <ng-container *ngIf="column.type === 'button'">
+                <th *matHeaderCellDef mat-header-cell class="uppercase text-right">{{ column.label | translate }}</th>
+                <td *matCellDef="let row" mat-cell (click)="$event.stopPropagation()">
+                    <div class="flex items-center justify-end space-x-2 min-w-[120px]">
+
+                        <!-- Template pour les documents -->
+                        <ng-container *ngIf="type === 'documents'">
+                            <!-- Indicateur de statut d'upload -->
+                            <app-upload-status-indicator [documentId]="row.id" #uploadIndicator>
+                            </app-upload-status-indicator>
+
+                            <!-- Menu Actions seulement si pas d'upload en cours -->
+                            <ng-container *ngIf="!isDocumentUploading(row.id)">
+                                <!-- Bouton Hamburger -->
+                                <button mat-icon-button [matMenuTriggerFor]="menuActions"
+                                    [matTooltip]="'menu_action.action' | translate">
+                                    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+                                </button>
+
+                                <!-- Menu déroulant -->
+                                <mat-menu #menuActions="matMenu">
+                                    <button mat-menu-item (click)="emitAction('show', row)" [disabled]="isLoading">
+                                        <mat-icon svgIcon="mat:remove_red_eye" class="mr-2"></mat-icon>
+                                        {{ 'menu_action.show' | translate }}
+                                    </button>
+                                    <button mat-menu-item (click)="emitAction('delete', row)" [disabled]="isLoading">
+                                        <mat-icon svgIcon="mat:delete" class="mr-2 text-red-600"></mat-icon>
+                                        {{ 'menu_action.delete' | translate }}
+                                    </button>
+                                </mat-menu>
+                            </ng-container>
+                        </ng-container>
+
+                        <!-- Template pour menus et categories (seulement edit) -->
+                        <ng-container *ngIf="type === 'menus' || type === 'categories'">
+                            <!-- Bouton Hamburger -->
+                            <button mat-icon-button [matMenuTriggerFor]="menuActions"
+                                [matTooltip]="'menu_action.action' | translate">
+                                <mat-icon svgIcon="mat:more_vert"></mat-icon>
+                            </button>
+
+                            <!-- Menu déroulant avec seulement edit -->
+                            <mat-menu #menuActions="matMenu">
+                                <button mat-menu-item (click)="emitAction('edit', row)" [disabled]="isLoading">
+                                    <mat-icon svgIcon="mat:edit" class="mr-2"></mat-icon>
+                                    {{ 'menu_action.edit' | translate }}
+                                </button>
+                            </mat-menu>
+                        </ng-container>
+
+                        <!-- Template par défaut pour les autres types -->
+                        <ng-container *ngIf="type !== 'documents' && type !== 'menus' && type !== 'categories'">
+                            <!-- Bouton Hamburger -->
+                            <button mat-icon-button [matMenuTriggerFor]="menuActions"
+                                [matTooltip]="'menu_action.action' | translate">
+                                <mat-icon svgIcon="mat:more_vert"></mat-icon>
+                            </button>
+
+                            <!-- Menu déroulant -->
+                            <mat-menu #menuActions="matMenu">
+                                <button mat-menu-item (click)="emitAction('show', row)" [disabled]="isLoading">
+                                    <mat-icon svgIcon="mat:remove_red_eye" class="mr-2"></mat-icon>
+                                    {{ 'menu_action.show' | translate }}
+                                </button>
+
+                                <button mat-menu-item (click)="emitAction('edit', row)" [disabled]="isLoading">
+                                    <mat-icon svgIcon="mat:edit" class="mr-2"></mat-icon>
+                                    {{ 'menu_action.edit' | translate }}
+                                </button>
+
+                                <!-- Bouton Add Collaborator pour les repos personnels uniquement -->
+                                <button mat-menu-item *ngIf="type === 'github-repositories' && row['is_owner']"
+                                    (click)="emitAction('add-collaborator', row)" [disabled]="isLoading">
+                                    <mat-icon svgIcon="mat:person_add" class="mr-2"></mat-icon>
+                                    {{ 'menu_action.add_collaborator' | translate }}
+                                </button>
+
+                                <!-- Cacher le bouton delete pour github-repositories -->
+                                <button mat-menu-item *ngIf="type !== 'github-repositories'"
+                                    (click)="emitAction('delete', row)" [disabled]="isLoading">
+                                    <mat-icon svgIcon="mat:delete" class="mr-2 text-red-600"></mat-icon>
+                                    {{ 'menu_action.delete' | translate }}
+                                </button>
+                            </mat-menu>
+                        </ng-container>
+                    </div>
+                </td>
+            </ng-container>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="visibleColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: visibleColumns;" @fadeInUp
+            class="hover:bg-hover transition duration-400 ease-out-swift cursor-pointer"></tr>
+    </table>
+
+    <mat-paginator [length]="pagination.total" [pageIndex]="pagination.current_page - 1"
+        [pageSize]="pagination.per_page" (page)="pageChange.emit($event)" class="sticky left-0">
+    </mat-paginator>
+</div>

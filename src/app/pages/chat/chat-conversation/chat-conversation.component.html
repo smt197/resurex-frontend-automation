@@ -1,0 +1,158 @@
+<div class="relative h-full flex flex-col overflow-hidden">
+  <!-- Header de la conversation -->
+  <div class="px-6 bg-foreground border-b h-16 flex-none flex items-center relative">
+    <button (click)="openDrawer()" class="md:hidden sm:-ml-4 mr-2" mat-icon-button type="button">
+      <mat-icon svgIcon="mat:menu"></mat-icon>
+    </button>
+
+    <ng-container *ngIf="chat$ | async as chat; else headerPlaceholder">
+      <div class="flex items-center gap-3">
+        <img class="hidden sm:block flex-none w-9 h-9 rounded-full object-cover"
+          [src]="chat.imageUrl || 'assets/img/avatars/noavatar.png'" alt="{{ chat.first_name }} avatar" />
+        <div class="flex-1 truncate">
+          <div class="font-semibold text-sm truncate">{{ chat.first_name }}</div> <!-- Utiliser name ou first_name -->
+          <div class="flex items-center gap-1 truncate">
+            <div class="h-1.5 w-1.5 rounded-full" [class.bg-green-600]="isPartnerOnline$ | async"
+              [class.bg-gray-400]="!(isPartnerOnline$ | async)"></div>
+            <div class="text-xs text-gray-600 dark:text-gray-400 truncate">
+              {{ ((isPartnerOnline$ | async) ? 'user.status.online' : 'user.status.offline') | translate }}
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #headerPlaceholder>
+      <div class="flex items-center gap-3 opacity-50 animate-pulse">
+        <div class="hidden sm:block flex-none w-9 h-9 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+        <div class="flex-1 truncate">
+          <div class="h-4 bg-gray-300 dark:bg-gray-700 rounded w-24 mb-1"></div>
+          <div class="h-3 bg-gray-200 dark:bg-gray-600 rounded w-16"></div>
+        </div>
+      </div>
+    </ng-template>
+
+    <span class="flex-1"></span>
+  </div>
+
+  <!-- Corps principal: Spinner ou Messages -->
+  <div class="flex-1 relative overflow-hidden">
+    <div *ngIf="isLoadingConversation()"
+      class="absolute inset-0 flex flex-col items-center justify-center bg-background z-20">
+      <vex-loading-spinner></vex-loading-spinner>
+      <p class="mt-3 text-gray-500 dark:text-gray-400" rxTranslate="global.chats.loading_conversation">Loading
+        conversation...</p>
+    </div>
+
+    <ng-container *ngIf="!isLoadingConversation()">
+      <ng-container *ngIf="(messages$ | async) as messages">
+        <ng-container *ngIf="messages.length > 0; else noMessagesTemplate">
+          <vex-scrollbar class="h-full"> <!-- Doit prendre toute la hauteur disponible -->
+            <div class="flex flex-col space-y-2 p-4 sm:p-8 justify-end min-h-full"> <!-- min-h-full pour justify-end -->
+              <ng-container *ngFor="let message of messages; trackBy: trackByIdFn">
+                <!-- Message du partenaire -->
+                <div *ngIf="message.from === 'partner'" class="flex gap-2 w-full">
+                  <img class="w-8 h-8 rounded-full self-end object-cover"
+                    [src]="(chat$ | async)?.imageUrl || 'assets/img/avatars/noavatar.png'" alt="Partner avatar" />
+                  <div class="flex flex-col space-y-1 items-start">
+                    <div
+                      class="px-4 py-3 rounded-xl bg-gray-200 dark:bg-gray-800 inline-flex items-center self-start max-w-[350px] gap-3 cursor-pointer">
+                      <ng-container *ngIf="message.message_type === 'image' && message.file_url">
+                        <img [src]="message.file_url" alt="{{ message.file_name || 'Image' }}"
+                          class="max-w-[200px] sm:max-w-xs max-h-64 rounded mb-1 cursor-pointer object-contain"
+                          (click)="openImage(message.file_url)">
+                      </ng-container>
+                      <!-- NOUVEAU: Affichage Fichier (non-image) -->
+                      <ng-container *ngIf="message.message_type === 'file' && message.file_url">
+                        <a [href]="message.file_url" target="_blank" download="{{ message.file_name }}"
+                          class="flex items-center p-3 rounded-xl bg-primary-500 hover:bg-primary-400 gap-3 cursor-pointer no-underline text-white mb-1">
+                          <div
+                            class="flex-none h-10 w-10 rounded-lg bg-white dark:bg-primary-700 flex items-center justify-center shadow">
+                            <mat-icon class="text-primary-600 dark:text-white scale-125"
+                              svgIcon="mat:insert_drive_file">{{
+                              getFileIcon(message.file_mime_type) }}</mat-icon>
+                          </div>
+                          <div class="flex-1 truncate min-w-0">
+                            <div class="text-sm font-medium truncate">
+                              {{ message.file_name || 'Attachment' }}
+                            </div>
+                            <div class="text-xs text-primary-100 dark:text-primary-200 truncate">
+                              {{ message.file_size | fileSize }}
+                            </div>
+                          </div>
+                          <mat-icon class="flex-none" svgIcon="mat:download"></mat-icon>
+                        </a>
+                      </ng-container>
+                      <div *ngIf="message.message"
+                        class="px-4 py-3 rounded-xl rounded-bl-none bg-gray-200 dark:bg-gray-800 inline-flex self-start max-w-[350px]">
+                        {{
+                        message.message }}</div>
+                    </div>
+                    <div class="flex items-center">
+                      <div class="text-xs font-medium">
+                        {{ languageService.parseAndFormatDate(message.timestamp || "") }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Message de "moi" -->
+                <div *ngIf="message.from === 'me'" class="flex flex-col items-end w-full">
+                  <div
+                    class="px-3 py-2 sm:px-4 sm:py-3 rounded-xl bg-primary-600 text-white inline-block self-end max-w-xs sm:max-w-md md:max-w-lg">
+                    <ng-container *ngIf="message.message_type === 'image' && message.file_url">
+                      <img [src]="message.file_url" alt="{{ message.file_name || 'Image' }}"
+                        class="max-w-[200px] sm:max-w-xs max-h-64 rounded mb-1 cursor-pointer object-contain"
+                        (click)="openImage(message.file_url)">
+                    </ng-container>
+                    <ng-container *ngIf="message.message_type === 'file' && message.file_url">
+                      <a [href]="message.file_url" target="_blank" download="{{ message.file_name }}"
+                        class="flex items-center p-2 bg-primary-500 hover:bg-primary-400 rounded mb-1 no-underline hover:no-underline text-white">
+                        <mat-icon class="mr-2 flex-shrink-0" svgIcon="mat:insert_drive_file">{{
+                          getFileIcon(message.file_mime_type) }}</mat-icon>
+                        <span class="truncate text-sm">{{ message.file_name || 'Attachment' }}</span>
+                      </a>
+                    </ng-container>
+                    <div *ngIf="message.message && message.message_type !== 'file' " class="break-words text-sm">{{
+                      message.message }}</div>
+                    <mat-progress-spinner *ngIf="message.isUploading" diameter="16" mode="indeterminate"
+                      class="self-center mt-1 inline-block"></mat-progress-spinner>
+                  </div>
+                  <div class="self-end flex items-center gap-1 mt-0.5">
+                    <mat-icon class="icon-xs text-gray-500 dark:text-gray-400" svgIcon="mat:done_all"></mat-icon>
+                    <!-- TODO: Dynamiser statut du message -->
+                    <div class="text-xs font-medium text-gray-500 dark:text-gray-400"> {{
+                      languageService.parseAndFormatDate(message.timestamp || "") }}</div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </vex-scrollbar>
+        </ng-container>
+      </ng-container>
+
+      <ng-template #noMessagesTemplate>
+        <div class="flex-1 flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 p-8">
+          <mat-icon svgIcon="mat:chat_bubble_outline" class="w-16 h-16 mb-4 opacity-50"></mat-icon>
+          <p class="text-lg" rxTranslate="global.chats.not_message">No messages yet.</p>
+          <p class="text-sm" rxTranslate="global.chats.start_conversation">Start the conversation!</p>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+
+  <!--Footer message -->
+  <div class="flex-none bg-foreground border-t p-2">
+    <ng-container *ngIf="!isChatBlocked(); else blockedForm">
+      <formly-form [form]="form" [model]="model" [fields]="fields" class="flex-auto h-full">
+      </formly-form>
+    </ng-container>
+    <ng-template #blockedForm>
+      <div class="flex-1 flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 p-4">
+        <p class="text-sm" rxTranslate="global.chats.block_message">This user is suspended. You cannot send messages to
+          this user.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

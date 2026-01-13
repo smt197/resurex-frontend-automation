@@ -1,0 +1,33 @@
+<div class="h-full flex flex-col">
+  <!-- Header section -->
+  <div class="p-6 bg-foreground shadow-b flex-none border-b">
+    <div class="container px-0">
+      <div class="flex items-center justify-between">
+        <h3 class="display-1 font-bold flex items-center">
+          <span @scaleIn
+            class="w-12 h-12 rounded-full text-primary-600 ltr:mr-4 rtl:ml-4 flex items-center justify-center bg-primary-600/10">
+            <mat-icon svgIcon="mat:attach_file"></mat-icon>
+          </span>
+          <span @fadeInRight class="block" rxTranslate="document.create.title">TITLE</span>
+        </h3>
+
+        <button *ngIf="!isLoading" (click)="back()" class="flex-none hidden sm:inline-block" color="primary"
+          mat-flat-button type="button">
+          <mat-icon class="ltr:mr-2 rtl:ml-2 ltr:-ml-1 rtl:-mr-1 icon-sm" svgIcon="mat:arrow_back"></mat-icon>
+          <span>Retour</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Files section -->
+  <div class="card overflow-y-auto flex-auto shadow-lg mt-4 border hover:border-solid hover:border-primary-500">
+    <div class="p-6">
+      <vex-loading-spinner *ngIf="isLoading" mode="indeterminate"></vex-loading-spinner>
+
+      <div *ngIf="!isLoading">
+        <formly-form [form]="form" [fields]="fields" [model]="model"
+          [options]="{ formState: { isLoading: isLoading } }"></formly-form>
+      </div>
+    </div>
+  </div>
+</div>

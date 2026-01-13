@@ -1,0 +1,97 @@
+// .bg-pattern {
+//     background: linear-gradient(
+//         135deg,
+//         var(--vex-background-background) 22px,
+//         var(--vex-background-hover) 22px,
+//         var(--vex-background-hover) 24px,
+//         transparent 24px,
+//         transparent 67px,
+//         var(--vex-background-hover) 67px,
+//         var(--vex-background-hover) 69px,
+//         transparent 69px
+//     ),
+//     linear-gradient(
+//         225deg,
+//         var(--vex-background-background) 22px,
+//         var(--vex-background-hover) 22px,
+//         var(--vex-background-hover) 24px,
+//         transparent 24px,
+//         transparent 67px,
+//         var(--vex-background-hover) 67px,
+//         var(--vex-background-hover) 69px,
+//         transparent 69px
+//     ) 0 64px;
+//     background-color: var(--vex-background-background);
+//     background-size: 64px 128px;
+//   }
+.timer {
+    color: #dc3545;
+    margin: 1rem 0;
+    font-weight: bold;
+  }
+  .info-message {
+      color: orange;
+      margin-top: 10px;
+      text-align: center;
+    }
+.bg-pattern {
+    background: linear-gradient(
+        135deg,
+        var(--vex-background-background) 22px,
+        rgba(0, 0, 0, 0.15) 22px,   /* Darker line for better visibility */
+        rgba(0, 0, 0, 0.15) 24px,   /* Darker line for better visibility */
+        transparent 24px,
+        transparent 67px,
+        rgba(0, 0, 0, 0.15) 67px,   /* Darker line for better visibility */
+        rgba(0, 0, 0, 0.15) 69px,   /* Darker line for better visibility */
+        transparent 69px
+    ),
+    linear-gradient(
+        225deg,
+        var(--vex-background-background) 22px,
+        rgba(0, 0, 0, 0.15) 22px,   /* Darker line for better visibility */
+        rgba(0, 0, 0, 0.15) 24px,   /* Darker line for better visibility */
+        transparent 24px,
+        transparent 67px,
+        rgba(0, 0, 0, 0.15) 67px,   /* Darker line for better visibility */
+        rgba(0, 0, 0, 0.15) 69px,   /* Darker line for better visibility */
+        transparent 69px
+    ) 0 64px;
+    background-color: var(--vex-background-background);
+    background-size: 64px 128px;
+  }
+  /* Styles pour les cases de l'OTP */
+
+
+/* Styles pour le bouton */
+button[mat-raised-button] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+ngx-otp-input { 
+  .ngx-otp-input-form {
+    padding: 6px !important;
+  }
+
+  .ngx-otp-input-box {
+    padding: 6px !important;
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 30px !important; // Suppression de la redondance
+    text-align: center;
+    font-weight: bold; // Correction de "font: bolder" en "font-weight: bold"
+  }
+}
+  
+  .info-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  button[mat-raised-button] {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }

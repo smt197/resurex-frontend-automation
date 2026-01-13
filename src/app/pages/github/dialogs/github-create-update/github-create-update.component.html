@@ -1,0 +1,26 @@
+<div class="dialog-container">
+  <h2 mat-dialog-title>
+    {{ (mode === 'create' ? 'GITHUB.DIALOG.CREATE_TITLE' : 'GITHUB.DIALOG.UPDATE_TITLE') | translate }}
+  </h2>
+
+  <mat-dialog-content class="dialog-content">
+    <form [formGroup]="form">
+      <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-button type="button" (click)="cancel()">
+      {{ 'global.cancel' | translate }}
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="save()"
+      [disabled]="!form.valid">
+      <mat-icon>{{ mode === 'create' ? 'add' : 'save' }}</mat-icon>
+      {{ (mode === 'create' ? 'global.create' : 'global.save') | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

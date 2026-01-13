@@ -1,0 +1,65 @@
+<div class="flex flex-col gap-4 w-full h-full">
+  <div class="flex items-center justify-end">
+    <button
+      class="text-secondary"
+      mat-dialog-close
+      mat-icon-button
+      type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+  <div *ngIf="imageUrl" class="mx-auto">
+    <img [src]="imageUrl" class="rounded-full w-36 h-36 mr-5" />
+  </div>
+  <div class="text-center space-y-2" mat-dialog-title>
+    <h1
+      *ngIf="defaults.first_name || defaults.last_name"
+      class="text-xl font-extrabold text-gray-800 tracking-tight capitalize">
+      {{ defaults.first_name }} {{ defaults.last_name }}
+    </h1>
+  </div>
+  <div class="text-start space-y-2" mat-dialog-content>
+    <div class="flex items-start gap-2 text-primary-400">
+      <mat-icon class="icon-xl" svgIcon="mat:person"></mat-icon>
+      <ng-container *ngIf="defaults.roles && defaults.roles.length > 0">
+        <span
+          class="inline-flex items-center rounded-full bg-primary-100 text-primary-500 px-3 py-1 text-sm font-semibold">
+          {{ getRolesNames(defaults.roles) }}
+        </span>
+      </ng-container>
+      <ng-container *ngIf="!defaults.roles || defaults.roles.length === 0">
+        <span class="text-gray-400 italic">No roles</span>
+      </ng-container>
+    </div>
+    <div class="flex items-start gap-2 text-primary-400">
+      <mat-icon class="icon-xl" svgIcon="mat:security"></mat-icon>
+      <ng-container
+        *ngIf="defaults.permissions && defaults.permissions.length > 0">
+        <span
+          class="inline-flex items-center rounded-full bg-primary-100 text-primary-500 px-3 py-1 text-sm font-semibold">
+          {{ getPermissionsNames(defaults.permissions) }}
+        </span>
+      </ng-container>
+      <ng-container
+        *ngIf="!defaults.permissions || defaults.permissions.length === 0">
+        <span class="text-gray-400 italic">No permissions</span>
+      </ng-container>
+    </div>
+    <div class="flex items-start gap-2 text-primary-500">
+      <mat-icon class="icon-xl" svgIcon="mat:email"></mat-icon>
+      <span class="text-lg font-medium text-gray-500 mt-1">
+        {{ defaults.email }}</span
+      >
+    </div>
+  </div>
+
+  <mat-divider class="text-border"></mat-divider>
+
+  <!-- Formulaire -->
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      <span class="text-lg font-medium">close</span>
+    </button>
+  </mat-dialog-actions>
+</div>

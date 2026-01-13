@@ -1,0 +1,29 @@
+<!-- Conteneur principal -->
+<div class="otp-toggle-container">
+  <!-- État de chargement -->
+  <div *ngIf="isLoading" class="otp-loading-state">
+    <span class="loading-text">
+      {{ 'global.loading' | translate }} <!-- Utiliser le pipe translate standard -->
+    </span>
+    <mat-progress-spinner
+      mode="indeterminate"
+      color="primary"
+      diameter="30" 
+      strokeWidth="4">
+    </mat-progress-spinner>
+  </div>
+
+  <!-- État normal (non chargement) -->
+  <div *ngIf="!isLoading" class="otp-active-state">
+    <mat-slide-toggle
+      [checked]="status"
+      color="primary"
+      (change)="onToggleChange($event)"
+      class="otp-slide-toggle"> <!-- Classe pour styler le toggle si besoin -->
+    </mat-slide-toggle>
+
+    <span class="status-text">
+      {{ (status ? 'otp.status.active' : 'otp.status.disabled') | translate }}
+    </span>
+  </div>
+</div>

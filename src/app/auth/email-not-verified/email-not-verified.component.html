@@ -1,0 +1,38 @@
+<div class="w-full h-full bg-pattern flex flex-col items-center justify-center">
+  <div @fadeInUp class="card overflow-hidden w-full max-w-md">
+    <div class="flex flex-col items-center">
+      <div class="p-6 rounded-full bg-primary-600/10 text-primary-600 mx-auto flex items-center justify-center">
+        <mat-icon class="icon-5xl" [svgIcon]="isSuccess ? 'mat:check' : 'mat:mail'"></mat-icon>
+      </div>
+
+      <div class="text-center mt-4">
+        <h4 class="title m-0" [ngClass]="{ 'text-red-500': !isSuccess }">
+          {{ mailmessage }}
+        </h4>
+
+        <div class="p-6 flex flex-col">
+          <ng-container *ngIf="!isLoading(); else loadingTemplate">
+
+          <button 
+            *ngIf="!isSuccess" 
+            (click)="resend()" 
+            color="primary" 
+            mat-raised-button>
+            <span class="uppercase">Resend link email verification</span>
+          </button>
+           </ng-container>
+           <ng-template #loadingTemplate>
+            <vex-loading-spinner></vex-loading-spinner>
+          </ng-template>
+          <button 
+            *ngIf="isSuccess" 
+            (click)="refresh()" 
+            color="primary" 
+            mat-raised-button>
+            Come back
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

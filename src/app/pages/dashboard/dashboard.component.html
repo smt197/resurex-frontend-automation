@@ -1,0 +1,21 @@
+<vex-secondary-toolbar [current]="'menu.dashboards' | translate">
+  <vex-breadcrumbs [crumbs]="['menu.dashboards' | translate, 'menu.home' | translate]"
+    class="flex-auto"></vex-breadcrumbs>
+
+  <button class="ml-2" color="primary" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+  </button>
+</vex-secondary-toolbar>
+
+<div class="
+    min-h-screen
+    bg-black/5
+      backdrop-blur-lg 
+    ">
+  <div class="flex flex-col items-center justify-center">
+    @if (isLoading()) {
+    <vex-loading-spinner></vex-loading-spinner>
+    } @else {
+    <vex-menu-user [apps]="filteredApps" (appClick)="appClick($event)"></vex-menu-user>
+    }
+  </div>

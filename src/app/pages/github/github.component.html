@@ -1,0 +1,15 @@
+<vex-generic-resource-list #resourceListComponent [type]="type" [formlyFields]="formlyFields" [dataService]="dataService"
+  [externalFilters]="externalFilters" [disableCreateButton]="isSyncing() || resourceListComponent.isLoading()" (action)="handleAction($event)">
+  <button app-bar-actions *ngIf="!resourceListComponent.isLoading()" mat-raised-button [color]="showOwned() ? 'accent' : 'warn'" (click)="toggleRepositoryView()"
+    [disabled]="isSyncing()" class="filter-button" style="margin-right: 16px;"
+    [matTooltip]="showOwned() ? ('GITHUB.ACTIONS.SHOW_COLLABORATION' | translate) : ('GITHUB.ACTIONS.SHOW_OWNED' | translate)">
+    <mat-icon>{{ showOwned() ? 'person' : 'group' }}</mat-icon>
+    <span>{{ showOwned() ? ('GITHUB.LABELS.MY_REPOS' | translate) : ('GITHUB.LABELS.COLLABORATION_REPOS' | translate) }}</span>
+  </button>
+  <button app-bar-actions *ngIf="!resourceListComponent.isLoading()" mat-raised-button color="primary" (click)="syncFromGithub()" [disabled]="isSyncing()"
+    class="sync-button">
+    <mat-spinner *ngIf="isSyncing()" diameter="20" class="inline-spinner"></mat-spinner>
+    <mat-icon *ngIf="!isSyncing()">sync</mat-icon>
+    <span *ngIf="!isSyncing()">{{ 'GITHUB.ACTIONS.SYNC_FROM_GITHUB' | translate }}</span>
+  </button>
+</vex-generic-resource-list>

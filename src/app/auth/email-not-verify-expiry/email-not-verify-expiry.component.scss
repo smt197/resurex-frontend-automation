@@ -1,0 +1,14 @@
+// Réutilise le même style que email-not-verified
+// Pas besoin de redéfinir les styles car ils sont gérés par auth.component.scss
+
+.w-full {
+  width: 100%;
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+}
+
+button[type="submit"] {
+  margin-top: 8px;
+}

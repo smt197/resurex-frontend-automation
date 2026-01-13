@@ -1,0 +1,18 @@
+<mat-form-field appearance="outline" class="w-full">
+  <button mat-icon-button matPrefix type="button" (click)="props['onAdd']()"
+    [matTooltip]="'global.chats.add_attachment' | translate">
+    <mat-icon>add_circle_outline</mat-icon>
+  </button>
+
+  <textarea matInput [formControl]="formControl" [formlyAttributes]="field" [placeholder]="props['placeholder'] || ''"
+    (keydown.enter)="$event.preventDefault(); props['onSend']()" cdkTextareaAutosize
+    [cdkAutosizeMinRows]="(this.form.get(field.name+'')?.value?.length || 2)"
+    [cdkAutosizeMaxRows]="(this.form.get(field.name+'')?.value?.length || 5)">
+    </textarea>
+
+  <button mat-icon-button matSuffix type="button" [disabled]="props['isSendDisabled']()" (click)="props['onSend']()">
+    <mat-icon *ngIf="!props['isUploading']()">send</mat-icon>
+    <mat-spinner *ngIf="props['isUploading']()" diameter="20" mode="indeterminate">
+    </mat-spinner>
+  </button>
+</mat-form-field>

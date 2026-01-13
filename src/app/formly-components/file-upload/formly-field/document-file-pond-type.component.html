@@ -1,0 +1,24 @@
+<div class="w-full" [style.max-width]="props['maxWidth'] || '100%'">
+  <ng-container *ngFor="let field of fileFields">
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
+      <span class="text-lg">  {{ 'document.filepond.label' | translate }}</span>
+      <div class="mt-4 mb-2">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm font-medium text-gray-700">
+            {{ 'file_upload.size_text' | translate }}
+          </span>
+          <span class="text-sm font-bold text-blue-600">
+            {{ formatFileSize(getTotalFileSize(field.key)) }} / {{ formatFileSize(maxTotalSize) }}
+          </span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+          <div class="bg-blue-600 h-2.5 rounded-full"
+               [style.width]="(getTotalFileSize(field.key) / maxTotalSize * 100) + '%'">
+          </div>
+        </div>
+      </div>
+     <file-pond #pond [options]="getPondOptionsForField(field)" (onaddfile)="onAddFile($event)"
+      (onremovefile)="onRemoveFile($event)"></file-pond>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,732 @@
+{
+  "response": {
+    "en-cours": "Operação em andamento…"
+  },
+  "access_denied": {
+    "title": "Manutenção",
+    "message": "A sua conta foi temporariamente suspensa por um administrador. Não pode aceder à aplicação neste momento.",
+    "contact_admin": "Se achar que se trata de um erro, entre em contacto com um administrador.",
+    "logout": "Desligar",
+    "back_to_login": "Voltar ao início de sessão"
+  },
+  "global": {
+    "save": "Salvar",
+    "plus": "Adicionar",
+    "addText": "Adicionar",
+    "cancel": "Cancelar",
+    "title": "resurex",
+    "language": "Inglês",
+    "code": "en",
+    "fr": "Francês",
+    "en": "Inglês",
+    "pt": "Português",
+    "language_name": "Idioma",
+    "rememberme": " Lembrar de mim",
+    "forgotpassword": " Esqueci a senha",
+    "loading": "Por favor, aguarde...",
+    "dashboard": "Painel de controle",
+    "country": "País",
+    "phone": "Telefone",
+    "button-toggle-box": "Em caixa",
+    "button-toggle-full": "Largura completa",
+    "close": "Fechar",
+    "show_dynamic_submit": "Atualizar",
+    "show_dynamic_descrip": "Gerencie suas informações pessoais, avatar e preferências de conta",
+    "show_dynamic_cancel": "Cancelar",
+    "logout": "Terminar sessão",
+    "languages": "Idioma",
+    "no_data": "Não {{type}} encontrar.",
+    "types": {
+      "users": "Usuãrio",
+      "roles": "Funçõ",
+      "permissions": "Permissõ",
+      "documents": "Documento",
+      "user-jobs": "Tarefa",
+      "tous_les_menus": "Todos os menus",
+      "tous_les_roles": "Todas as funções",
+      "toutes_les_categories": "Todas as categorias",
+      "menus": "Menus",
+      "category": "Categoria",
+      "module-managers": "Module Manager",
+      "tasks": "Task"
+    },
+    "expansion": {
+      "Folded": "Ver mais",
+      "Unfolded": "Reduzir"
+    },
+    "backup": {
+      "title": "Sistema de Backup",
+      "submit": "Iniciar backup",
+      "reset": "Reiniciar",
+      "process_title": "Inicializando o processo de backup...",
+      "show_process": "Backup do banco de dados em andamento..."
+    },
+    "chats": {
+      "title": "Chats",
+      "submit": "Novo Chat",
+      "search": "Procurar chat...",
+      "add_contact": "Adicionar Contato",
+      "all_conversation": "Todas as Conversas",
+      "no_chat_matching": " Nenhuma conversa encontrada",
+      "try_message": "digite sua mensagem...",
+      "loading_conversation": "Carregando conversa...",
+      "not_message": "Nenhuma mensagem ainda.",
+      "start_conversation": "Inicie a conversa!",
+      "add_new_discussion": "iniciar um novo debate",
+      "search_user": "Pesquisar usuários...",
+      "Cancel": "Cancelar",
+      "add_attachment": "Adicionar um anexo",
+      "block_message": "Este usuário está suspenso. Você não pode enviar mensagens para este usuário.",
+      "recently_list": "Contatado recentemente",
+      "no_recent_contacts": "Nenhum contato recente"
+    },
+    "filepond": {
+      "label_idle": "Arrastar e largar ou <span class='filepond--label-action'>Browse</span>"
+    }
+  },
+  "menu": {
+    "home": "Início",
+    "dashboards": "Painel",
+    "users": "Usuários",
+    "settings": "Configurações",
+    "analytics": "Análises",
+    "roles": "Funções",
+    "permissions": "Permissões",
+    "autorisation": "Autorização",
+    "administration": "Administração",
+    "chat": "Chat",
+    "notifications": "Notificações",
+    "logs": "Registro de atividades",
+    "documents": "Documentos",
+    "user-jobs": "Tarefas",
+    "managemenu": "Gestão de Menus",
+    "category": "Categoria",
+    "filter_by_role": "Filtrar por função",
+    "filter_by_category": "Filtrar por categoria",
+    "menus": "Menus",
+    "menu_create": "Novo Menu",
+    "categories": "Categorias",
+    "label": {
+      "name": "Nome do menu",
+      "icon": "Ícone",
+      "color": "Cor",
+      "order": "Ordem",
+      "roles": "Funções",
+      "actions": "Ações",
+      "route": "Rota",
+      "disable": "Desabilitar Menu",
+      "category": "Categoria"
+    },
+    "disabled": "Menu desabilitado",
+    "module-managers": "Module Managers",
+    "tasks": "Tasks"
+  },
+  "labels": {
+    "menu_name": "Nome do menu",
+    "icon": "Ícone",
+    "color": "Cor",
+    "order": "Ordem",
+    "roles": "Funções",
+    "actions": "Ações",
+    "no_data_available": "Nenhum dado disponível"
+  },
+  "login": {
+    "title": "Bem-vindo",
+    "subtile": "Faça login com suas credenciais abaixo.",
+    "submit": "Entrar"
+  },
+  "otp": {
+    "title": "Verificação de OTP",
+    "subtile": "Um código foi enviado por e-mail, por favor verifique sua caixa de entrada.",
+    "time": "Tempo restante",
+    "reessayer": "Tentar novamente em",
+    "message": "Por favor, insira o código OTP de 6 dígitos.",
+    "renvoie": "Reenviar OTP",
+    "submit": "Enviar",
+    "status": {
+      "active": "OTP ativo",
+      "disabled": "OTP inativo"
+    }
+  },
+  "forgot-password": {
+    "title": "Redefinir Senha",
+    "subtile": "Digite seu e-mail para recuperação de senha.",
+    "submit": "Enviar link de recuperação",
+    "success_bloc": {
+      "title": "Verifique seu e-mail para o link de redefinição.",
+      "submit": "Voltar"
+    }
+  },
+  "reset-password": {
+    "title": "Redefinir senha",
+    "subtile": "Modifique sua senha.",
+    "submit": "Atualizar",
+    "resender_bloc": {
+      "title": "Reenviar link de redefinição de senha."
+    }
+  },
+  "form": {
+    "email": {
+      "label": "E-mail",
+      "validation": {
+        "required": "O campo e-mail é obrigatório",
+        "minLength": "O e-mail deve ter pelo menos 8 caracteres",
+        "maxLength": "O e-mail não pode exceder 254 caracteres",
+        "pattern": "Por favor, insira um e-mail válido"
+      }
+    },
+    "password": {
+      "label": "Senha",
+      "validation": {
+        "required": "O campo senha é obrigatório",
+        "minLength": "A senha deve ter pelo menos 8 caracteres",
+        "maxLength": "A senha não pode exceder 8 caracteres",
+        "passwordMismatch": "As senhas não coincidem",
+        "invalidLength": "A senha deve ter exatamente 8 caracteres",
+        "containsLink": "Não pode conter links",
+        "containsEmail": "Contém e-mail",
+        "passwordStrength": "A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial.",
+        "sameAsCurrent": "A nova senha deve ser diferente da senha atual"
+      }
+    },
+    "password_confirmation": {
+      "label": "Confirmação de senha",
+      "validation": {
+        "required": "O campo senha é obrigatório",
+        "minLength": "A senha deve ter pelo menos 8 caracteres",
+        "maxLength": "A senha não pode exceder 8 caracteres",
+        "passwordMismatch": "As senhas não coincidem",
+        "invalidLength": "A senha deve ter exatamente 8 caracteres",
+        "containsLink": "Não pode conter links",
+        "containsEmail": "Contém e-mail",
+        "passwordStrength": "A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial."
+      }
+    },
+    "current_password": {
+      "label": "Senha atual",
+      "validation": {
+        "required": "O campo senha atual é obrigatório",
+        "minLength": "A senha atual deve ter no mínimo 8 caracteres",
+        "maxLength": "A senha atual não pode exceder 8 caracteres",
+        "invalidLength": "A senha atual deve ter exatamente 8 caracteres",
+        "containsLink": "A senha atual não pode conter links",
+        "containsEmail": "A senha atual não pode conter um endereço de e-mail",
+        "passwordStrength": "A senha atual deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial"
+      }
+    },
+    "first_name": {
+      "label": "Nome",
+      "validation": {
+        "required": "O campo nome é obrigatório",
+        "minLength": "O nome deve ter pelo menos 8 caracteres",
+        "maxLength": "O nome não pode exceder 254 caracteres"
+      }
+    },
+    "last_name": {
+      "label": "Sobrenome",
+      "validation": {
+        "required": "O campo sobrenome é obrigatório",
+        "minLength": "O sobrenome deve ter pelo menos 8 caracteres",
+        "maxLength": "O sobrenome não pode exceder 254 caracteres"
+      }
+    },
+    "confirmed": {
+      "label": "Eu concordo com os termos de serviço e tudo mais. * *",
+      "description": "Para continuar, aceite os termos",
+      "validation": {
+        "required": "O campo confirmação é obrigatório",
+        "pattern": "Por favor, aceite os termos"
+      }
+    },
+    "btn_reset": "Repor",
+    "btn_previous": "Anterior",
+    "btn_next": "Seguinte",
+    "btn_continue": "Continuar",
+    "remember_me": {
+      "label": "Lembrar de mim"
+    },
+    "forgotpasswordurl": {
+      "label": "Esqueceu a senha?"
+    },
+    "roles": {
+      "label": "Nome do cargo",
+      "validation": {
+        "required": "O campo cargo é obrigatório"
+      }
+    },
+    "birthday": {
+      "label": "Data de nascimento",
+      "placeholder": "Selecione uma data",
+      "format": "DD-MM-YYYY",
+      "validation": {
+        "minDate": "A data deve ser posterior a 01/01/1900",
+        "maxDate": "A data não pode ser no futuro"
+      }
+    },
+    "permissions": {
+      "label": "Nome da permissão",
+      "validation": {
+        "required": "O campo permissão é obrigatório"
+      }
+    },
+    "site_name": {
+      "label": "Nome do site",
+      "validation": {
+        "required": "O nome do site é obrigatório",
+        "maxlength": "O nome do site não pode exceder 100 caracteres"
+      }
+    },
+    "site_subtitle": {
+      "label": "Subtítulo do Site",
+      "validation": {
+        "required": "O Subtítulo do Site é obrigatório",
+        "maxlength": "O Subtítulo do Site não pode exceder 100 caracteres"
+      }
+    },
+    "site_web": {
+      "label": "URL do site",
+      "placeholder": "exemplo.com",
+      "validation": {
+        "required": "A URL do site é obrigatória",
+        "pattern": "Por favor insira uma URL válida"
+      }
+    },
+    "site_description": {
+      "label": "Descrição do site",
+      "placeholder": "Digite a descrição do site",
+      "validation": {
+        "maxlength": "A descrição não pode exceder 500 caracteres"
+      }
+    },
+    "site_active": {
+      "label": "Status do site"
+    },
+    "site_logo": {
+      "label": "Logo do site"
+    },
+    "photo": {
+      "label": "Foto de perfil"
+    },
+    "validation": {
+      "required": "O campo é obrigatório"
+    },
+    "expiry_link": "Seu link de verificação expirou. Por favor, insira seu e-mail para receber um novo.",
+    "is_blocked": {
+      "label": "bloqueado"
+    },
+    "otp_enabled": {
+      "label": "Status OTP"
+    }
+  },
+  "register": {
+    "title": "Registrar uma conta",
+    "subtile": "Basta preencher o formulário abaixo",
+    "step": {
+      "label_step1": "Criar conta",
+      "label_step2": "Escolher uma senha",
+      "label_step3": "Confirmar criação"
+    },
+    "submit": "Criar Conta"
+  },
+  "auth": {
+    "signup": {
+      "title": "Criar conta",
+      "button": "Registar-se"
+    },
+    "signin": {
+      "title": "Connexão",
+      "button": "Iniciar sessão"
+    }
+  },
+  "home": {
+    "title": "Início",
+    "header": "Bem-vindo",
+    "title_bloc": "Lista de usuários",
+    "subtile_bloc": "Lista de usuários do sistema"
+  },
+  "user": {
+    "title": "Usuários",
+    "select": "Usuário",
+    "selected": "selecionado",
+    "search": "Pesquisar …",
+    "mot_cle": "Motivo",
+    "mot_cle_date_debut": "DATA DE INÍCIO",
+    "mot_cle_date_fin": "DATA DE FIM",
+    "filter": "Filtrar colunas",
+    "filter_date": "Filtrar por data",
+    "add-user": "Adicionar utilizador",
+    "label": {
+      "first_name": "Nome próprio",
+      "last_name": "Apelido",
+      "role": "Cargo",
+      "status": "estatuto",
+      "photo": "FOTO",
+      "email": "E-mail",
+      "actions": "Ações",
+      "roles": "funções",
+      "permissions": "permissões",
+      "phone": "Telefone",
+      "birthday": "Data de nascimento",
+      "is_blocked": "estatuto Bloqueado",
+      "otp_enabled": "estatuto OTP"
+    },
+    "no_user_matching": "Nenhum utilizador encontrado",
+    "show": "Ver",
+    "modify": "Editar",
+    "user_create": "Novo utilizador",
+    "cancel": "Cancelar",
+    "block": "Bloquear",
+    "unblock": "Desbloquear",
+    "block_confirm": "Tem a certeza de que pretende bloquear este utilizador?",
+    "unblock_confirm": "Tem a certeza de que pretende desbloquear este utilizador?",
+    "status": {
+      "online": "em linha",
+      "offline": "fora de linha"
+    }
+  },
+  "role": {
+    "role_create": "Nova Função",
+    "select": "função",
+    "label": {
+      "name": "Nome da Função",
+      "guard_name": "Nome do Guarda"
+    }
+  },
+  "permission": {
+    "permission_create": "Nova Permissão",
+    "select": "permissão",
+    "label": {
+      "name": "Nome da Permissão",
+      "guard_name": "Nome do Guarda"
+    }
+  },
+  "document": {
+    "document_create": "Novo Documento",
+    "select": "documento",
+    "label": {
+      "name": "Nome do Documento",
+      "guard_name": "Nome do Guarda",
+      "description": "Descrição",
+      "files": "Arquivo",
+      "size": "tamanho",
+      "file_count": "Número de arquivos"
+    },
+    "create_update": {
+      "title": "Criar/Atualizar Documento",
+      "submit_button": "Salvar Documento",
+      "create_title": "Gestão de ficheiros",
+      "edit_title": "Gestão de ficheiros"
+    },
+    "edit": {
+      "name": "editar"
+    },
+    "detail": {
+      "title": "Documento detalhado"
+    },
+    "create": {
+      "title": "Novo documento"
+    },
+    "filepond": {
+      "label": "Transferir(pdf, docx, xlsx...)"
+    },
+    "status": {
+      "name": "Início do tratamento...",
+      "en_cours": "em andamento",
+      "tache": "mancha"
+    }
+  },
+  "paginator": {
+    "items_per_page": "Itens por página:",
+    "next_page": "Próxima página",
+    "previous_page": "Página anterior",
+    "first_page": "Primeira página",
+    "last_page": "Última página",
+    "range": "{{start}} - {{end}} de {{length}}"
+  },
+  "file_upload": {
+    "label": {
+      "idle": "Arraste e solte seus {{type}} ou <span class='filepond--label-action'>{{action}}</span>",
+      "action": "procurar"
+    },
+    "validation": {
+      "file_type": "Tipo de arquivo inválido. Apenas arquivos PNG, JPG e JPEG são permitidos.",
+      "duplicate": "O arquivo {{filename}} já foi adicionado.",
+      "size_limit": "Adicionar {{filename}} excederia o limite de {{size}} MB.",
+      "success": "O arquivo {{filename}} foi adicionado com sucesso.",
+      "removed": "O arquivo {{filename}} foi removido."
+    },
+    "file_types": {
+      "photo": "imagens"
+    },
+    "fields": {
+      "photo": "Foto"
+    },
+    "total_size": "Tamanho total",
+    "size_text": "Tamanho total",
+    "size": {
+      "bytes": "{{value}} Bytes",
+      "kb": "{{value}} KB",
+      "mb": "{{value}} MB",
+      "gb": "{{value}} GB",
+      "tb": "{{value}} TB"
+    }
+  },
+  "card": {
+    "language": {
+      "title": "Idioma do sistema",
+      "description": "Selecione o idioma que deseja usar na interface"
+    },
+    "password": {
+      "title": "Segurança da senha",
+      "description": "Aumente a segurança da sua conta atualizando sua senha regularmente"
+    },
+    "backup": {
+      "title": "Backup de dados",
+      "description": "Configure e gerencie backups automáticos para evitar perda de dados",
+      "start": "Iniciar Backup",
+      "reset": "Redefinir Estado do Backup",
+      "status": "Status do Backup",
+      "no_status_backup": "Clique em 'Iniciar Backup' para começar um novo processo.",
+      "backup_process": "Processo de backup iniciado. À espera de conclusão...",
+      "backup_ready": "Pronto para iniciar o backup."
+    },
+    "otp": {
+      "title": "Autenticação em dois fatores (2FA)",
+      "description": "Ative ou desative a verificação em duas etapas para proteger melhor sua conta"
+    },
+    "maintenance": {
+      "title": "Modo de Manutenção",
+      "description": "Ative ou desative o modo de manutenção para bloquear o acesso dos usuários"
+    }
+  },
+  "NOTIFICATION_DETAIL": {
+    "GENERIC_TITLE": "Detalhes da Notificação",
+    "GENERIC_DESCRIPTION": "Informações relacionadas à notificação.",
+    "USER_TITLE": "Detalhes da Notificação do Utilizador",
+    "USER_DESCRIPTION": "Informações sobre a notificação do utilizador.",
+    "SETTINGS_TITLE": "Detalhes da Notificação de Configurações",
+    "SETTINGS_DESCRIPTION": "Informações sobre a notificação de configurações."
+  },
+  "profile": {
+    "my_inbox": "Caixa de receção",
+    "my_inbox_description": "Lista de mensagens",
+    "parameters": "parâmetros",
+    "parameters_description": "Definições da conta",
+    "notifications": "Notificações",
+    "notifications_description": "Lista de notificações"
+  },
+  "table": {
+    "guard_name": "NOME DO GUARDA",
+    "name": "NOME",
+    "actions": "Ações"
+  },
+  "notification_onglet": {
+    "non_lues": "Notificações não lidas",
+    "histories": "Histórico de notificações"
+  },
+  "log": {
+    "title": "Registos de atividade",
+    "description": "DESCRIÇÃO",
+    "event": "EVENT",
+    "causer": "USUARIOS",
+    "created_at": "CRIADO EM"
+  },
+  "notifications": {
+    "title": "notificaçãos",
+    "singular": "Tem uno notificação",
+    "plural": "Tem {{count}} notificaçãos",
+    "new_notification": "Tem {{count}} notificaçãos novas",
+    "no_notifications": "Nenhuma notificação",
+    "see_more": "Ver mais"
+  },
+  "message": {
+    "show": "Nova mensagem de {{name}}"
+  },
+  "dashboard_assistant": {
+    "good_job": "Bom trabalho,",
+    "description": "Completou a sua missão para esta semana.",
+    "tache1": "completar notificações",
+    "tache2": "gerir gráficos",
+    "tache3": "gerir mensagens"
+  },
+  "dashboard_analytic": {
+    "log_activity_label": "Registar atividade (por dia)",
+    "unique_users": "Utilizadores únicos",
+    "online_users": "Utilizadores online",
+    "total_users": "Total de utilizadores (únicos)",
+    "total_roles_permissions": "Total de funções e permissões",
+    "logs_label": "Registos",
+    "log": "logas",
+    "label_role": "Funções",
+    "label_permission": "Permissões"
+  },
+  "common": {
+    "yesterday": "Ontem",
+    "no_data_available": "Nenhum dado disponível."
+  },
+  "menu_action": {
+    "show": "Ver",
+    "edit": "editar",
+    "delete": "apagar",
+    "action": "ação",
+    "block": "bloquear",
+    "unblock": "desbloquear"
+  },
+  "jobMonitor": {
+    "title": "Tarefas em segundo plano",
+    "uploading": "Carregando {{count}} documento(s)",
+    "processing": "Processando...",
+    "multipleUploads": "{{jobCount}} uploads ({{totalFiles}} arquivos)",
+    "completed": "Upload concluído: {{count}} arquivos",
+    "files": "arquivos",
+    "globalProgress": "Progresso Global",
+    "estimatedTime": "Tempo Restante Estimado",
+    "status": {
+      "executing": "Processando",
+      "queued": "Aguardando",
+      "completed": "Concluído",
+      "failed": "Falhou"
+    }
+  },
+  "uploadStatus": {
+    "initializing": "Inicializando...",
+    "waiting": "Aguardando...",
+    "completed": "Concluído",
+    "failed": "Falhou"
+  },
+  "job_status": {
+    "label": {
+      "id": "ID",
+      "job_id": "ID do Trabalho",
+      "type": "Tipo",
+      "queue": "Fila",
+      "status": "Estado",
+      "attempts": "Tentativas",
+      "progress": "Progresso",
+      "file_count": "Número de arquivos",
+      "main_document_id": "ID do documento principal",
+      "input_type": "Tipo de entrada",
+      "created_at": "Criado em",
+      "started_at": "Iniciado em",
+      "finished_at": "Finalizado em",
+      "user_id": "ID do Usuário"
+    },
+    "status": {
+      "queued": "Na fila",
+      "executing": "Em execução",
+      "finished": "Concluído",
+      "failed": "Falhou",
+      "retrying": "Repetindo"
+    }
+  },
+  "categorie": {
+    "label": {
+      "name": "Nome da Categoria",
+      "order": "Ordem de Exibição",
+      "icon": "Ícone",
+      "navigation_type": "Tipo de Navegação",
+      "position_reference": "Referência de Posição",
+      "position_type": "Tipo de Posição"
+    },
+    "position_type": {
+      "before": "Antes",
+      "after": "Depois"
+    },
+    "navigation_type": {
+      "subheading": "Subtítulo",
+      "dropdown": "Menu Suspenso"
+    },
+    "categorie_create": "Nova Categoria"
+  },
+  "admin_maintenance": {
+    "title": "Gestão do Modo de Manutenção",
+    "mode_title": "Modo de Manutenção",
+    "status_active": "Ativo - Os usuários não podem acessar o aplicativo",
+    "status_inactive": "Inativo - O aplicativo está acessível",
+    "message_label": "Mensagem de manutenção",
+    "message_placeholder": "Mensagem a ser exibida aos usuários durante a manutenção",
+    "message_hint": "Esta mensagem será exibida aos usuários ao tentar fazer login",
+    "save_button": "Salvar",
+    "saving_button": "Salvando...",
+    "logout_button": "Desconectar",
+    "info_title": "ℹ️ Informações",
+    "info_admin_access": "Apenas administradores podem acessar o aplicativo no modo de manutenção",
+    "info_users_blocked": "Os usuários com a função \"user\" serão bloqueados após a ativação",
+    "info_pages_blocked": "As páginas de login e registro estarão inacessíveis no modo de manutenção",
+    "en_cours": "Manutenção em andamento…"
+  },
+  "maintenance_dialog": {
+    "activate_title": "Ativar Modo de Manutenção",
+    "activate_message": "Tem certeza de que deseja ativar o modo de manutenção?",
+    "activate_description": "Os usuários não poderão mais acessar o aplicativo. Apenas os administradores terão acesso.",
+    "activate_button": "Ativar",
+    "deactivate_title": "Desativar Modo de Manutenção",
+    "deactivate_message": "Tem certeza de que deseja desativar o modo de manutenção?",
+    "deactivate_description": "Os usuários poderão acessar o aplicativo normalmente novamente.",
+    "deactivate_button": "Desativar"
+  },
+  "module-manager": {
+    "module-manager_create": "Novo Module Manager",
+    "label": {
+      "name": "Name",
+      "displayName": "DisplayName",
+      "displayNameSingular": "DisplayNameSingular",
+      "resourceType": "ResourceType",
+      "enabled": "Enabled",
+      "devMode": "DevMode"
+    },
+    "placeholder": {
+      "name": "Enter name",
+      "displayName": "Enter displayName",
+      "displayNameSingular": "Enter displayNameSingular",
+      "resourceType": "Enter resourceType",
+      "enabled": "Enter enabled",
+      "devMode": "Enter devMode"
+    },
+    "validation": {
+      "name_required": "Name is required",
+      "displayName_required": "DisplayName is required",
+      "displayNameSingular_required": "DisplayNameSingular is required",
+      "resourceType_required": "ResourceType is required"
+    }
+  },
+  "MODULE_MANAGER": {
+    "CREATE_TITLE": "Gerar Novo Módulo",
+    "UPDATE_TITLE": "Atualizar Módulo",
+    "TABS": {
+      "BASIC_INFO": "Informações Básicas",
+      "FIELDS": "Campos",
+      "SUMMARY": "Resumo"
+    },
+    "FIELDS": {
+      "TITLE": "Campos do Módulo",
+      "ADD_FIELD": "Adicionar Campo"
+    },
+    "SUMMARY": {
+      "TITLE": "Resumo da Configuração do Módulo"
+    },
+    "NAVIGATION": {
+      "NEXT": "Próximo",
+      "PREVIOUS": "Anterior"
+    },
+    "ACTIONS": {
+      "CANCEL": "Cancelar",
+      "GENERATE": "Gerar Módulo",
+      "UPDATE": "Atualizar Módulo"
+    }
+  },
+  "task": {
+    "task_create": "Novo Task",
+    "label": {
+      "name": "Name",
+      "profile": "Profile"
+    },
+    "placeholder": {
+      "name": "Enter name",
+      "profile": "Enter profile"
+    },
+    "validation": {
+      "name_required": "Name is required"
+    }
+  }
+}

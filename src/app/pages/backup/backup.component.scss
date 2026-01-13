@@ -1,0 +1,74 @@
+.backup-container {
+    background: rgba(245, 245, 245, 0.8);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    
+    .progress-bar {
+      height: 8px;
+      border-radius: 4px;
+    }
+    
+    .status-message {
+      font-size: 1rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      
+      .message-text {
+        margin-left: 0.5rem;
+      }
+    }
+    
+    .progress-percent {
+      font-size: 0.875rem;
+      color: rgba(0, 0, 0, 0.6);
+      
+      .estimated-time {
+        font-style: italic;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+    
+    .backup-details {
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      padding-top: 1rem;
+      
+      .detail-item {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  
+  .backup-button, .download-button {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
+    
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+  
+  .text-success {
+    color: #4CAF50;
+  }
+  
+  .text-warn {
+    color: #FFC107;
+  }
+  
+  .text-error {
+    color: #F44336;
+  }
+  
+  .text-info {
+    color: #2196F3;
+  }

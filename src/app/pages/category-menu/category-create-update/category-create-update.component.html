@@ -1,0 +1,33 @@
+<div class="flex flex-col h-full">
+  <!-- Header avec titre et boutons -->
+  <div class="flex items-center" mat-dialog-title>
+    <div *ngIf="model.icon && model.icon !== undefined && model.icon.trim() !== ''" class="mr-5">
+      <mat-icon>{{ model.icon }}</mat-icon>
+    </div>
+
+    <h2
+      *ngIf="model.name"
+      class="headline m-0 flex-auto">
+      {{ model.name }}
+    </h2>
+
+    <h2 *ngIf="!model.name" class="headline m-0 flex-auto">
+      {{ isCreateMode() ? 'New Category' : 'Edit Category' }}
+    </h2>
+    
+    <button
+      class="text-secondary"
+      mat-dialog-close
+      mat-icon-button
+      type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="text-border"></mat-divider>
+
+  <!-- Formulaire -->
+  <mat-dialog-content class="w-full">
+    <formly-form [form]="form" [model]="model" [fields]="fields"></formly-form>
+  </mat-dialog-content>
+</div>

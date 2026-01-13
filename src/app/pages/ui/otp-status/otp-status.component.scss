@@ -1,0 +1,45 @@
+.otp-toggle-container {
+  display: flex;
+  justify-content: flex-end; // Aligne tout le conteneur à droite
+  align-items: center;       // Centre verticalement les enfants directs
+  width: 100%;
+  padding: 8px 0; // Un peu de padding vertical
+}
+
+.otp-loading-state,
+.otp-active-state {
+  display: flex;
+  align-items: center;
+  gap: 12px; // Espace entre les éléments
+}
+
+.loading-text {
+  font-size: 1rem; // Taille ajustée
+  color: #555; // Couleur de texte pour le chargement
+}
+
+.status-text {
+  font-size: 1.1rem; // Taille de texte pour le statut
+  font-weight: 500;
+  margin-left: 8px; // Petite marge si le gap n'est pas suffisant avec le toggle
+}
+
+.otp-slide-toggle {
+  // Si vous voulez agrandir le toggle, il est préférable de le faire via des thèmes Angular Material
+  // ou des surcharges CSS plus spécifiques et robustes que `transform: scale()`.
+  // `transform: scale(1.2);` par exemple, mais attention aux impacts sur la mise en page.
+  // Pour une solution plus propre, considérez la personnalisation du thème Material.
+}
+
+// Exemple de comment agrandir le slide-toggle via CSS (peut être fragile avec les mises à jour de Material)
+// ::ng-deep .otp-slide-toggle .mdc-switch__track {
+//   height: 20px !important;
+//   width: 48px !important;
+// }
+// ::ng-deep .otp-slide-toggle .mdc-switch__handle {
+//   height: 28px !important;
+//   width: 28px !important;
+// }
+// ::ng-deep .otp-slide-toggle .mdc-switch__handle-track {
+//    transform: scale(1.4) !important; // C'est un hack, à utiliser avec précaution
+// }

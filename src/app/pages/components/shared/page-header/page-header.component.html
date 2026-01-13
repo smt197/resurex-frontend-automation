@@ -1,0 +1,22 @@
+<vex-page-layout-header>
+  <div class="pb-14 m-6 flex flex-col items-start justify-center pt-12">
+    <div
+      [class.container]="layoutControl?.value === 'boxed'"
+      [class.px-6]="layoutControl?.value === 'fullwidth'"
+      class="w-full flex flex-col sm:flex-row justify-between">
+      <div>
+        <h1 class="title mt-0 mb-1">{{ title }}</h1>
+        <vex-breadcrumbs [crumbs]="breadcrumbs"></vex-breadcrumbs>
+      </div>
+
+      <div class="hidden sm:block" *ngIf="showLayoutToggle">
+        <mat-button-toggle-group
+          [formControl]="layoutControl"
+          class="mt-4 sm:mt-0">
+          <mat-button-toggle value="boxed"><span rxTranslate="global.button-toggle-box">Boxed</span> </mat-button-toggle>
+          <mat-button-toggle value="fullwidth" ><span rxTranslate="global.button-toggle-full">Full-Width</span> </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+  </div>
+</vex-page-layout-header>

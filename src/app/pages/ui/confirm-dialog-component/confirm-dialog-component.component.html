@@ -1,0 +1,48 @@
+<div class="dialog-container bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden max-w-md w-full">
+  <!-- Header with icon and title -->
+  <div class="dialog-header p-6 flex items-center gap-4 border-b border-gray-200 dark:border-gray-700">
+    <!-- Vous pouvez changer l'icône en fonction du type de confirmation -->
+    <div class="icon-wrapper bg-primary-500/10 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 rounded-full p-3 flex items-center justify-center">
+      <!-- Suggestion: utiliser une icône plus générique pour "confirmation" ou spécifique à l'action -->
+      <!-- 'lock_reset' est très spécifique au changement de mot de passe. -->
+      <!-- Pour une confirmation générique, peut-être 'help_outline' ou 'check_circle_outline' si c'est positif -->
+      <mat-icon class="text-2xl">help_outline</mat-icon>
+      <!-- J'ai ajouté data.icon pour pouvoir passer une icône dynamiquement -->
+    </div>
+    <h2 mat-dialog-title class="headline m-0 text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-100">
+      Confirmation
+      <!-- J'ai ajouté data.title pour un titre dynamique -->
+    </h2>
+  </div>
+
+  <!-- Content -->
+  <mat-dialog-content class="dialog-content p-6 text-gray-700 dark:text-gray-300">
+    <p class="text-base md:text-lg leading-relaxed">
+      <!-- Utiliser ngNonBindable si data.message peut contenir du HTML que vous NE VOULEZ PAS interpréter -->
+      <!-- Sinon, si c'est juste du texte, c'est bon. Pour la sécurité, si le message vient d'une source non fiable, nettoyez-le. -->
+      {{ data.message || 'Are you sure you want to proceed with this action?' }}
+    </p>
+    <!-- Si vous avez des détails supplémentaires, vous pouvez les ajouter ici -->
+    <!-- Exemple:
+    <ul *ngIf="data.details" class="list-disc list-inside mt-4 space-y-1 text-sm">
+      <li *ngFor="let detail of data.details">{{ detail }}</li>
+    </ul>
+    -->
+  </mat-dialog-content>
+
+  <!-- Actions -->
+  <mat-dialog-actions align="end" class="dialog-actions p-6 pt-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-700">
+    <button mat-stroked-button
+            class="px-5 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150"
+            (click)="onCancel()">
+    Cancel 
+    </button>
+    <button mat-flat-button
+            color="primary"
+            class="px-6 py-2 rounded-md text-sm font-medium ml-3 transition-transform duration-150 hover:scale-105"
+            (click)="onConfirm()"
+            cdkFocusInitial> <!-- Pour mettre le focus sur ce bouton par défaut -->
+       Confirm
+    </button>
+  </mat-dialog-actions>
+</div>

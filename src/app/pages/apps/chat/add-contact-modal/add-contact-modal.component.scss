@@ -1,0 +1,15 @@
+// add-contact-modal.component.scss
+.vex-add-contact-content {
+  min-height: 200px; // Pour s'assurer qu'il y a de la place pour le spinner
+  max-height: 60vh; // Limiter la hauteur maximale
+  overflow-y: auto;
+}
+
+// S'assurer que le paginator est bien visible et stylisé
+::ng-deep .mat-mdc-dialog-actions mat-paginator {
+  // Si le paginator est trop large, ajustez son conteneur ou ses styles
+  // Par exemple, pour qu'il ne prenne pas toute la largeur s'il y a aussi le bouton cancel
+  // Vous devrez peut-être ajuster les flex-properties du conteneur mat-dialog-actions
+  // ou rendre le paginator plus petit.
+  // Pour le moment, il est mis à w-full, ce qui peut être ok si le bouton cancel est à côté.
+}

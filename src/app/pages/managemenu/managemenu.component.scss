@@ -1,0 +1,17 @@
+.role-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 2px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+}
+
+.role-admin {
+  background-color: #ef4444;
+}
+
+.role-user {
+  background-color: #10b981;
+}

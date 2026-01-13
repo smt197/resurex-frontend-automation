@@ -1,0 +1,62 @@
+<div class="w-full h-full bg-pattern flex flex-col items-center justify-center">
+  <div @fadeInUp class="card overflow-hidden w-full max-w-md">
+    <div class="flex flex-col items-center">
+      <div class="p-6 rounded-full bg-primary-600/10 text-primary-600 mx-auto flex items-center justify-center">
+        <mat-icon class="icon-5xl" [svgIcon]="isSuccess() ? 'mat:check' : 'mat:mail'"></mat-icon>
+      </div>
+
+      <div class="text-center mt-4">
+        <h4 class="title m-0" [ngClass]="{ 'text-red-500': !isSuccess() }" rxTranslate="form.expiry_link">
+          {{ message() }}
+        </h4>
+
+        <div class="p-6 flex flex-col">
+          <ng-container *ngIf="!isLoading(); else loadingTemplate">
+
+            <!-- Email Input Form (only when not success) -->
+            <form *ngIf="!isSuccess()" [formGroup]="emailForm" (ngSubmit)="resendVerification()" class="mb-4">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Email Address</mat-label>
+                <input
+                  matInput
+                  type="email"
+                  formControlName="email"
+                  placeholder="your.email@example.com"
+                  autocomplete="email">
+                <mat-icon matPrefix>mail</mat-icon>
+                <mat-error *ngIf="emailControl.hasError('required')">
+                  Email is required
+                </mat-error>
+                <mat-error *ngIf="emailControl.hasError('email')">
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+
+              <button
+                type="submit"
+                [disabled]="emailForm.invalid"
+                color="primary"
+                mat-raised-button
+                class="w-full">
+                <span class="uppercase">Resend link email verification</span>
+              </button>
+            </form>
+
+          </ng-container>
+
+          <ng-template #loadingTemplate>
+            <vex-loading-spinner></vex-loading-spinner>
+          </ng-template>
+
+          <button
+            *ngIf="isSuccess()"
+            (click)="goToLogin()"
+            color="primary"
+            mat-raised-button>
+            Come back
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

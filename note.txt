@@ -1,0 +1,490 @@
+Cache::has('user_menus_52');
+Cache::get('user_menus_52');
+
+
+import { Component, OnInit, OnDestroy, signal } from '@angular/core';
+import { UntypedFormControl } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { VexBreadcrumbsComponent } from '@vex/components/vex-breadcrumbs/vex-breadcrumbs.component';
+import { VexSecondaryToolbarComponent } from '@vex/components/vex-secondary-toolbar/vex-secondary-toolbar.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { User } from 'src/app/interfaces/User';
+import { AuthService } from 'src/app/services/auth-service';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { fadeInUp400ms } from '@vex/animations/fade-in-up.animation';
+import { Menu } from 'src/app/interfaces/Menu';
+import { GenericApiService } from 'src/app/services/generic-api.service';
+import { MenuUserComponent } from '../menu-user/menu-user.component';
+import { LoadingSpinnerComponent } from 'src/app/auth/components/loading-spinner/loading-spinner.component';
+import { environment } from 'src/environments/environment';
+import { finalize, forkJoin, map, switchMap, tap, throwError } from 'rxjs';
+
+@Component({
+  selector: 'vex-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.scss',
+  standalone: true,
+  animations: [fadeInUp400ms],
+  imports: [
+    VexSecondaryToolbarComponent,
+    VexBreadcrumbsComponent,
+    MatButtonModule,
+    MatIconModule,
+    NgxPermissionsModule,
+    SharedModule,
+    TranslateModule,
+    MenuUserComponent,
+    LoadingSpinnerComponent
+  ]
+})
+export class DashboardComponent implements OnInit {
+  layoutCtrl = new UntypedFormControl('fullwidth');
+
+  user: User | null = null;
+  permissionsUser: string[] = [];
+  rolesUser: string[] = [];
+
+  public filteredApps: Menu[] = []; // Menus filtrés
+  isLoading = signal<boolean>(false);
+  // L'état (state) est aussi une propriété de la classe
+  public openApps: string[] = ['finder', 'safari'];
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private genericApi: GenericApiService
+  ) {}
+  ngOnInit(): void {
+    this.getUserInfo();
+    this.loadMenusByRole();
+  }
+
+  getUserInfo() {
+    this.user = this.authService.user;
+    this.permissionsUser = this.authService.getAllPermission();
+    this.rolesUser = this.authService.getRolesNames();
+  }
+
+  users() {
+    this.router.navigate(['/index/user']);
+  }
+
+  loadMenusByRole(): void {
+    this.isLoading.set(true);
+
+    this.genericApi
+      .getAll<Menu>('menus', environment.current_page, environment.pageSize)
+      .pipe(
+        switchMap((response) => {
+          // Vérification plus stricte avec gestion des types nullable
+          if (!response || !response.pagination) {
+            return throwError(
+              () =>
+                new Error('Réponse invalide: données ou pagination manquantes')
+            );
+          }
+
+          const pagination = response.pagination;
+          const totalPages = Math.ceil(pagination.total / pagination.per_page);
+
+          const pageRequests = Array.from({ length: totalPages }, (_, i) =>
+            this.genericApi.getAll<Menu>('menus', i + 1, pagination.per_page)
+          );
+
+          return forkJoin(pageRequests);
+        }),
+        map((responses) =>
+          responses
+            .filter(
+              (response): response is NonNullable<typeof response> =>
+                response != null &&
+                response.data != null &&
+                Array.isArray(response.data)
+            )
+            .flatMap((response) => response.data as Menu[])
+        ),
+        tap((allMenus) => this.filterAppsByRole(allMenus)),
+        finalize(() => this.isLoading.set(false))
+      )
+      .subscribe({
+        error: (error) =>
+          console.error('Erreur lors du chargement des menus:', error)
+      });
+  }
+  // Filtre les menus par rôle utilisateur
+  filterAppsByRole(menus: Menu[]): void {
+    const processedMenus = menus.map((menu) => ({
+      ...menu,
+      icon: menu.icon.startsWith('mat:') ? menu.icon : 'mat:' + menu.icon
+    }));
+    if (!this.rolesUser || this.rolesUser.length === 0) {
+      this.filteredApps = [];
+      return;
+    }
+
+    this.filteredApps = processedMenus.filter((menu) =>
+      menu.roles.some((role: string) => this.rolesUser.includes(role))
+    );
+  }
+
+  appClick(menu: Menu): void {
+    this.router.navigate([menu.route], { queryParams: menu.queryParams });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { Injectable } from '@angular/core';
+import {
+  NavigationDropdown,
+  NavigationItem,
+  NavigationLink,
+  NavigationSubheading
+} from './navigation-item.interface';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { Menu } from 'src/app/interfaces/Menu';
+import { GenericApiService } from 'src/app/services/generic-api.service';
+import { environment } from 'src/environments/environment';
+import { forkJoin } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NavigationLoaderService {
+  private readonly _items: BehaviorSubject<NavigationItem[]> =
+    new BehaviorSubject<NavigationItem[]>([]);
+
+  private authorizationDropdown: NavigationDropdown | null = null;
+
+  get items$(): Observable<NavigationItem[]> {
+    return this._items.asObservable();
+  }
+
+  constructor(
+    private translate: TranslateService,
+    private genericApi: GenericApiService
+  ) {}
+
+  loadNavigation(
+    rolesNames: string[],
+    unreadCount$?: Observable<number>,
+    chatUnreadCount$?: Observable<number>
+  ): void {
+    // Utiliser des observables par défaut pour éviter les erreurs
+    const defaultUnreadCount$ = unreadCount$ || of(0);
+    const defaultChatUnreadCount$ = chatUnreadCount$ || of(0);
+
+    // Charger les menus depuis l'API
+    this.loadMenusFromApi(
+      rolesNames,
+      defaultUnreadCount$,
+      defaultChatUnreadCount$
+    );
+  }
+
+  private loadMenusFromApi(
+    rolesNames: string[],
+    unreadCount$?: Observable<number>,
+    chatUnreadCount$?: Observable<number>
+  ): void {
+    // Première requête pour obtenir le nombre total de pages
+    this.genericApi
+      .getAll<Menu>('menus', environment.current_page, environment.pageSize)
+      .subscribe({
+      next: (response) => {
+          if (response && response.pagination) {
+            // Calculer le nombre de pages en fonction du total et per_page
+            const totalPages = Math.ceil(
+              response.pagination.total / response.pagination.per_page
+            );
+
+            // Créer des observables pour toutes les pages
+            const pageRequests = [];
+            for (let page = 1; page <= totalPages; page++) {
+              pageRequests.push(
+                this.genericApi.getAll<Menu>(
+                  'menus',
+                  page,
+                  response.pagination.per_page
+                )
+              );
+            }
+
+            // Exécuter toutes les requêtes en parallèle
+            forkJoin(pageRequests).subscribe({
+              next: (responses) => {
+                const allMenus: Menu[] = [];
+                responses.forEach((pageResponse) => {
+                  if (
+                    pageResponse &&
+                    pageResponse.data &&
+                    Array.isArray(pageResponse.data)
+                  ) {
+                    allMenus.push(...(pageResponse.data as Menu[]));
+          }
+                });
+
+          // Filtrer les menus par rôle
+                const filteredMenus = this.filterMenusByRole(
+                  allMenus,
+                  rolesNames
+                );
+
+          // Convertir les menus en format de navigation
+          const navigationItems = this.convertMenusToNavigation(
+            filteredMenus,
+            unreadCount$,
+            chatUnreadCount$
+          );
+
+          this._items.next(navigationItems);
+              },
+              error: (error) => {
+                console.error('Erreur lors du chargement des pages:', error);
+              }
+            });
+        }
+      },
+      error: (error) => {
+          console.error('Erreur lors de la première requête:', error);
+      }
+    });
+  }
+
+  private filterMenusByRole(menus: Menu[], rolesNames: string[]): Menu[] {
+    if (!rolesNames || rolesNames.length === 0) {
+      return [];
+    }
+
+    return menus.filter((menu) =>
+      menu.roles.some((role: string) => rolesNames.includes(role))
+    );
+  }
+
+  private convertMenusToNavigation(
+    menus: Menu[],
+    unreadCount$?: Observable<number>,
+    chatUnreadCount$?: Observable<number>
+  ): NavigationItem[] {
+    // Grouper les menus par catégorie
+    const categories = this.groupMenusByCategory(menus);
+
+    const navigationItems: NavigationItem[] = [];
+
+    // Ajouter les menus par catégorie
+    for (const category of categories) {
+      // Si c'est la catégorie autorisation, créer un dropdown dans Administration
+      if (category.name === 'menu.autorisation') {
+        const dropdownItem: NavigationDropdown = {
+          type: 'dropdown',
+          label: category.name,
+          icon: 'mat:security',
+          children: []
+        };
+
+        for (const menu of category.menus) {
+          const translationKey = `menu.${menu.slug || menu.name.toLowerCase()}`;
+          const translatedLabel = this.translate.instant(translationKey);
+          const finalLabel =
+            translatedLabel !== translationKey ? translatedLabel : menu.name;
+
+          const menuItem: NavigationLink = {
+            type: 'link',
+            label: finalLabel,
+            route: menu.route,
+            icon: menu.icon.startsWith('mat:') ? menu.icon : 'mat:' + menu.icon,
+            routerLinkActiveOptions: { exact: false }
+          };
+
+          dropdownItem.children.push(menuItem);
+        }
+
+        // Ajouter le dropdown à la section Administration (sera créé plus tard)
+        // On garde une référence pour l'ajouter après
+        this.authorizationDropdown = dropdownItem;
+      } else {
+        // Pour Dashboard et Administration, créer des subheadings normaux
+        const categoryItem: NavigationSubheading = {
+          type: 'subheading',
+          label: category.name,
+          children: []
+        };
+
+        for (const menu of category.menus) {
+          const translationKey = `menu.${menu.slug || menu.name.toLowerCase()}`;
+          const translatedLabel = this.translate.instant(translationKey);
+          const finalLabel =
+            translatedLabel !== translationKey ? translatedLabel : menu.name;
+
+          let menuItem: NavigationLink = {
+            type: 'link',
+            label: finalLabel,
+            route: menu.route,
+            icon: menu.icon.startsWith('mat:') ? menu.icon : 'mat:' + menu.icon,
+            routerLinkActiveOptions: {
+              exact: menu.route === '/index' ? true : false
+            }
+          };
+
+          // Ajouter les badges pour les notifications et chat
+          if (
+            menu.route === '/index/notifications/all' ||
+            menu.route.includes('/notifications')
+          ) {
+            menuItem = {
+              ...menuItem,
+              badge: {
+                value: unreadCount$ || of(0),
+                bgClass: 'bg-red-500',
+                textClass: 'text-white'
+              }
+            };
+          }
+
+          if (menu.route === '/index/chat' || menu.route.includes('/chat')) {
+            menuItem = {
+              ...menuItem,
+              badge: {
+                value: chatUnreadCount$ || of(0),
+                bgClass: 'bg-green-500',
+                textClass: 'text-white'
+              }
+            };
+          }
+
+          categoryItem.children.push(menuItem);
+        }
+
+        // Si c'est la section Administration et qu'on a un dropdown d'autorisation, l'ajouter
+        if (
+          category.name === 'menu.administration' &&
+          this.authorizationDropdown
+        ) {
+          categoryItem.children.push(this.authorizationDropdown);
+          this.authorizationDropdown = null; // Reset pour éviter la duplication
+        }
+
+        navigationItems.push(categoryItem);
+      }
+    }
+
+    // Appliquer les traductions
+    return this.translateNavigationItems(navigationItems);
+  }
+
+  private translateNavigationItems(items: NavigationItem[]): NavigationItem[] {
+    return items.map((item) => {
+      const translatedLabel = item.label.startsWith('menu.')
+        ? this.translate.instant(item.label)
+        : item.label;
+
+      switch (item.type) {
+        case 'link':
+          const linkItem = item as NavigationLink;
+          return {
+            type: 'link',
+            label: translatedLabel,
+            route: linkItem.route,
+            icon: linkItem.icon,
+            routerLinkActiveOptions: linkItem.routerLinkActiveOptions,
+            badge: linkItem.badge
+          } as NavigationLink;
+
+        case 'dropdown':
+          const dropdownItem = item as NavigationDropdown;
+          return {
+            type: 'dropdown',
+            label: translatedLabel,
+            icon: dropdownItem.icon,
+            route: dropdownItem.route,
+            children: this.translateNavigationItems(dropdownItem.children),
+            badge: dropdownItem.badge
+          } as NavigationDropdown;
+
+        case 'subheading':
+          const subheadingItem = item as NavigationSubheading;
+          return {
+            type: 'subheading',
+            label: translatedLabel,
+            route: subheadingItem.route,
+            children: this.translateNavigationItems(subheadingItem.children)
+          } as NavigationSubheading;
+
+        default:
+          return item;
+      }
+    });
+  }
+
+  private groupMenusByCategory(
+    menus: Menu[]
+  ): { name: string; menus: Menu[] }[] {
+    // Créer des groupes spécifiques basés sur les routes
+    const dashboardMenus: Menu[] = [];
+    const authorizationMenus: Menu[] = [];
+    const administrationMenus: Menu[] = [];
+
+    for (const menu of menus) {
+      // Menus Dashboard: home, chat, notifications, documents
+      if (
+        menu.route === '/index' ||
+        menu.route === '/index/chat' ||
+        menu.route.includes('/chat') ||
+        menu.route.includes('/notifications') ||
+        menu.route === '/index/document' ||
+        menu.route.includes('/document') ||
+        menu.route.includes('/settings')
+      ) {
+        dashboardMenus.push(menu);
+      }
+      // Menus Autorisation: roles et permissions
+      else if (
+        menu.route === '/index/role' ||
+        menu.route === '/index/permission'
+      ) {
+        authorizationMenus.push(menu);
+      }
+      // Tous les autres menus vont dans Administration
+      else {
+        administrationMenus.push(menu);
+      }
+    }
+
+    const categories: { name: string; menus: Menu[] }[] = [];
+
+    // Ajouter la catégorie Dashboard
+    if (dashboardMenus.length > 0) {
+      categories.push({ name: 'menu.dashboards', menus: dashboardMenus });
+    }
+
+    // Ajouter la catégorie Autorisation si on a des menus roles/permissions
+    if (authorizationMenus.length > 0) {
+      categories.push({ name: 'menu.autorisation', menus: authorizationMenus });
+    }
+
+    // Ajouter les autres menus dans la catégorie Administration
+    if (administrationMenus.length > 0) {
+      categories.push({
+        name: 'menu.administration',
+        menus: administrationMenus
+      });
+    }
+
+    return categories;
+  }
+}

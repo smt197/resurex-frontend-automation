@@ -1,0 +1,38 @@
+<div class="container p-6">
+  <div class="flex items-start justify-between" mat-dialog-title>
+    <div class="flex items-start justify-start gap-2">
+      <mat-icon color="warn" svgIcon="mat:delete"></mat-icon>
+      <h2 class="headline m-0 flex-auto">Delete Object</h2>
+    </div>
+  </div>
+
+  <mat-divider class="text-border"></mat-divider>
+
+  <mat-dialog-content class="flex flex-col items-start justify-start space-y-2">
+    <!-- Affichage des informations de l'utilisateur -->
+    <ng-container *ngIf="isSinglePermission(); else userList">
+      <p class="text-lg text-red-500 font-medium">
+        Are you sure you want to delete?
+      </p>
+      <p class="text-lg font-semibold">
+        PERMISSIONS: {{ getSinglePermissionName() }}
+      </p>
+    </ng-container>
+    <!-- Affichage pour un tableau d'utilisateurs -->
+    <ng-template #userList>
+      <p class="text-lg text-red-500 font-medium">
+        Are you sure you want to delete all permissions?
+      </p>
+      <p class="text-lg font-semibold">
+        NUMBERS: {{ getSinglePermissionName() }}
+      </p>
+    </ng-template>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Cancel</button>
+    <button color="primary" mat-flat-button type="submit" (click)="send()">
+      Delete
+    </button>
+  </mat-dialog-actions>
+</div>

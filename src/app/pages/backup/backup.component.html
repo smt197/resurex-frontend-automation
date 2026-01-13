@@ -1,0 +1,49 @@
+<div class="w-full max-w-lg mx-auto p-4 md:p-6">
+
+  <!-- Section du bouton d'action -->
+  <div class="flex justify-center mb-6">
+    <button mat-raised-button
+            color="primary"
+            (click)="canReset ? resetUiAndCheckServer() : startBackup()"
+            [disabled]="!canStartBackup && !canReset"
+            class="backup-button px-6 py-3 text-base rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center">
+            <!-- Ajout de 'flex items-center' ici -->
+
+      <!-- Conteneur pour l'icône ou le spinner avec une largeur/hauteur fixe -->
+      <span class="inline-flex items-center justify-center w-6 h-6 mr-3"> <!-- Ajustez w-6/h-6 et mr-3 si besoin -->
+        <mat-spinner *ngIf="isLoading" diameter="20" class="block"></mat-spinner>
+        <mat-icon *ngIf="!isLoading" svgIcon="mat:{{ canReset ? 'refresh' : 'backup' }}" class="block"></mat-icon>
+      </span>
+
+      <span class="font-medium">{{ (canReset ? 'card.backup.reset' : 'card.backup.start') | translate }}</span>
+    </button>
+  </div>
+
+  <!-- Conteneur pour le statut du backup (pas de changement ici par rapport à votre version précédente "plus jolie") -->
+  <div class="backup-container bg-white dark:bg-gray-800 shadow-xl rounded-lg p-6 transition-all duration-500 ease-out"
+       *ngIf="uiState.message || isLoading" @fadeInUp400ms>
+    <div class="backup-status">
+      <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-4 text-center" *ngIf="isLoading || uiState.status !== 'idle'"
+      rxTranslate="card.backup.status">
+        Backup Status
+      </h3>
+      <div class="status-message flex items-center justify-center py-3 px-4 rounded-md text-sm"
+           [ngClass]="{
+             'bg-green-50 dark:bg-green-700 text-green-700 dark:text-green-100 border border-green-300 dark:border-green-600': uiState.status === 'completed',
+             'bg-blue-50 dark:bg-blue-700 text-blue-700 dark:text-blue-100 border border-blue-300 dark:border-blue-600': uiState.status === 'dispatched' || uiState.status === 'running_from_server',
+             'bg-red-50 dark:bg-red-700 text-red-700 dark:text-red-100 border border-red-300 dark:border-red-600': uiState.status === 'error' || uiState.status === 'failed',
+             'bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600': uiState.status === 'idle' && uiState.message
+           }">
+        <mat-icon class="mr-3 text-xl" *ngIf="uiState.status === 'completed'" svgIcon="mat:check_circle"></mat-icon>
+        <mat-icon class="mr-3 text-xl" *ngIf="uiState.status === 'dispatched' || uiState.status === 'running_from_server'" svgIcon="mat:hourglass_empty"></mat-icon>
+        <mat-icon class="mr-3 text-xl" *ngIf="uiState.status === 'error' || uiState.status === 'failed'" svgIcon="mat:error"></mat-icon>
+        <mat-icon class="mr-3 text-xl" *ngIf="uiState.status === 'idle' && uiState.message" svgIcon="mat:info"></mat-icon>
+        <span class="message-text font-medium">{{ uiState.message }}</span>
+      </div>
+     
+    </div>
+  </div>
+  <div *ngIf="!uiState.message && !isLoading" class="text-center text-gray-500 dark:text-gray-400 py-8"  rxTranslate="card.backup.no_status_backup">
+    Click "Launch Backup" to start a new backup process.
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<vex-secondary-toolbar [current]="'menu.dashboards' | translate">
+  <vex-breadcrumbs [crumbs]="['menu.dashboards' | translate, 'menu.settings' | translate]"
+    class="flex-auto"></vex-breadcrumbs>
+
+  <button class="ml-2" color="primary" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:more_vert"></mat-icon>
+  </button>
+</vex-secondary-toolbar>
+<vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
+  [class.px-6]="layoutCtrl.value === 'fullwidth'" class="mt-6">
+
+  <div class="w-full">
+    <!-- L'accordéon englobe TOUTES les cartes pour un comportement unifié -->
+    <mat-accordion class="w-full">
+
+      <!-- Carte de type 1 : show-dynamic-card -->
+      <vex-show-dynamic-card *ngIf="InformationCard.length > 0" [data]="InformationCard" [showEditButton]="true"
+        (editToggle)="onEditToggle($event)" (submitData)="onSubmitData($event)">
+      </vex-show-dynamic-card>
+
+      <!-- Carte de type 2 : card-with-icon-action (filtrées selon le rôle) -->
+      <vex-card-with-icon-action *ngFor="let card of filteredCards" [icon]="card.icon" [title]="card.title"
+        [description]="card.description" [component]="card.component">
+      </vex-card-with-icon-action>
+
+    </mat-accordion>
+  </div>
+
+</vex-page-layout-content>
