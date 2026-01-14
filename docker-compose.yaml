@@ -18,6 +18,4 @@ services:
 networks:
   default:
       driver: bridge
-#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
-
   
