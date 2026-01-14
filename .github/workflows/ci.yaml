@@ -83,4 +83,3 @@ jobs:
             echo "Note: This will not fail the deployment as the image was successfully pushed"
           fi
         timeout-minutes: 2
-
