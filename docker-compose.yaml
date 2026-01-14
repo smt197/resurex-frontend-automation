@@ -1,0 +1,23 @@
+services:
+  front:
+    image: ghcr.io/smt197/resurex-frontend-automation:latest
+    pull_policy: always
+    restart: unless-stopped
+    expose:
+      - "80"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    networks:
+      - default
+
+# Section networks inchangée
+networks:
+  default:
+      driver: bridge
+#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
+
+  
