@@ -8,6 +8,7 @@ import {
 import {
   BehaviorSubject,
   catchError,
+  filter,
   map,
   Observable,
   of,
@@ -20,6 +21,19 @@ import { BackupCompletionNotification } from './BackupService';
 import { JobStatus } from '../interfaces/JobStatus';
 import { User } from '../interfaces/User';
 import { Menu } from '../interfaces/Menu';
+
+export interface DeploymentStatus {
+  deployment_id: string;
+  module_slug: string;
+  branch_name: string;
+  status: 'pending' | 'building' | 'deploying' | 'success' | 'failed';
+  message?: string;
+  progress?: number;
+  started_at?: string;
+  finished_at?: string;
+  logs?: string[];
+}
+
 interface PresenceUser extends User {
   first_name: string;
 }
@@ -52,6 +66,9 @@ export class WebsocketService {
 
   private readonly _blockStatusUpdate = new Subject<{ is_blocked: boolean }>();
   readonly blockStatusUpdate$ = this._blockStatusUpdate.asObservable();
+
+  private readonly _deploymentStatus = new Subject<DeploymentStatus>();
+  readonly deploymentStatus$ = this._deploymentStatus.asObservable();
 
   private readonly STORAGE_KEY = 'resurex_active_jobs';
   private readonly JOB_TIMESTAMP_KEY = 'resurex_jobs_timestamp';
@@ -472,5 +489,38 @@ export class WebsocketService {
 
   public listenForMenuUpdates(): Observable<{ menus: Menu[]; action: string }> {
     return this.menuUpdated$;
+  }
+
+  /**
+   * Listen for deployment status updates
+   * Called when Dokploy sends deployment progress/completion callbacks
+   */
+  public initDeploymentListener(userId: number): void {
+    const channelName = `App.Models.User.${userId}`;
+    const eventName = 'deployment.status-updated';
+
+    this.echo
+      .private(channelName)
+      .listen(`.${eventName}`, (event: DeploymentStatus) => {
+        this.zone.run(() => {
+          this._deploymentStatus.next(event);
+        });
+      });
+  }
+
+  /**
+   * Listen for deployment status on a global channel (for all users)
+   */
+  public listenForDeploymentUpdates(): Observable<DeploymentStatus> {
+    return this.deploymentStatus$;
+  }
+
+  /**
+   * Subscribe to deployment updates for a specific module
+   */
+  public listenForModuleDeployment(moduleSlug: string): Observable<DeploymentStatus> {
+    return this.deploymentStatus$.pipe(
+      filter((status) => status.module_slug === moduleSlug)
+    );
   }
 }

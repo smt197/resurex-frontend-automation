@@ -94,6 +94,17 @@ export interface UpdateModuleRequest extends Partial<GenerateModuleRequest> {
   moduleName: string;
 }
 
+export interface GenerateModuleResponse {
+  success: boolean;
+  message: string;
+  data?: {
+    module_slug: string;
+    branch_name?: string;
+    deployment_triggered?: boolean;
+    deployment_id?: string;
+  };
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -166,8 +177,8 @@ export class ModuleGeneratorService {
    * Créer un nouveau module
    * Note: La route /generate est une route custom qui attend les données en camelCase
    */
-  generateModule(request: GenerateModuleRequest): Observable<{ success: boolean; message: string }> {
-    return this.http.post<{ success: boolean; message: string }>(`${this.apiUrl}/generate`, request);
+  generateModule(request: GenerateModuleRequest): Observable<GenerateModuleResponse> {
+    return this.http.post<GenerateModuleResponse>(`${this.apiUrl}/generate`, request);
   }
 
   /**
