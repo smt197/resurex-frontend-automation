@@ -9,5 +9,5 @@ export const githubRepositoriesResolver: ResolveFn<any> = (
 ): Observable<any> => {
   const githubService = inject(GithubService);
   // Charger uniquement les repos en collaboration (is_owner: false)
-  return githubService.getCollaborationRepositories(100);
+  return githubService.getAllRepositories(100);
 };
