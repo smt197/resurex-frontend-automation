@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -21,7 +21,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
 import {
   moduleManagersFormlyFields,
   ModuleField,
@@ -29,11 +31,14 @@ import {
 } from 'src/app/interfaces/Module-managers';
 import {
   ModuleGeneratorService,
-  GenerateModuleRequest
+  GenerateModuleRequest,
+  GenerateModuleResponse
 } from '../../services/module-generator.service';
 import { LoadingSpinnerComponent } from 'src/app/auth/components/loading-spinner/loading-spinner.component';
 import { GithubService } from '../../../github/github.service';
 import { GithubRepository, GithubBranch } from 'src/app/interfaces/GithubRepository';
+import { DeploymentService } from 'src/app/services/deployment.service';
+import { DeploymentStatusComponent, DeploymentDialogData } from '../../dialogs/deployment-status/deployment-status.component';
 
 @Component({
   selector: 'vex-module-manager-create-update-page',
@@ -51,6 +56,7 @@ import { GithubRepository, GithubBranch } from 'src/app/interfaces/GithubReposit
     MatTooltipModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     ReactiveFormsModule,
     FormlyModule,
     FormlyMaterialModule,
@@ -60,7 +66,8 @@ import { GithubRepository, GithubBranch } from 'src/app/interfaces/GithubReposit
   templateUrl: './module-manager-create-update-page.component.html',
   styleUrls: ['./module-manager-create-update-page.component.scss']
 })
-export class ModuleManagerCreateUpdatePageComponent implements OnInit {
+export class ModuleManagerCreateUpdatePageComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   @ViewChild(MatTabGroup) tabGroup!: MatTabGroup;
 
   form = new FormGroup({});
@@ -102,8 +109,15 @@ export class ModuleManagerCreateUpdatePageComponent implements OnInit {
     private router: Router,
     private moduleService: ModuleGeneratorService,
     private githubService: GithubService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private deploymentService: DeploymentService
   ) {}
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   ngOnInit(): void {
     // Clone fields to avoid mutation
@@ -343,7 +357,17 @@ Co-Authored-By: Resurex Module Generator <noreply@resurex.com>`;
           { duration: 3000 }
         );
         this.saving = false;
-        this.router.navigate(['/index/module-managers']);
+
+        // If deployment was triggered, show the deployment status dialog
+        if (response.data?.deployment_triggered && this.gitModel.createBranch) {
+          this.openDeploymentDialog(
+            response.data.module_slug || moduleData.moduleName,
+            moduleData.displayName,
+            this.gitModel.branchName
+          );
+        } else {
+          this.router.navigate(['/index/module-managers']);
+        }
       },
       error: (error) => {
         console.error('Error generating module:', error);
@@ -354,6 +378,51 @@ Co-Authored-By: Resurex Module Generator <noreply@resurex.com>`;
         );
         this.saving = false;
       }
+    });
+  }
+
+  private openDeploymentDialog(moduleSlug: string, moduleName: string, branchName: string): void {
+    const dialogData: DeploymentDialogData = {
+      moduleSlug,
+      moduleName,
+      branchName
+    };
+
+    const dialogRef = this.dialog.open(DeploymentStatusComponent, {
+      width: '500px',
+      disableClose: true,
+      data: dialogData
+    });
+
+    // Subscribe to deployment completion
+    this.deploymentService.deploymentCompleted$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((status) => {
+        if (status.module_slug === moduleSlug) {
+          if (status.status === 'success') {
+            this.snackBar.open('Deployment completed successfully!', 'Close', {
+              duration: 5000,
+              panelClass: 'success-snackbar'
+            });
+          } else if (status.status === 'failed') {
+            this.snackBar.open(
+              `Deployment failed: ${status.message || 'Unknown error'}`,
+              'Close',
+              { duration: 8000, panelClass: 'error-snackbar' }
+            );
+          }
+        }
+      });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.continueInBackground) {
+        this.snackBar.open(
+          'Deployment continues in background. You will be notified when complete.',
+          'Close',
+          { duration: 5000 }
+        );
+      }
+      this.router.navigate(['/index/module-managers']);
     });
   }
 
