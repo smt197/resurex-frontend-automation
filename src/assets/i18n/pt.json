@@ -53,7 +53,8 @@
       "menus": "Menus",
       "category": "Categoria",
       "module-managers": "Module Manager",
-      "github-repositories": "Repositórios GitHub"
+      "github-repositories": "Repositórios GitHub",
+      "orders": "Order"
     },
     "expansion": {
       "Folded": "Ver mais",
@@ -161,7 +162,8 @@
       "roles_required": "Pelo menos uma função deve ser selecionada"
     },
     "disabled": "Menu desabilitado",
-    "module-managers": "gestores de módulos"
+    "module-managers": "gestores de módulos",
+    "orders": "Orders"
   },
   "labels": {
     "menu_name": "Nome do menu",
@@ -960,6 +962,23 @@
       "load_error": "Erro ao carregar configurações",
       "test_success": "Conexão com GitHub bem-sucedida",
       "test_error": "Falha na conexão com GitHub"
+    }
+  },
+  "order": {
+    "order_create": "Novo Order",
+    "detail": {
+      "title": "Detalhes do Order"
+    },
+    "label": {
+      "name": "Name",
+      "description": "Description"
+    },
+    "placeholder": {
+      "name": "Enter name",
+      "description": "Enter description"
+    },
+    "validation": {
+      "name_required": "Name is required"
     }
   }
 }
