@@ -1,3 +1,4 @@
+import { DIGITES_CONFIG } from './pages/digites/digites.config';
 import { MODULE_MANAGERS_CONFIG } from './pages/module-managers/module-managers.config';
 import { moduleEnabledGuard } from 'src/app/guards/module-enabled.guard';
 import { authGuard } from './guards/auth.guard';
@@ -231,6 +232,13 @@ export const appRoutes: VexRoutes = [
           import(
             './pages/module-managers/pages/module-managers/module-manager-create-update-page.component'
           ).then((m) => m.ModuleManagerCreateUpdatePageComponent)
+      },
+      {
+        path: 'digites',
+        canActivate: [moduleEnabledGuard],
+        data: { moduleConfig: DIGITES_CONFIG },
+        loadChildren: () =>
+          import('./pages/digites/digites.routes').then((m) => m.digitesRoutes)
       },
       {
         path: 'not-found',
