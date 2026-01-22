@@ -1,0 +1,29 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <mat-icon class="warning-icon">warning</mat-icon>
+    <h2 mat-dialog-title>
+      Confirm Deletion
+    </h2>
+  </div>
+
+  <mat-dialog-content>
+    <p *ngIf="!isMultiple">
+      Are you sure you want to delete this {{ displayName }}?
+    </p>
+    <p *ngIf="isMultiple">
+      Are you sure you want to delete {{ count }} {{ displayNamePlural }}?
+    </p>
+    <p class="warning-text">
+      This action cannot be undone.
+    </p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()">
+      Cancel
+    </button>
+    <button mat-raised-button color="warn" type="button" (click)="confirm()">
+      Delete
+    </button>
+  </mat-dialog-actions>
+</div>

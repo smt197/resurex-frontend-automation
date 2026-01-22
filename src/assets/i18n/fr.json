@@ -52,7 +52,8 @@
       "menus": "Menus",
       "category": "Catégorie",
       "module-managers": "Module Manager",
-      "github-repositories": "Dépôts GitHub"
+      "github-repositories": "Dépôts GitHub",
+      "orders": "Order"
     },
     "chats": {
       "title": "Chats",
@@ -159,7 +160,8 @@
       "roles_required": "Au moins un rôle doit être sélectionné"
     },
     "disabled": "Menu désactivé",
-    "module-managers": "Module Managers"
+    "module-managers": "Module Managers",
+    "orders": "Orders"
   },
   "labels": {
     "menu_name": "Nom du menu",
@@ -974,6 +976,23 @@
       "load_error": "Erreur lors du chargement des paramètres",
       "test_success": "Connexion GitHub réussie",
       "test_error": "Échec de la connexion GitHub"
+    }
+  },
+  "order": {
+    "order_create": "Nouveau Order",
+    "detail": {
+      "title": "Détails du Order"
+    },
+    "label": {
+      "name": "Name",
+      "description": "Description"
+    },
+    "placeholder": {
+      "name": "Enter name",
+      "description": "Enter description"
+    },
+    "validation": {
+      "name_required": "Name is required"
     }
   }
 }
