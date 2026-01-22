@@ -52,8 +52,7 @@
       "menus": "Menus",
       "category": "Catégorie",
       "module-managers": "Module Manager",
-      "github-repositories": "Dépôts GitHub",
-      "digites": "Digite"
+      "github-repositories": "Dépôts GitHub"
     },
     "chats": {
       "title": "Chats",
@@ -160,8 +159,7 @@
       "roles_required": "Au moins un rôle doit être sélectionné"
     },
     "disabled": "Menu désactivé",
-    "module-managers": "Module Managers",
-    "digites": "Digites"
+    "module-managers": "Module Managers"
   },
   "labels": {
     "menu_name": "Nom du menu",
@@ -976,23 +974,6 @@
       "load_error": "Erreur lors du chargement des paramètres",
       "test_success": "Connexion GitHub réussie",
       "test_error": "Échec de la connexion GitHub"
-    }
-  },
-  "digite": {
-    "digite_create": "Nouveau Digite",
-    "detail": {
-      "title": "Détails du Digite"
-    },
-    "label": {
-      "name": "Name",
-      "description": "Description"
-    },
-    "placeholder": {
-      "name": "Enter name",
-      "description": "Enter description"
-    },
-    "validation": {
-      "name_required": "Name is required"
     }
   }
 }

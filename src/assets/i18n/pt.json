@@ -53,8 +53,7 @@
       "menus": "Menus",
       "category": "Categoria",
       "module-managers": "Module Manager",
-      "github-repositories": "Repositórios GitHub",
-      "digites": "Digite"
+      "github-repositories": "Repositórios GitHub"
     },
     "expansion": {
       "Folded": "Ver mais",
@@ -162,8 +161,7 @@
       "roles_required": "Pelo menos uma função deve ser selecionada"
     },
     "disabled": "Menu desabilitado",
-    "module-managers": "gestores de módulos",
-    "digites": "Digites"
+    "module-managers": "gestores de módulos"
   },
   "labels": {
     "menu_name": "Nome do menu",
@@ -962,23 +960,6 @@
       "load_error": "Erro ao carregar configurações",
       "test_success": "Conexão com GitHub bem-sucedida",
       "test_error": "Falha na conexão com GitHub"
-    }
-  },
-  "digite": {
-    "digite_create": "Novo Digite",
-    "detail": {
-      "title": "Detalhes do Digite"
-    },
-    "label": {
-      "name": "Name",
-      "description": "Description"
-    },
-    "placeholder": {
-      "name": "Enter name",
-      "description": "Enter description"
-    },
-    "validation": {
-      "name_required": "Name is required"
     }
   }
 }

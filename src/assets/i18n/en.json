@@ -52,8 +52,7 @@
       "menus": "Menus",
       "category": "Category",
       "module-managers": "Module Manager",
-      "github-repositories": "GitHub Repositories",
-      "digites": "Digite"
+      "github-repositories": "GitHub Repositories"
     },
     "expansion": {
       "Folded": "Show more",
@@ -160,8 +159,7 @@
       "roles_required": "At least one role must be selected"
     },
     "disabled": "Menu disabled",
-    "module-managers": "Module Managers",
-    "digites": "Digites"
+    "module-managers": "Module Managers"
   },
   "labels": {
     "menu_name": "Menu name",
@@ -966,23 +964,6 @@
     "LABELS": {
       "MY_REPOS": "My Repositories",
       "COLLABORATION_REPOS": "Collaborations"
-    }
-  },
-  "digite": {
-    "digite_create": "New Digite",
-    "detail": {
-      "title": "Digite Details"
-    },
-    "label": {
-      "name": "Name",
-      "description": "Description"
-    },
-    "placeholder": {
-      "name": "Enter name",
-      "description": "Enter description"
-    },
-    "validation": {
-      "name_required": "Name is required"
     }
   }
 }
