@@ -52,7 +52,8 @@
       "menus": "Menus",
       "category": "Category",
       "module-managers": "Module Manager",
-      "github-repositories": "GitHub Repositories"
+      "github-repositories": "GitHub Repositories",
+      "products": "Product"
     },
     "expansion": {
       "Folded": "Show more",
@@ -159,7 +160,8 @@
       "roles_required": "At least one role must be selected"
     },
     "disabled": "Menu disabled",
-    "module-managers": "Module Managers"
+    "module-managers": "Module Managers",
+    "products": "Products"
   },
   "labels": {
     "menu_name": "Menu name",
@@ -964,6 +966,21 @@
     "LABELS": {
       "MY_REPOS": "My Repositories",
       "COLLABORATION_REPOS": "Collaborations"
+    }
+  },
+  "product": {
+    "product_create": "New Product",
+    "detail": {
+      "title": "Product Details"
+    },
+    "label": {
+      "name": "Name"
+    },
+    "placeholder": {
+      "name": "Enter name"
+    },
+    "validation": {
+      "name_required": "Name is required"
     }
   }
 }
