@@ -54,8 +54,7 @@
       "category": "Categoria",
       "module-managers": "Module Manager",
       "github-repositories": "Repositórios GitHub",
-      "orders": "Order",
-      "products": "Product"
+      "orders": "Order"
     },
     "expansion": {
       "Folded": "Ver mais",
@@ -164,8 +163,7 @@
     },
     "disabled": "Menu desabilitado",
     "module-managers": "gestores de módulos",
-    "orders": "Orders",
-    "products": "Products"
+    "orders": "Orders"
   },
   "labels": {
     "menu_name": "Nome do menu",
@@ -981,24 +979,6 @@
     },
     "validation": {
       "name_required": "Name is required"
-    }
-  },
-  "product": {
-    "product_create": "Novo Product",
-    "detail": {
-      "title": "Detalhes do Product"
-    },
-    "label": {
-      "name": "Name",
-      "price": "Price"
-    },
-    "placeholder": {
-      "name": "Enter name",
-      "price": "Enter price"
-    },
-    "validation": {
-      "name_required": "Name is required",
-      "price_required": "Price is required"
     }
   }
 }

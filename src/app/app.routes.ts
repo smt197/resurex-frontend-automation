@@ -1,4 +1,3 @@
-import { PRODUCTS_CONFIG } from './pages/products/products.config';
 import { ORDERS_CONFIG } from './pages/orders/orders.config';
 import { MODULE_MANAGERS_CONFIG } from './pages/module-managers/module-managers.config';
 import { moduleEnabledGuard } from 'src/app/guards/module-enabled.guard';
@@ -240,13 +239,6 @@ export const appRoutes: VexRoutes = [
         data: { moduleConfig: ORDERS_CONFIG },
         loadChildren: () =>
           import('./pages/orders/orders.routes').then((m) => m.ordersRoutes)
-      },
-      {
-        path: 'products',
-        canActivate: [moduleEnabledGuard],
-        data: { moduleConfig: PRODUCTS_CONFIG },
-        loadChildren: () =>
-          import('./pages/products/products.routes').then((m) => m.productsRoutes)
       },
       {
         path: 'not-found',
