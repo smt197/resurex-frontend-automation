@@ -1,0 +1,28 @@
+.container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-card {
+  mat-card-header {
+    padding: 24px 24px 0;
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+
+  mat-card-content {
+    padding: 24px;
+  }
+
+  .actions {
+    padding: 16px 24px;
+    margin: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    gap: 12px;
+  }
+}
