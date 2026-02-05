@@ -1,4 +1,3 @@
-import { PRODUCTS_CONFIG } from './pages/products/products.config';
 import { MODULE_MANAGERS_CONFIG } from './pages/module-managers/module-managers.config';
 import { moduleEnabledGuard } from 'src/app/guards/module-enabled.guard';
 import { authGuard } from './guards/auth.guard';
@@ -232,13 +231,6 @@ export const appRoutes: VexRoutes = [
           import(
             './pages/module-managers/pages/module-managers/module-manager-create-update-page.component'
           ).then((m) => m.ModuleManagerCreateUpdatePageComponent)
-      },
-      {
-        path: 'products',
-        canActivate: [moduleEnabledGuard],
-        data: { moduleConfig: PRODUCTS_CONFIG },
-        loadChildren: () =>
-          import('./pages/products/products.routes').then((m) => m.productsRoutes)
       },
       {
         path: 'not-found',
