@@ -53,8 +53,7 @@
       "category": "Category",
       "module-managers": "Module Manager",
       "github-repositories": "GitHub Repositories",
-      "products": "Product",
-      "orders": "Order"
+      "products": "Product"
     },
     "expansion": {
       "Folded": "Show more",
@@ -162,8 +161,7 @@
     },
     "disabled": "Menu disabled",
     "module-managers": "Module Managers",
-    "products": "Products",
-    "orders": "Orders"
+    "products": "Products"
   },
   "labels": {
     "menu_name": "Menu name",
@@ -974,21 +972,6 @@
     "product_create": "New Product",
     "detail": {
       "title": "Product Details"
-    },
-    "label": {
-      "name": "Name"
-    },
-    "placeholder": {
-      "name": "Enter name"
-    },
-    "validation": {
-      "name_required": "Name is required"
-    }
-  },
-  "order": {
-    "order_create": "New Order",
-    "detail": {
-      "title": "Order Details"
     },
     "label": {
       "name": "Name"
