@@ -255,6 +255,13 @@ export const appRoutes: VexRoutes = [
           import('./pages/orders/orders.routes').then((m) => m.ordersRoutes)
       },
       {
+        path: 'orders',
+        canActivate: [moduleEnabledGuard],
+        data: { moduleConfig: ORDERS_CONFIG },
+        loadChildren: () =>
+          import('./pages/orders/orders.routes').then((m) => m.ordersRoutes)
+      },
+      {
         path: 'not-found',
         loadComponent: () =>
           import('./auth/errors/error-404/error-404.component').then(
