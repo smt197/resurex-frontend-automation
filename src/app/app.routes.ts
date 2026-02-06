@@ -1,3 +1,4 @@
+import { TASKS_CONFIG } from './pages/tasks/tasks.config';
 import { MODULE_MANAGERS_CONFIG } from './pages/module-managers/module-managers.config';
 import { moduleEnabledGuard } from 'src/app/guards/module-enabled.guard';
 import { authGuard } from './guards/auth.guard';
@@ -231,6 +232,13 @@ export const appRoutes: VexRoutes = [
           import(
             './pages/module-managers/pages/module-managers/module-manager-create-update-page.component'
           ).then((m) => m.ModuleManagerCreateUpdatePageComponent)
+      },
+      {
+        path: 'tasks',
+        canActivate: [moduleEnabledGuard],
+        data: { moduleConfig: TASKS_CONFIG },
+        loadChildren: () =>
+          import('./pages/tasks/tasks.routes').then((m) => m.tasksRoutes)
       },
       {
         path: 'not-found',

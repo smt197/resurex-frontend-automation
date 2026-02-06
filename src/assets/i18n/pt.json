@@ -53,7 +53,8 @@
       "menus": "Menus",
       "category": "Categoria",
       "module-managers": "Module Manager",
-      "github-repositories": "Repositórios GitHub"
+      "github-repositories": "Repositórios GitHub",
+      "tasks": "Tâche"
     },
     "expansion": {
       "Folded": "Ver mais",
@@ -161,7 +162,8 @@
       "roles_required": "Pelo menos uma função deve ser selecionada"
     },
     "disabled": "Menu desabilitado",
-    "module-managers": "gestores de módulos"
+    "module-managers": "gestores de módulos",
+    "tasks": "Tâches"
   },
   "labels": {
     "menu_name": "Nome do menu",
@@ -960,6 +962,26 @@
       "load_error": "Erro ao carregar configurações",
       "test_success": "Conexão com GitHub bem-sucedida",
       "test_error": "Falha na conexão com GitHub"
+    }
+  },
+  "task": {
+    "task_create": "Novo Tâche",
+    "detail": {
+      "title": "Detalhes do Tâche"
+    },
+    "label": {
+      "title": "Title",
+      "description": "Description",
+      "status": "Status"
+    },
+    "placeholder": {
+      "title": "Enter title",
+      "description": "Enter description",
+      "status": "Enter status"
+    },
+    "validation": {
+      "title_required": "Title is required",
+      "status_required": "Status is required"
     }
   }
 }

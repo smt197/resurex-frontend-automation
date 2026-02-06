@@ -52,7 +52,8 @@
       "menus": "Menus",
       "category": "Catégorie",
       "module-managers": "Module Manager",
-      "github-repositories": "Dépôts GitHub"
+      "github-repositories": "Dépôts GitHub",
+      "tasks": "Tâche"
     },
     "chats": {
       "title": "Chats",
@@ -159,7 +160,8 @@
       "roles_required": "Au moins un rôle doit être sélectionné"
     },
     "disabled": "Menu désactivé",
-    "module-managers": "Module Managers"
+    "module-managers": "Module Managers",
+    "tasks": "Tâches"
   },
   "labels": {
     "menu_name": "Nom du menu",
@@ -974,6 +976,26 @@
       "load_error": "Erreur lors du chargement des paramètres",
       "test_success": "Connexion GitHub réussie",
       "test_error": "Échec de la connexion GitHub"
+    }
+  },
+  "task": {
+    "task_create": "Nouveau Tâche",
+    "detail": {
+      "title": "Détails du Tâche"
+    },
+    "label": {
+      "title": "Title",
+      "description": "Description",
+      "status": "Status"
+    },
+    "placeholder": {
+      "title": "Enter title",
+      "description": "Enter description",
+      "status": "Enter status"
+    },
+    "validation": {
+      "title_required": "Title is required",
+      "status_required": "Status is required"
     }
   }
 }

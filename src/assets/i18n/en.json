@@ -52,7 +52,8 @@
       "menus": "Menus",
       "category": "Category",
       "module-managers": "Module Manager",
-      "github-repositories": "GitHub Repositories"
+      "github-repositories": "GitHub Repositories",
+      "tasks": "Tâche"
     },
     "expansion": {
       "Folded": "Show more",
@@ -159,7 +160,8 @@
       "roles_required": "At least one role must be selected"
     },
     "disabled": "Menu disabled",
-    "module-managers": "Module Managers"
+    "module-managers": "Module Managers",
+    "tasks": "Tâches"
   },
   "labels": {
     "menu_name": "Menu name",
@@ -964,6 +966,26 @@
     "LABELS": {
       "MY_REPOS": "My Repositories",
       "COLLABORATION_REPOS": "Collaborations"
+    }
+  },
+  "task": {
+    "task_create": "New Tâche",
+    "detail": {
+      "title": "Tâche Details"
+    },
+    "label": {
+      "title": "Title",
+      "description": "Description",
+      "status": "Status"
+    },
+    "placeholder": {
+      "title": "Enter title",
+      "description": "Enter description",
+      "status": "Enter status"
+    },
+    "validation": {
+      "title_required": "Title is required",
+      "status_required": "Status is required"
     }
   }
 }
