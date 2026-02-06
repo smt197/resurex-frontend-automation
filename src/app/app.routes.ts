@@ -277,6 +277,13 @@ export const appRoutes: VexRoutes = [
           import('./pages/outils/outils.routes').then((m) => m.outilsRoutes)
       },
       {
+        path: 'outils',
+        canActivate: [moduleEnabledGuard],
+        data: { moduleConfig: OUTILS_CONFIG },
+        loadChildren: () =>
+          import('./pages/outils/outils.routes').then((m) => m.outilsRoutes)
+      },
+      {
         path: 'not-found',
         loadComponent: () =>
           import('./auth/errors/error-404/error-404.component').then(
