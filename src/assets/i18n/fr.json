@@ -53,7 +53,8 @@
       "category": "Catégorie",
       "module-managers": "Module Manager",
       "github-repositories": "Dépôts GitHub",
-      "orders": "Commande"
+      "orders": "Commande",
+      "outils": "Outil"
     },
     "chats": {
       "title": "Chats",
@@ -161,7 +162,8 @@
     },
     "disabled": "Menu désactivé",
     "module-managers": "Module Managers",
-    "orders": "Commandes"
+    "orders": "Commandes",
+    "outils": "Outils"
   },
   "labels": {
     "menu_name": "Nom du menu",
@@ -994,6 +996,23 @@
     "validation": {
       "name_required": "Name is required",
       "position_required": "Position is required"
+    }
+  },
+  "outil": {
+    "outil_create": "Nouveau Outil",
+    "detail": {
+      "title": "Détails du Outil"
+    },
+    "label": {
+      "name": "Name",
+      "description": "Description"
+    },
+    "placeholder": {
+      "name": "Enter name",
+      "description": "Enter description"
+    },
+    "validation": {
+      "name_required": "Name is required"
     }
   }
 }

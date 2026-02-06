@@ -53,7 +53,8 @@
       "category": "Category",
       "module-managers": "Module Manager",
       "github-repositories": "GitHub Repositories",
-      "orders": "Commande"
+      "orders": "Commande",
+      "outils": "Outil"
     },
     "expansion": {
       "Folded": "Show more",
@@ -161,7 +162,8 @@
     },
     "disabled": "Menu disabled",
     "module-managers": "Module Managers",
-    "orders": "Commandes"
+    "orders": "Commandes",
+    "outils": "Outils"
   },
   "labels": {
     "menu_name": "Menu name",
@@ -984,6 +986,23 @@
     "validation": {
       "name_required": "Name is required",
       "position_required": "Position is required"
+    }
+  },
+  "outil": {
+    "outil_create": "New Outil",
+    "detail": {
+      "title": "Outil Details"
+    },
+    "label": {
+      "name": "Name",
+      "description": "Description"
+    },
+    "placeholder": {
+      "name": "Enter name",
+      "description": "Enter description"
+    },
+    "validation": {
+      "name_required": "Name is required"
     }
   }
 }
